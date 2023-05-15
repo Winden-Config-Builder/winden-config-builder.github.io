@@ -1,0 +1,144 @@
+[
+    {
+        "title": "Layout",
+        "content": [
+            {
+                "title": "Aspect Ratio",
+                "docs": "https://tailwindcss.com/docs/aspect-ratio",
+                "description": "Utilities for controlling the aspect ratio of an element.",
+                "table": [
+                    [
+                        "aspect-auto",
+                        "aspect-ratio: auto;",
+                        ""
+                    ],
+                    [
+                        "aspect-square",
+                        "aspect-ratio: 1 / 1;",
+                        ""
+                    ],
+                    [
+                        "aspect-video",
+                        "aspect-ratio: 16 / 9;",
+                        ""
+                    ]
+                ]
+            },
+            {
+                "title": "Container",
+                "docs": "https://tailwindcss.com/docs/container",
+                "description": "Sets the max-width to match the min-width of the current breakpoint.",
+                "table": [
+                    [
+                        "container",
+                        "none",
+                        "width: 100%",
+                        ""
+                    ],
+                    [
+                        "",
+                        "sm (640px)",
+                        "max-width: 640px;",
+                        ""
+                    ],
+                    [
+                        "",
+                        "md (768px)",
+                        "max-width: 768px;",
+                        ""
+                    ],
+                    [
+                        "",
+                        "lg (1024px)",
+                        "max-width: 1024px;",
+                        ""
+                    ],
+                    [
+                        "",
+                        "xl (1280px)",
+                        "max-width: 1280px;",
+                        ""
+                    ],
+                    [
+                        "",
+                        "2xl (1536px)",
+                        "max-width: 1536px;",
+                        ""
+                    ]
+                ]
+            },
+            {
+                "title": "Columns",
+                "docs": "https://tailwindcss.com/docs/columns",
+                "description": "Utilities for controlling the number of columns within an element.",
+                "table": [
+                    [
+                        "columns-1",
+                        "columns: 1;",
+                        ""
+                    ],
+                    [
+                        "columns-2",
+                        "columns: 2;",
+                        ""
+                    ],
+                    [
+                        "columns-7",
+                        "columns: 7;",
+                        ""
+                    ],
+                    [
+                        "columns-8",
+                        "columns: 8;",
+                        ""
+                    ],
+                    [
+                        "columns-9",
+                        "columns: 9;",
+                        ""
+                    ],
+                    [
+                        "columns-10",
+                        "columns: 10;",
+                        ""
+                    ],
+                    [
+                        "columns-11",
+                        "columns: 11;",
+                        ""
+                    ],
+                    [
+                        "columns-12",
+                        "columns: 12;",
+                        ""
+                    ],
+                    [
+                        "columns-auto",
+                        "columns: auto;",
+                        ""
+                    ],
+                    [
+                        "columns-3xs",
+                        "columns: 16rem;",
+                        ""
+                    ],
+                    [
+                        "columns-2xs",
+                        "columns: 18rem;",
+                        ""
+                    ],
+                    [
+                        "columns-xs",
+                        "columns: 20rem;",
+                        ""
+                    ],
+                    [
+                        "columns-sm",
+                        "columns: 24rem;",
+                        ""
+                    ]
+                ]
+            }
+        ]
+    }
+]
