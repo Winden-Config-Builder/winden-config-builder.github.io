@@ -25,6 +25,7 @@ body {
 .input-wrap {
   display: grid;
   gap: 5px;
+  width: 100%;
 }
 
 input[type=number], input[type=text] {

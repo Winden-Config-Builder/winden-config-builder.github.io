@@ -16,11 +16,6 @@
     
           <div id="form">
             <h1>Minimum (Mobile)</h1>
-            <p>
-              Define the minimum font size and viewport width for your type scale's
-              baseline step. The minimum font size for all other steps is this
-              baseline font size scaled up/down by your chosen type scale ratio.
-            </p>
             <div class="input-group">
               <div class="input-wrap">
                 <label for="minBaseFontSize">Base font size (pixels)</label>
@@ -37,11 +32,6 @@
             </div>
     
             <h1>Maximum (Desktop)</h1>
-            <p>
-              Defdivne the maximum font size and viewport width for your type
-              scale's baseline step. The max font size for all other steps is this
-              baseline font size scaled up/down by your chosen type scale ratio.
-            </p>
             <div class="input-group">
               <div class="input-wrap">
                 <label for="maxBaseFontSize">Base font size (pixels)</label>
@@ -59,16 +49,23 @@
     
             <h1>Type scale</h1>
             <p>
-              Prodivide a comma-separated list of names for each step in your type
-              scale, in ascending order of font size. Use any convention you want.
-              Be sure to also identify the name of your base step.
+              Prodivide a comma-separated list of names.
             </p>
-            <input
-              type="text"
-              id="typeScaleNames"
-              value="sm, md, base, lg, xl, xxl"
-            />
-    
+            <div class="input-group">
+                <div class="input-wrap">
+                    <label for="typeScaleNames">Type Scale Names</label>
+                    <input
+                      type="text"
+                      id="typeScaleNames"
+                      value="sm, md, base, lg, xl, xxl"
+                    />    
+                </div>
+                
+                <div class="input-wrap" id="baseLineSelect">
+                    <label for="baselineStep">BaselineStep</label>
+                </div>
+            </div>
+            
             <h1>Rounding</h1>
             <p>The maximum number of decimal places in the output.</p>
             <input type="number" id="rounding" value="4" />
