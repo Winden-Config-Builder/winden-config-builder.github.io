@@ -41,35 +41,36 @@ function generateShades() {
 
 
 function setSelectedShade(index) {
-  var selectedColor = chroma(colorPicker.value).hex();
-
-  // Remove the style from the previously selected shade
-  if (selectedIndex !== null) {
-    shadesContainer.childNodes[selectedIndex].classList.remove("active-color");
-  }
-
-  // Set the style for the selected shade
-  shadesContainer.childNodes[index].style.backgroundColor = selectedColor;
-  shadesContainer.childNodes[index].classList.add("active-color");
-
-  for (var i = 0; i < shadesContainer.childNodes.length; i++) {
-    var shade;
-    if (i < index) {
-      shade = chroma(selectedColor).darken((index - i) / 2).hex();
-    } else if (i > index) {
-      shade = chroma(selectedColor).brighten((i - index) / 2).hex();
-    } else {
-      shade = selectedColor;
+    var selectedColor = chroma(colorPicker.value).hex();
+  
+    // Remove the style from the previously selected shade
+    if (selectedIndex !== null) {
+      shadesContainer.childNodes[selectedIndex].classList.remove("active-color");
     }
-    shadesContainer.childNodes[i].style.backgroundColor = shade;
-    shadesContainer.childNodes[i].textContent = shade;  // Update the box name (hex color value)
+  
+    // Set the style for the selected shade
+    shadesContainer.childNodes[index].style.backgroundColor = selectedColor;
+    shadesContainer.childNodes[index].classList.add("active-color");
+  
+    for (var i = 0; i < shadesContainer.childNodes.length; i++) {
+      var shade;
+      if (i < index) {
+        shade = chroma(selectedColor).brighten((index - i) / 2).hex(); // Reverse darken and brighten methods
+      } else if (i > index) {
+        shade = chroma(selectedColor).darken((i - index) / 2).hex(); // Reverse darken and brighten methods
+      } else {
+        shade = selectedColor;
+      }
+      shadesContainer.childNodes[i].style.backgroundColor = shade;
+      shadesContainer.childNodes[i].textContent = shade; // Update the box name (hex color value)
+    }
+  
+    // Update the selectedIndex
+    selectedIndex = index;
+  
+    exportColors();
   }
-
-  // Update the selectedIndex
-  selectedIndex = index;
-
-  exportColors();
-}
+  
 
 var addButton = document.getElementById("addButton");
 var removeButton = document.getElementById("removeButton");
