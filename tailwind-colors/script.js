@@ -57,22 +57,33 @@ function generatePalette() {
     const lightnessMin = lightnessMinInput.value / 100;
     const lightnessMax = lightnessMaxInput.value / 100;
 
-    // Create shades from white to the chosen color
-    for (let i = 0; i < numBlocks; i++) {
-        const ratio = i / (numBlocks - 1);
-        const lightness = lightnessMin + (1 - lightnessMin) * ratio;
-        const color = color2k.mix('white', pickedColor, lightness);
-        createColorDiv(color);
-    }
+    for (let i = 0; i <= 2*numBlocks; i++) {
+        let color;
+        const ratio = i / (2*numBlocks); // ratio ranges from 0 to 1
 
-    // Create shades from the chosen color to black
-    for (let i = 0; i < numBlocks; i++) {
-        const ratio = i / (numBlocks - 1);
-        const lightness = lightnessMax * ratio;
-        const color = color2k.mix(pickedColor, 'black', lightness);
+        // First half of the colors (from white to the chosen color)
+        if (ratio < 0.5) {
+            const lightness = lightnessMin + (1 - lightnessMin) * (ratio * 2);
+            color = color2k.mix('white', pickedColor, lightness);
+        } 
+        // At the midpoint, use the chosen color
+        else if (ratio === 0.5) {
+            color = pickedColor;
+            createColorDiv(color, true); // pass true to mark this as the current color
+            continue;
+        }
+        // Second half of the colors (from the chosen color to black)
+        else {
+            const lightness = lightnessMax * ((ratio - 0.5) * 2);
+            color = color2k.mix(pickedColor, 'black', lightness);
+        }
+
         createColorDiv(color);
     }
 }
+
+
+
 
 
 // Convert RGBA to HEX color
@@ -82,8 +93,9 @@ function rgbaToHex(rgba) {
     return "#" + hex(match[1]) + hex(match[2]) + hex(match[3]);
 }
 
+
 // Create a color div
-function createColorDiv(color) {
+function createColorDiv(color, isCurrentColor = false) {
     // Don't create the color div if the color is white or black
     if (color === 'rgb(0, 0, 0)' || color === 'rgb(255, 255, 255)') {
         return;
@@ -91,6 +103,9 @@ function createColorDiv(color) {
 
     const colorWrap = document.createElement('div');
     colorWrap.className = 'colorWrap';
+    if (isCurrentColor) {
+        colorWrap.classList.add('current-color');
+    }
 
     const colorDiv = document.createElement('div');
     colorDiv.className = 'colorDiv';
@@ -110,4 +125,3 @@ function createColorDiv(color) {
     colorWrap.appendChild(colorValue);
     paletteDiv.appendChild(colorWrap);
 }
-
