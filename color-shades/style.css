@@ -9,6 +9,19 @@ body {
   margin: 30px 0;
 }
 
+.flex-wrapper{
+    display: flex;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.input-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
 .active-color {
   outline: 2px solid black;
   outline-offset: 2px;
