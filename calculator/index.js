@@ -1,25 +1,28 @@
+function updateValues() {
+  return {
+    minBaseFontSize: parseFloat(document.getElementById('minBaseFontSize').value),
+    minScreenWidth: parseFloat(document.getElementById('minScreenWidth').value),
+    minScaleRatio: parseFloat(document.getElementById('minScaleRatio').value),
+    maxBaseFontSize: parseFloat(document.getElementById('maxBaseFontSize').value),
+    maxScreenWidth: parseFloat(document.getElementById('maxScreenWidth').value),
+    maxScaleRatio: parseFloat(document.getElementById('maxScaleRatio').value),
+    typeScaleNames: document.getElementById('typeScaleNames').value.split(','),
+    decimalPlaces: parseInt(document.getElementById('rounding').value),
+  };
+}
+
 function generate() {
-  let minBaseFontSize = parseFloat(document.getElementById('minBaseFontSize').value);
-  let minScreenWidth = parseFloat(document.getElementById('minScreenWidth').value);
-  let minScaleRatio = parseFloat(document.getElementById('minScaleRatio').value);
-
-  let maxBaseFontSize = parseFloat(document.getElementById('maxBaseFontSize').value);
-  let maxScreenWidth = parseFloat(document.getElementById('maxScreenWidth').value);
-  let maxScaleRatio = parseFloat(document.getElementById('maxScaleRatio').value);
-
-  let typeScaleNames = document.getElementById('typeScaleNames').value.split(',');
-  let decimalPlaces = parseInt(document.getElementById('rounding').value);
-
+  let values = updateValues();
   let cssVariables = "";
 
-  for (let i = 0; i < typeScaleNames.length; i++) {
-    let minFontSize = minBaseFontSize * Math.pow(minScaleRatio, i);
-    let maxFontSize = maxBaseFontSize * Math.pow(maxScaleRatio, i);
+  for (let i = 0; i < values.typeScaleNames.length; i++) {
+    let minFontSize = values.minBaseFontSize * Math.pow(values.minScaleRatio, i);
+    let maxFontSize = values.maxBaseFontSize * Math.pow(values.maxScaleRatio, i);
 
-    let vwValue = ((maxFontSize - minFontSize) * 100) / (maxScreenWidth - minScreenWidth);
-    let pxValue = minFontSize - (minScreenWidth * vwValue / 100);
+    let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
+    let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
 
-    cssVariables += `--${typeScaleNames[i].trim()}: clamp(${minFontSize.toFixed(decimalPlaces)}px, ${vwValue.toFixed(decimalPlaces)}vw + ${pxValue.toFixed(decimalPlaces)}px, ${maxFontSize.toFixed(decimalPlaces)}px);\n`;
+    cssVariables += `--${values.typeScaleNames[i].trim()}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
   }
 
   const wrappedCSSVariables = `:root {\n${cssVariables}}`;
@@ -37,20 +40,6 @@ function generate() {
 
   document.querySelector('#preview code').textContent = wrappedCSSVariables;
 }
-
-// Event listeners for all input fields
-document.getElementById('minBaseFontSize').addEventListener('input', generate);
-document.getElementById('minScreenWidth').addEventListener('input', generate);
-document.getElementById('minScaleRatio').addEventListener('input', generate);
-document.getElementById('maxBaseFontSize').addEventListener('input', generate);
-document.getElementById('maxScreenWidth').addEventListener('input', generate);
-document.getElementById('maxScaleRatio').addEventListener('input', generate);
-document.getElementById('typeScaleNames').addEventListener('input', generate);
-document.getElementById('rounding').addEventListener('input', generate);
-
-// Generate CSS variables on page load
-window.addEventListener('load', generate);
-
 
 function updateSelectOptions() {
   let typeScaleNames = document.getElementById('typeScaleNames').value.split(/\s*,\s*/);
@@ -71,17 +60,16 @@ function updateSelectOptions() {
 }
 
 // Event listeners for all input fields
-document.getElementById('minBaseFontSize').addEventListener('input', generate);
-document.getElementById('minScreenWidth').addEventListener('input', generate);
-document.getElementById('minScaleRatio').addEventListener('input', generate);
-document.getElementById('maxBaseFontSize').addEventListener('input', generate);
-document.getElementById('maxScreenWidth').addEventListener('input', generate);
-document.getElementById('maxScaleRatio').addEventListener('input', generate);
-document.getElementById('typeScaleNames').addEventListener('input', function() {
-  updateSelectOptions();
-  generate();
+let inputIds = ['minBaseFontSize', 'minScreenWidth', 'minScaleRatio', 'maxBaseFontSize', 'maxScreenWidth', 'maxScaleRatio', 'typeScaleNames', 'rounding'];
+
+inputIds.forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    if (id === 'typeScaleNames') {
+      updateSelectOptions();
+    }
+    generate();
+  });
 });
-document.getElementById('rounding').addEventListener('input', generate);
 
 // Generate CSS variables and update select options on page load
 window.addEventListener('load', function() {
