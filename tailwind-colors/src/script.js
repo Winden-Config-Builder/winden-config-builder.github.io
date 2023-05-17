@@ -1,3 +1,5 @@
+import { mix } from 'https://cdn.skypack.dev/color2k?min';
+
 // DOM elements
 const colorPicker = document.getElementById('colorPicker');
 const colorPickerValue = document.getElementById('colorPickerValue');
@@ -50,26 +52,15 @@ function handleRemoveButtonClick() {
 // Generate the color palette
 function generatePalette() {
     const pickedColor = colorPicker.value;
-
-    // Clear existing palette
     paletteDiv.innerHTML = '';
 
     const lightnessMin = lightnessMinInput.value / 100;
     const lightnessMax = lightnessMaxInput.value / 100;
 
-    // Create shades from white to the chosen color
     for (let i = 0; i < numBlocks; i++) {
         const ratio = i / (numBlocks - 1);
-        const lightness = lightnessMin + (1 - lightnessMin) * ratio;
-        const color = color2k.mix('white', pickedColor, lightness);
-        createColorDiv(color);
-    }
-
-    // Create shades from the chosen color to black
-    for (let i = 0; i < numBlocks; i++) {
-        const ratio = i / (numBlocks - 1);
-        const lightness = lightnessMax * ratio;
-        const color = color2k.mix(pickedColor, 'black', lightness);
+        const lightness = lightnessMin + (lightnessMax - lightnessMin) * ratio;
+        const color = mix(mix('white', pickedColor, lightness), 'black', lightness);
         createColorDiv(color);
     }
 }
