@@ -14,30 +14,31 @@ generateShades(); // Generate shades when the page loads
 setColorName(); // Set the color name when the page loads
 
 function generateShades() {
-  shadesContainer.innerHTML = "";
-  var baseColor = chroma(colorPicker.value);
-  shades = chroma.scale([baseColor.darken(), baseColor, baseColor.brighten()]).mode("lab").colors(numBlocks);
-
-  shades.forEach(function (shade, index) {
-    var shadeElement = document.createElement("div");
-    shadeElement.style.backgroundColor = shade;
-    shadeElement.className = "shade";
-    shadeElement.textContent = chroma(shade).hex(); // Set the hex value as text content
-
-    shadeElement.addEventListener("click", function () {
-      setSelectedShade(index);
+    shadesContainer.innerHTML = "";
+    var baseColor = chroma(colorPicker.value);
+    
+    // Adjust the color scale to always start from white and end at black
+    shades = chroma.scale(['white', baseColor, 'black']).mode("lab").colors(numBlocks);
+  
+    shades.forEach(function (shade, index) {
+      var shadeElement = document.createElement("div");
+      shadeElement.style.backgroundColor = shade;
+      shadeElement.className = "shade";
+      shadeElement.textContent = chroma(shade).hex(); // Set the hex value as text content
+  
+      shadeElement.addEventListener("click", function () {
+        setSelectedShade(index);
+      });
+  
+      shadesContainer.appendChild(shadeElement);
     });
-
-    shadesContainer.appendChild(shadeElement);
-  });
-
-  // Reapply the selected shade if one is currently selected
-  if (selectedIndex !== null) {
-    setSelectedShade(selectedIndex);
-  }
-
-  exportColors();
+  
+    // Reapply the selected shade if one is currently selected
+    if (selectedIndex !== null) {
+      setSelectedShade(selectedIndex);
+    }
 }
+
 
 function setSelectedShade(index) {
   var selectedColor = chroma(colorPicker.value).hex();
