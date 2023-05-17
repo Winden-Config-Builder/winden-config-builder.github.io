@@ -33,23 +33,28 @@ function generatePalette() {
     // clear existing palette
     paletteDiv.innerHTML = '';
 
-    // create shades from white to picked color
-    for (let i = 1; i < numBlocks - 1; i++) {
-        let ratio = i / (numBlocks - 1);
+    // Get lightness min and max values from the inputs
+    let lightnessMin = document.getElementById('lightnessMin').value / 100;
+    let lightnessMax = document.getElementById('lightnessMax').value / 100;
+
+    // create shades from lightnessMin to picked color
+    for (let i = 0; i < numBlocks; i++) {
+        let ratio = lightnessMin + (i / (numBlocks - 1)) * (1 - lightnessMin);
         let color = color2k.mix('white', pickedColor, ratio);
         createColorDiv(color);
     }
 
-    // create the picked color block
-    createColorDiv(pickedColor);
-
-    // create shades from picked color to black
-    for (let i = 1; i < numBlocks - 1; i++) {
-        let ratio = i / (numBlocks - 1);
+    // create shades from picked color to lightnessMax
+    for (let i = 0; i < numBlocks; i++) {
+        let ratio = lightnessMax * (i / (numBlocks - 1));
         let color = color2k.mix(pickedColor, 'black', ratio);
         createColorDiv(color);
     }
 }
+
+document.getElementById('lightnessMin').onchange = generatePalette;
+document.getElementById('lightnessMax').onchange = generatePalette;
+
 
 function rgbaToHex(rgba) {
     let match = rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
