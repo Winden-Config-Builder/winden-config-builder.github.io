@@ -125,3 +125,24 @@ function removeBlock() {
   document.querySelector('input[type="text"]').value = "custom-color";
   exportColors();
   
+
+
+var hueInput = document.getElementById("hue");
+
+hueInput.addEventListener("input", function() {
+  setColorWithHue();
+  generateShades();
+  setColorName();
+  exportColors();
+});
+
+
+
+function setColorWithHue() {
+  var hueValue = hueInput.value;
+  var baseColor = chroma(colorPicker.value);
+  var colorWithHue = baseColor.set('hsl.h', hueValue);
+
+  // Set the color picker's value to the new color
+  colorPicker.value = colorWithHue.hex();
+}
