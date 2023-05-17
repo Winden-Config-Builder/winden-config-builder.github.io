@@ -89,7 +89,6 @@ function handleAddColorPickerButtonClick() {
 
 // Generate the color palette
 // Generate the color palette
-// Generate the color palette
 function generatePalette() {
     const colorPickers = Array.from(document.getElementsByClassName('colorPicker'));
     const pickedColors = colorPickers.map(picker => picker.value);
@@ -126,10 +125,10 @@ function generatePalette() {
             createColorDiv(color);
         }
     } else {
-        for (let i = 0; i < numBlocks * numColors; i++) {
+        for (let i = 0; i <= numBlocks; i++) {
             const colorIndex = Math.floor(i / numBlocks);
             const color1 = pickedColors[colorIndex % numColors];
-            const color2 = pickedColors[(colorIndex + 1) % numColors];
+            const color2 = pickedColors[Math.min(colorIndex + 1, numColors - 1)];
 
             const ratio = (i % numBlocks) / numBlocks;
 
