@@ -13,28 +13,30 @@ const addColorPickerButton = document.getElementById('addColorPickerButton');
 addColorPickerButton.addEventListener('click', handleAddColorPickerButtonClick);
 
 
-
 // Configuration
 let numBlocks = 6;
 
 // Event listeners
 window.onload = generatePalette;
-colorPicker.addEventListener('change', handleColorPickerChange);
-colorPickerValue.addEventListener('change', handleColorPickerValueChange);
-lightnessMinInput.addEventListener('change', generatePalette);
-lightnessMaxInput.addEventListener('change', generatePalette);
-addButton.addEventListener('click', handleAddButtonClick);
-removeButton.addEventListener('click', handleRemoveButtonClick);
+document.getElementById('addColorPickerButton').addEventListener('click', handleAddColorPickerButtonClick);
+document.getElementById('lightnessMin').addEventListener('change', generatePalette);
+document.getElementById('lightnessMax').addEventListener('change', generatePalette);
+document.getElementById('addButton').addEventListener('click', handleAddButtonClick);
+document.getElementById('removeButton').addEventListener('click', handleRemoveButtonClick);
 
 // Generate palette on color picker change
-function handleColorPickerChange() {
-    colorPickerValue.value = colorPicker.value;
+function handleColorPickerChange(event) {
+    const picker = event.target;
+    const pickerValue = picker.nextSibling;
+    pickerValue.value = picker.value;
     generatePalette();
 }
 
 // Update color picker value on input change
-function handleColorPickerValueChange() {
-    colorPicker.value = colorPickerValue.value;
+function handleColorPickerValueChange(event) {
+    const pickerValue = event.target;
+    const picker = pickerValue.previousSibling;
+    picker.value = pickerValue.value;
     generatePalette();
 }
 
@@ -54,7 +56,6 @@ function handleRemoveButtonClick() {
     }
 }
 
-
 // Handle the creation of new color pickers
 function handleAddColorPickerButtonClick() {
     const colorPickerContainer = document.getElementById('colorPickerContainer');
@@ -72,22 +73,24 @@ function handleAddColorPickerButtonClick() {
     colorPicker.type = 'color';
     colorPicker.className = 'colorPicker';
     colorPicker.value = '#ff0000';
-    colorPicker.addEventListener('change', generatePalette);
+    colorPicker.addEventListener('change', handleColorPickerChange);
 
     const colorPickerValue = document.createElement('input');
     colorPickerValue.type = 'text';
     colorPickerValue.className = 'colorPickerValue';
     colorPickerValue.value = '#ff0000';
-    colorPickerValue.addEventListener('change', generatePalette);
+    colorPickerValue.addEventListener('change', handleColorPickerValueChange);
 
     flex.appendChild(colorPicker);
     flex.appendChild(colorPickerValue);
     colorPickerWrap.appendChild(label);
     colorPickerWrap.appendChild(flex);
     colorPickerContainer.appendChild(colorPickerWrap);
+
+    generatePalette();
 }
 
-// Generate the color palette
+
 // Generate the color palette
 function generatePalette() {
     const colorPickers = Array.from(document.getElementsByClassName('colorPicker'));
@@ -125,21 +128,21 @@ function generatePalette() {
             createColorDiv(color);
         }
     } else {
-        for (let i = 0; i <= numBlocks; i++) {
-            const colorIndex = Math.floor(i / numBlocks);
+        for (let i = 0; i < numBlocks; i++) {
+            const colorIndex = Math.floor(i / (numBlocks / (numColors - 1)));
             const color1 = pickedColors[colorIndex % numColors];
             const color2 = pickedColors[Math.min(colorIndex + 1, numColors - 1)];
 
-            const ratio = (i % numBlocks) / numBlocks;
+            const ratio = (i % (numBlocks / (numColors - 1))) / (numBlocks / (numColors - 1));
 
             const color = color2k.mix(color1, color2, ratio);
 
             createColorDiv(color);
         }
+        // Add the last color
+        createColorDiv(pickedColors[numColors - 1]);
     }
 }
-
-
 
 
 // Convert RGBA to HEX color
