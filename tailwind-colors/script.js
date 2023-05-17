@@ -1,83 +1,101 @@
-window.onload = generatePalette;
+// DOM elements
+const colorPicker = document.getElementById('colorPicker');
+const colorPickerValue = document.getElementById('colorPickerValue');
+const lightnessMinInput = document.getElementById('lightnessMin');
+const lightnessMaxInput = document.getElementById('lightnessMax');
+const addButton = document.getElementById('addButton');
+const removeButton = document.getElementById('removeButton');
+const paletteDiv = document.getElementById('palette');
 
+// Configuration
 let numBlocks = 6;
 
-document.getElementById('addButton').onclick = function() {
+// Event listeners
+window.onload = generatePalette;
+colorPicker.addEventListener('change', handleColorPickerChange);
+colorPickerValue.addEventListener('change', handleColorPickerValueChange);
+lightnessMinInput.addEventListener('change', generatePalette);
+lightnessMaxInput.addEventListener('change', generatePalette);
+addButton.addEventListener('click', handleAddButtonClick);
+removeButton.addEventListener('click', handleRemoveButtonClick);
+
+// Generate palette on color picker change
+function handleColorPickerChange() {
+    colorPickerValue.value = colorPicker.value;
+    generatePalette();
+}
+
+// Update color picker value on input change
+function handleColorPickerValueChange() {
+    colorPicker.value = colorPickerValue.value;
+    generatePalette();
+}
+
+// Add button click handler
+function handleAddButtonClick() {
     if (numBlocks < 10) {
         numBlocks++;
         generatePalette();
     }
-};
+}
 
-document.getElementById('removeButton').onclick = function() {
+// Remove button click handler
+function handleRemoveButtonClick() {
     if (numBlocks > 1) {
         numBlocks--;
         generatePalette();
     }
-};
+}
 
-document.getElementById('colorPicker').onchange = function() {
-    document.getElementById('colorPickerValue').value = this.value;
-    generatePalette();
-};
-
-document.getElementById('colorPickerValue').onchange = function() {
-    document.getElementById('colorPicker').value = this.value;
-    generatePalette();
-};
-
+// Generate the color palette
 function generatePalette() {
-    let pickedColor = document.getElementById('colorPicker').value;
-    let paletteDiv = document.getElementById('palette');
+    const pickedColor = colorPicker.value;
 
-    // clear existing palette
+    // Clear existing palette
     paletteDiv.innerHTML = '';
 
-    // Get lightness min and max values from the inputs
-    let lightnessMin = document.getElementById('lightnessMin').value / 100;
-    let lightnessMax = document.getElementById('lightnessMax').value / 100;
+    const lightnessMin = lightnessMinInput.value / 100;
+    const lightnessMax = lightnessMaxInput.value / 100;
 
-    // create shades from lightnessMin to picked color to lightnessMax
+    // Create shades from white to the chosen color
     for (let i = 0; i < numBlocks; i++) {
-        let ratio = i / (numBlocks - 1);
-        let lightness1 = lightnessMin + (1 - lightnessMin) * ratio;
-        let lightness2 = lightnessMax * ratio;
-        let color1 = color2k.mix('white', pickedColor, lightness1);
-        let color2 = color2k.mix(pickedColor, 'black', lightness2);
-        createColorDiv(color1);
-        createColorDiv(color2);
+        const ratio = i / (numBlocks - 1);
+        const lightness = lightnessMin + (1 - lightnessMin) * ratio;
+        const color = color2k.mix('white', pickedColor, lightness);
+        createColorDiv(color);
+    }
+
+    // Create shades from the chosen color to black
+    for (let i = 0; i < numBlocks; i++) {
+        const ratio = i / (numBlocks - 1);
+        const lightness = lightnessMax * ratio;
+        const color = color2k.mix(pickedColor, 'black', lightness);
+        createColorDiv(color);
     }
 }
 
-  
-
-
-document.getElementById('lightnessMin').onchange = generatePalette;
-document.getElementById('lightnessMax').onchange = generatePalette;
-
-
+// Convert RGBA to HEX color
 function rgbaToHex(rgba) {
-    let match = rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
-    function hex(x) {
-        return ("0" + parseInt(x).toString(16)).slice(-2);
-    }
+    const match = rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+    const hex = (x) => ("0" + parseInt(x).toString(16)).slice(-2);
     return "#" + hex(match[1]) + hex(match[2]) + hex(match[3]);
 }
 
+// Create a color div
 function createColorDiv(color) {
     // Don't create the color div if the color is white or black
     if (color === 'rgb(0, 0, 0)' || color === 'rgb(255, 255, 255)') {
         return;
     }
 
-    let colorWrap = document.createElement('div');
+    const colorWrap = document.createElement('div');
     colorWrap.className = 'colorWrap';
 
-    let colorDiv = document.createElement('div');
+    const colorDiv = document.createElement('div');
     colorDiv.className = 'colorDiv';
     colorDiv.style.backgroundColor = color;
 
-    let colorValue = document.createElement('div');
+    const colorValue = document.createElement('div');
     colorValue.className = 'colorValue';
 
     // If the color is in RGB or RGBA format, convert it to HEX
@@ -89,5 +107,6 @@ function createColorDiv(color) {
 
     colorWrap.appendChild(colorDiv);
     colorWrap.appendChild(colorValue);
-    document.getElementById('palette').appendChild(colorWrap);
+    paletteDiv.appendChild(colorWrap);
 }
+
