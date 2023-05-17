@@ -3,22 +3,18 @@
   <head>
     <title>Color Shades Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js"></script>
-    <style>
-      .shade {
-        display: inline-flex;
-        align-items: center;
-        padding: 20px;
-        height: 40px;
-        margin: 5px;
-        cursor: pointer;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <input type="text">
     <input type="color" id="colorPicker" value="#4aabff" />
     <div id="shadesContainer"></div>
     <button id="addButton">Add Block</button>
     <button id="removeButton">Remove Block</button>
+
+    <div id="preview">
+<pre><code></code></pre>
+    </div>
 
     <script src="index.js"></script>
   </body>

@@ -1,0 +1,20 @@
+.active-color {
+    outline: 2px solid black;
+    outline-offset: 2px;
+}
+
+.shade {
+    display: inline-flex;
+    align-items: center;
+    padding: 20px;
+    width: 75px;
+    height: 40px;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  #preview{
+    background-color: beige;
+    padding: 30px;
+    margin: 30px 0;
+  }
