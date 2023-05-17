@@ -37,20 +37,20 @@ function generatePalette() {
     let lightnessMin = document.getElementById('lightnessMin').value / 100;
     let lightnessMax = document.getElementById('lightnessMax').value / 100;
 
-    // create shades from lightnessMin to picked color
+    // create shades from lightnessMin to picked color to lightnessMax
     for (let i = 0; i < numBlocks; i++) {
-        let ratio = lightnessMin + (i / (numBlocks - 1)) * (1 - lightnessMin);
-        let color = color2k.mix('white', pickedColor, ratio);
-        createColorDiv(color);
-    }
-
-    // create shades from picked color to lightnessMax
-    for (let i = 0; i < numBlocks; i++) {
-        let ratio = lightnessMax * (i / (numBlocks - 1));
-        let color = color2k.mix(pickedColor, 'black', ratio);
-        createColorDiv(color);
+        let ratio = i / (numBlocks - 1);
+        let lightness1 = lightnessMin + (1 - lightnessMin) * ratio;
+        let lightness2 = lightnessMax * ratio;
+        let color1 = color2k.mix('white', pickedColor, lightness1);
+        let color2 = color2k.mix(pickedColor, 'black', lightness2);
+        createColorDiv(color1);
+        createColorDiv(color2);
     }
 }
+
+  
+
 
 document.getElementById('lightnessMin').onchange = generatePalette;
 document.getElementById('lightnessMax').onchange = generatePalette;
