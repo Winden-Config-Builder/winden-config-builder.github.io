@@ -7,6 +7,13 @@ const addButton = document.getElementById('addButton');
 const removeButton = document.getElementById('removeButton');
 const paletteDiv = document.getElementById('palette');
 
+
+// Add an event listener for the new button
+const addColorPickerButton = document.getElementById('addColorPickerButton');
+addColorPickerButton.addEventListener('click', handleAddColorPickerButtonClick);
+
+
+
 // Configuration
 let numBlocks = 6;
 
@@ -47,41 +54,91 @@ function handleRemoveButtonClick() {
     }
 }
 
+
+// Handle the creation of new color pickers
+function handleAddColorPickerButtonClick() {
+    const colorPickerContainer = document.getElementById('colorPickerContainer');
+
+    const colorPickerWrap = document.createElement('div');
+    colorPickerWrap.className = 'colorPickerWrap';
+
+    const label = document.createElement('label');
+    label.textContent = 'Color';
+
+    const flex = document.createElement('div');
+    flex.className = 'flex';
+
+    const colorPicker = document.createElement('input');
+    colorPicker.type = 'color';
+    colorPicker.className = 'colorPicker';
+    colorPicker.value = '#ff0000';
+    colorPicker.addEventListener('change', generatePalette);
+
+    const colorPickerValue = document.createElement('input');
+    colorPickerValue.type = 'text';
+    colorPickerValue.className = 'colorPickerValue';
+    colorPickerValue.value = '#ff0000';
+    colorPickerValue.addEventListener('change', generatePalette);
+
+    flex.appendChild(colorPicker);
+    flex.appendChild(colorPickerValue);
+    colorPickerWrap.appendChild(label);
+    colorPickerWrap.appendChild(flex);
+    colorPickerContainer.appendChild(colorPickerWrap);
+}
+
+// Generate the color palette
+// Generate the color palette
 // Generate the color palette
 function generatePalette() {
-    const pickedColor = colorPicker.value;
+    const colorPickers = Array.from(document.getElementsByClassName('colorPicker'));
+    const pickedColors = colorPickers.map(picker => picker.value);
+    const numColors = pickedColors.length;
 
     // Clear existing palette
     paletteDiv.innerHTML = '';
 
-    const lightnessMin = lightnessMinInput.value / 100;
-    const lightnessMax = lightnessMaxInput.value / 100;
+    if(numColors === 1) {
+        const lightnessMin = lightnessMinInput.value / 100;
+        const lightnessMax = lightnessMaxInput.value / 100;
 
-    for (let i = 0; i <= 2*numBlocks; i++) {
-        let color;
-        const ratio = i / (2*numBlocks); // ratio ranges from 0 to 1
+        for (let i = 0; i <= 2*numBlocks; i++) {
+            let color;
+            const ratio = i / (2*numBlocks); // ratio ranges from 0 to 1
 
-        // First half of the colors (from white to the chosen color)
-        if (ratio < 0.5) {
-            const lightness = lightnessMin + (1 - lightnessMin) * (ratio * 2);
-            color = color2k.mix('white', pickedColor, lightness);
-        } 
-        // At the midpoint, use the chosen color
-        else if (ratio === 0.5) {
-            color = pickedColor;
-            createColorDiv(color, true); // pass true to mark this as the current color
-            continue;
+            // First half of the colors (from white to the chosen color)
+            if (ratio < 0.5) {
+                const lightness = lightnessMin + (1 - lightnessMin) * (ratio * 2);
+                color = color2k.mix('white', pickedColors[0], lightness);
+            } 
+            // At the midpoint, use the chosen color
+            else if (ratio === 0.5) {
+                color = pickedColors[0];
+                createColorDiv(color, true); // pass true to mark this as the current color
+                continue;
+            }
+            // Second half of the colors (from the chosen color to black)
+            else {
+                const lightness = lightnessMax * ((ratio - 0.5) * 2);
+                color = color2k.mix(pickedColors[0], 'black', lightness);
+            }
+
+            createColorDiv(color);
         }
-        // Second half of the colors (from the chosen color to black)
-        else {
-            const lightness = lightnessMax * ((ratio - 0.5) * 2);
-            color = color2k.mix(pickedColor, 'black', lightness);
-        }
+    } else {
+        for (let i = 0; i < numBlocks * numColors; i++) {
+            const colorIndex = Math.floor(i / numBlocks);
+            const color1 = pickedColors[colorIndex % numColors];
+            const color2 = pickedColors[(colorIndex + 1) % numColors];
 
-        createColorDiv(color);
+            const ratio = (i % numBlocks) / numBlocks;
+
+            const color = color2k.mix(color1, color2, ratio);
+
+            createColorDiv(color);
+        }
     }
 }
-
 
 
 
