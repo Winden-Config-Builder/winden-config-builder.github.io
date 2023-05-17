@@ -28,7 +28,7 @@ body {
   width: 100%;
 }
 
-input[type=number], input[type=text] {
+input[type=number], input[type=text], select {
   border: 2px solid black;
   padding: 5px;
   font-size: 16px;
@@ -36,7 +36,7 @@ input[type=number], input[type=text] {
 }
 
 #preview {
-  background-color: beige;
+  background-color: #f0f0eb;
   line-height: 2;
   padding: 30px;
 }

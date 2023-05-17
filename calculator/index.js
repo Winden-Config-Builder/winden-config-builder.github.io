@@ -50,3 +50,41 @@ document.getElementById('rounding').addEventListener('input', generate);
 
 // Generate CSS variables on page load
 window.addEventListener('load', generate);
+
+
+function updateSelectOptions() {
+  let typeScaleNames = document.getElementById('typeScaleNames').value.split(/\s*,\s*/);
+  let select = document.getElementById('baseLineSelect');
+
+  // clear out old options
+  while (select.firstChild) {
+    select.firstChild.remove();
+  }
+
+  // create and append new options
+  for (let i = 0; i < typeScaleNames.length; i++) {
+    let option = document.createElement('option');
+    option.value = typeScaleNames[i];
+    option.text = typeScaleNames[i];
+    select.appendChild(option);
+  }
+}
+
+// Event listeners for all input fields
+document.getElementById('minBaseFontSize').addEventListener('input', generate);
+document.getElementById('minScreenWidth').addEventListener('input', generate);
+document.getElementById('minScaleRatio').addEventListener('input', generate);
+document.getElementById('maxBaseFontSize').addEventListener('input', generate);
+document.getElementById('maxScreenWidth').addEventListener('input', generate);
+document.getElementById('maxScaleRatio').addEventListener('input', generate);
+document.getElementById('typeScaleNames').addEventListener('input', function() {
+  updateSelectOptions();
+  generate();
+});
+document.getElementById('rounding').addEventListener('input', generate);
+
+// Generate CSS variables and update select options on page load
+window.addEventListener('load', function() {
+  updateSelectOptions();
+  generate();
+});
