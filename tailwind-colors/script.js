@@ -6,7 +6,7 @@ const lightnessMaxInput = document.getElementById('lightnessMax');
 const addButton = document.getElementById('addButton');
 const removeButton = document.getElementById('removeButton');
 const paletteDiv = document.getElementById('palette');
-
+const numBlocksInput = document.getElementById('numBlocks');
 
 // Add an event listener for the new button
 const addColorPickerButton = document.getElementById('addColorPickerButton');
@@ -14,15 +14,15 @@ addColorPickerButton.addEventListener('click', handleAddColorPickerButtonClick);
 
 
 // Configuration
-let numBlocks = 6;
+// let numBlocks = 6;
+let numBlocks = Number(numBlocksInput.value);
 
 // Event listeners
 window.onload = generatePalette;
 document.getElementById('addColorPickerButton').addEventListener('click', handleAddColorPickerButtonClick);
 document.getElementById('lightnessMin').addEventListener('change', generatePalette);
 document.getElementById('lightnessMax').addEventListener('change', generatePalette);
-document.getElementById('addButton').addEventListener('click', handleAddButtonClick);
-document.getElementById('removeButton').addEventListener('click', handleRemoveButtonClick);
+numBlocksInput.addEventListener('change', handleNumBlocksInputChange);
 
 // Generate palette on color picker change
 function handleColorPickerChange(event) {
@@ -56,6 +56,17 @@ function handleRemoveButtonClick() {
     }
 }
 
+// Handle changes to the number of blocks
+function handleNumBlocksInputChange() {
+    const newNumBlocks = Number(numBlocksInput.value);
+    if (newNumBlocks >= 1 && newNumBlocks <= 10) {
+        numBlocks = newNumBlocks;
+        generatePalette();
+    } else {
+        numBlocksInput.value = numBlocks; // Reset the input value if it's out of range
+    }
+}
+
 // Handle the creation of new color pickers
 function handleAddColorPickerButtonClick() {
     const colorPickerContainer = document.getElementById('colorPickerContainer');
@@ -81,8 +92,13 @@ function handleAddColorPickerButtonClick() {
     colorPickerValue.value = '#ff0000';
     colorPickerValue.addEventListener('change', handleColorPickerValueChange);
 
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Remove';
+    deleteButton.addEventListener('click', handleDeleteButtonClick);
+
     flex.appendChild(colorPicker);
     flex.appendChild(colorPickerValue);
+    flex.appendChild(deleteButton);
     colorPickerWrap.appendChild(label);
     colorPickerWrap.appendChild(flex);
     colorPickerContainer.appendChild(colorPickerWrap);
@@ -90,6 +106,12 @@ function handleAddColorPickerButtonClick() {
     generatePalette();
 }
 
+// Handle the removal of color pickers
+function handleDeleteButtonClick(event) {
+    const colorPickerWrap = event.target.parentNode.parentNode;
+    colorPickerWrap.remove();
+    generatePalette();
+}
 
 // Generate the color palette
 function generatePalette() {
@@ -103,11 +125,11 @@ function generatePalette() {
     if(numColors === 1) {
         const lightnessMin = lightnessMinInput.value / 100;
         const lightnessMax = lightnessMaxInput.value / 100;
-
-        for (let i = 0; i <= 2*numBlocks; i++) {
+    
+        for (let i = 0; i < numBlocks; i++) { // Here
             let color;
-            const ratio = i / (2*numBlocks); // ratio ranges from 0 to 1
-
+            const ratio = i / numBlocks; // And here
+    
             // First half of the colors (from white to the chosen color)
             if (ratio < 0.5) {
                 const lightness = lightnessMin + (1 - lightnessMin) * (ratio * 2);
@@ -124,19 +146,20 @@ function generatePalette() {
                 const lightness = lightnessMax * ((ratio - 0.5) * 2);
                 color = color2k.mix(pickedColors[0], 'black', lightness);
             }
-
+    
             createColorDiv(color);
         }
     } else {
-        for (let i = 0; i < numBlocks; i++) {
+        // If there are multiple colors, iterate one less time
+        for (let i = 0; i < numBlocks - 1; i++) {
             const colorIndex = Math.floor(i / (numBlocks / (numColors - 1)));
             const color1 = pickedColors[colorIndex % numColors];
             const color2 = pickedColors[Math.min(colorIndex + 1, numColors - 1)];
-
+    
             const ratio = (i % (numBlocks / (numColors - 1))) / (numBlocks / (numColors - 1));
-
+    
             const color = color2k.mix(color1, color2, ratio);
-
+    
             createColorDiv(color);
         }
         // Add the last color
