@@ -39,3 +39,16 @@ input[type="number"], input[type="text"] {
     line-height: 2;
     padding: 30px;
 }
+
+.sm, .md, .base, .lg, .xl, .xxl {
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+
+.sm{ font-size: var(--sm);}
+.md{ font-size: var(--md);}
+.base{ font-size: var(--base);}
+.lg{ font-size: var(--lg);}
+.xl{ font-size: var(--xl);}
+.xxl{ font-size: var(--xxl);}
