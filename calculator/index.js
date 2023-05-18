@@ -11,8 +11,6 @@ function updateValues() {
   };
 }
 
-
-
 function generate() {
   let values = updateValues();
   let cssVariables = "";
@@ -35,7 +33,7 @@ function generate() {
     let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
 
     let typeScaleName = values.typeScaleNames[i].trim();
-    let cssVariable = `--${typeScaleName}`;
+    let cssVariable = `--win-fs-${typeScaleName}`;
 
     cssVariables += `${cssVariable}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
 

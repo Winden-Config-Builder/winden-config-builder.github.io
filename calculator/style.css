@@ -5,7 +5,7 @@ body {
 
 #wrap {
   max-width: 1440px;
-  margin: auto;
+  margin: 30px auto;
   display: flex;
   gap: 30px;
 }
@@ -35,10 +35,15 @@ input[type=number], input[type=text], select {
   width: 100%;
 }
 
-#preview {
-  background-color: #f0f0eb;
+.code-preview {
+  background-color: #d3eaff;
   line-height: 2;
-  padding: 30px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+.code-preview pre {
+  padding: 0;
+  margin: 0;
 }
 
 .sm, .md, .base, .lg, .xl, .xxl {
@@ -48,25 +53,25 @@ input[type=number], input[type=text], select {
 }
 
 .sm {
-  font-size: var(--sm);
+  font-size: var(--win-fs-sm);
 }
 
 .md {
-  font-size: var(--md);
+  font-size: var(--win-fs-md);
 }
 
 .base {
-  font-size: var(--base);
+  font-size: var(--win-fs-base);
 }
 
 .lg {
-  font-size: var(--lg);
+  font-size: var(--win-fs-lg);
 }
 
 .xl {
-  font-size: var(--xl);
+  font-size: var(--win-fs-xl);
 }
 
 .xxl {
-  font-size: var(--xxl);
+  font-size: var(--win-fs-xxl);
 }/*# sourceMappingURL=style.css.map */
