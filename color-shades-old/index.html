@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Color Shades Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.1/chroma.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    
+    <div class="flex-wrapper">
+        <div class="input-wrap">
+            <label for="">Name</label>
+            <input type="text" id="colorName" value="custom-color">
+        </div>
+        <div class="input-wrap">
+            <label for="">Color</label>
+            <input type="color" id="colorPicker" value="#4aabff" />
+        </div>
+        <div class="input-wrap">
+            <label for="">Hue</label>
+            <input type="number" id="hue" min="-180" max="180" value="0" />
+        </div>
+        <div class="input-wrap">
+            <label for="">Saturation</label>
+            <input type="number" id="saturation" min="0" max="100" value="100" />
+        </div>
+        <div class="input-wrap">
+            <label for="">Lightness Min</label>
+            <input type="number" id="lightnessMin" min="0" max="100" value="0" />   
+        </div>
+        <div class="input-wrap">
+            <label for="">Lightness Max</label>
+            <input type="number" id="lightnessMax" min="0" max="100" value="100" />
+        </div>
+        
+    </div>
+    <div id="shadesContainer"></div>
+    <button id="addButton">Add Block</button>
+    <button id="removeButton">Remove Block</button>
+
+    <div id="preview">
+<pre><code></code></pre>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
