@@ -11,27 +11,39 @@ function updateValues() {
   };
 }
 
+
+
 function generate() {
   let values = updateValues();
   let cssVariables = "";
+  let tailwindVarPreview = "fontSize: {\n";
+  let tailwindPreview = "fontSize: {\n";
+
   let select = document.getElementById('baseLineSelect');
   let index = select.selectedIndex;
 
   for (let i = 0; i < values.typeScaleNames.length; i++) {
-	if (index > 0){
-		var base = i - index;
-	} else {
-		var base = i;
-	}
-	let minFontSize = values.minBaseFontSize * Math.pow(values.minScaleRatio, base);
-	let maxFontSize = values.maxBaseFontSize * Math.pow(values.maxScaleRatio, base);
+    if (index > 0) {
+      var base = i - index;
+    } else {
+      var base = i;
+    }
+    let minFontSize = values.minBaseFontSize * Math.pow(values.minScaleRatio, base);
+    let maxFontSize = values.maxBaseFontSize * Math.pow(values.maxScaleRatio, base);
 
-	let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
-	let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
-		
-	cssVariables += `--${values.typeScaleNames[i].trim()}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
+    let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
+    let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
 
-    
+    let typeScaleName = values.typeScaleNames[i].trim();
+    let cssVariable = `--${typeScaleName}`;
+
+    cssVariables += `${cssVariable}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
+
+    // Add entries to tailwind var preview
+    tailwindVarPreview += `  ${typeScaleName}: 'var(${cssVariable})',\n`;
+
+    // Add entries to tailwind preview
+    tailwindPreview += `  '${typeScaleName}': 'clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px)',\n`;
   }
 
   const wrappedCSSVariables = `:root {\n${cssVariables}}`;
@@ -47,8 +59,11 @@ function generate() {
     head.appendChild(newStyleTag);
   }
 
-  document.querySelector('#preview code').textContent = wrappedCSSVariables;
+  document.querySelector('#css-variables-preview code').textContent = wrappedCSSVariables;
+  document.querySelector('#tailwind-var-preview code').textContent = `${tailwindVarPreview}}`;
+  document.querySelector('#tailwind-preview code').textContent = `${tailwindPreview}}`;
 }
+
 
 function updateSelectOptions() {
   let typeScaleNames = document.getElementById('typeScaleNames').value.split(/\s*,\s*/);
