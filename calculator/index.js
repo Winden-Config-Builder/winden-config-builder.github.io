@@ -14,15 +14,24 @@ function updateValues() {
 function generate() {
   let values = updateValues();
   let cssVariables = "";
+  let select = document.getElementById('baseLineSelect');
+  let index = select.selectedIndex;
 
   for (let i = 0; i < values.typeScaleNames.length; i++) {
-    let minFontSize = values.minBaseFontSize * Math.pow(values.minScaleRatio, i);
-    let maxFontSize = values.maxBaseFontSize * Math.pow(values.maxScaleRatio, i);
+	if (index > 0){
+		var base = i - index;
+	} else {
+		var base = i;
+	}
+	let minFontSize = values.minBaseFontSize * Math.pow(values.minScaleRatio, base);
+	let maxFontSize = values.maxBaseFontSize * Math.pow(values.maxScaleRatio, base);
 
-    let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
-    let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
+	let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
+	let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
+		
+	cssVariables += `--${values.typeScaleNames[i].trim()}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
 
-    cssVariables += `--${values.typeScaleNames[i].trim()}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
+    
   }
 
   const wrappedCSSVariables = `:root {\n${cssVariables}}`;
@@ -60,7 +69,7 @@ function updateSelectOptions() {
 }
 
 // Event listeners for all input fields
-let inputIds = ['minBaseFontSize', 'minScreenWidth', 'minScaleRatio', 'maxBaseFontSize', 'maxScreenWidth', 'maxScaleRatio', 'typeScaleNames', 'rounding'];
+let inputIds = ['minBaseFontSize', 'minScreenWidth', 'minScaleRatio', 'maxBaseFontSize', 'maxScreenWidth', 'maxScaleRatio', 'typeScaleNames', 'rounding', 'baseLineSelect'];
 
 inputIds.forEach(id => {
   document.getElementById(id).addEventListener('input', () => {
