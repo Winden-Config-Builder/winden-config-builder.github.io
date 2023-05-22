@@ -58,3 +58,10 @@ input[type="number"], input[type="text"], select {
 .lg{ font-size: var(--win-fs-lg);}
 .xl{ font-size: var(--win-fs-xl);}
 .xxl{ font-size: var(--win-fs-xxl);}
+
+
+#typographySingle, #typographyRatio{
+    border: 4px solid lightblue;
+    padding: 20px;
+    margin: 20px 0;
+}

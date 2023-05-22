@@ -98,3 +98,41 @@ window.addEventListener('load', function() {
   updateSelectOptions();
   generate();
 });
+
+document.getElementById('disableRatio').addEventListener('change', function() {
+  let typographyRatio = document.getElementById('typographyRatio');
+  let typographySingle = document.getElementById('typographySingle');
+
+  if(this.checked) {
+    typographyRatio.style.display = 'none';
+    typographySingle.style.display = 'block';
+  } else {
+    typographyRatio.style.display = 'block';
+    typographySingle.style.display = 'none';
+  }
+});
+
+
+// Event listener for "AddFont" button
+document.querySelector('.AddFont').addEventListener('click', function() {
+  let typographySingleWrap = document.querySelector('#typographySingle .typographySingleWrap');
+  let inputGroup = document.querySelector('#typographySingle .input-group');
+  let clonedInputGroup = inputGroup.cloneNode(true); // This creates a copy of the inputGroup
+
+  // Make sure to add an event listener to the cloned "delFont" button
+  let delFontButton = clonedInputGroup.querySelector('.delFont');
+  delFontButton.addEventListener('click', function() {
+    this.closest('.input-group').remove();
+  });
+
+  typographySingleWrap.appendChild(clonedInputGroup); // This adds the copy to the DOM
+});
+
+// Event listener for initial "delFont" button
+let delFontButtons = document.querySelectorAll('.delFont');
+delFontButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    this.closest('.input-group').remove();
+  });
+});
+
