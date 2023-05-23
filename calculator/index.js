@@ -19,29 +19,68 @@ function generate() {
 
   let select = document.getElementById('baseLineSelect');
   let index = select.selectedIndex;
+  
+  let fontBlock = document.querySelector('.font-preview');
+  fontBlock.innerHTML="";
+  
+  // if disableRatio selected
+  if (document.getElementById('disableRatio').checked){
+	var sizes = document.querySelectorAll('.typographySingleWrap .input-group');
+	for (let i = 0; i < sizes.length; i++) {
+		let minFontSize = Number(sizes[i].querySelector("#minScaleRatio").value);
+		let maxFontSize = Number(sizes[i].querySelector("#maxScaleRatio").value);
+		let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
+		let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
+		
+		let typeScaleName = sizes[i].querySelector("#maxScaleName").value?sizes[i].querySelector("#maxScaleName").value:i;
+		let cssVariable = `--win-fs-${typeScaleName}`;
+		
+		// custom lorem ipsum
+		var p = document.createElement("p");
+		p.innerHTML = 'Lorem ipsum';
+		p.classList.add(typeScaleName);
+		p.style.fontSize = "var(--win-fs-"+typeScaleName+")";
+		fontBlock.append(p);
+		
+		cssVariables += `${cssVariable}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
 
-  for (let i = 0; i < values.typeScaleNames.length; i++) {
-    if (index > 0) {
-      var base = i - index;
-    } else {
-      var base = i;
-    }
-    let minFontSize = values.minBaseFontSize * Math.pow(values.minScaleRatio, base);
-    let maxFontSize = values.maxBaseFontSize * Math.pow(values.maxScaleRatio, base);
+		// Add entries to tailwind var preview
+		tailwindVarPreview += `  ${typeScaleName}: 'var(${cssVariable})',\n`;
 
-    let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
-    let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
+		// Add entries to tailwind preview
+		tailwindPreview += `  '${typeScaleName}': 'clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px)',\n`;	
+	}				
+  } else {
+	  for (let i = 0; i < values.typeScaleNames.length; i++) {
+		if (index > 0) {
+		  var base = i - index;
+		} else {
+		  var base = i;
+		}
+		let minFontSize = values.minBaseFontSize * Math.pow(values.minScaleRatio, base);
+		let maxFontSize = values.maxBaseFontSize * Math.pow(values.maxScaleRatio, base);
 
-    let typeScaleName = values.typeScaleNames[i].trim();
-    let cssVariable = `--win-fs-${typeScaleName}`;
+		let vwValue = ((maxFontSize - minFontSize) * 100) / (values.maxScreenWidth - values.minScreenWidth);
+		let pxValue = minFontSize - (values.minScreenWidth * vwValue / 100);
 
-    cssVariables += `${cssVariable}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
+		let typeScaleName = values.typeScaleNames[i].trim();
+		let cssVariable = `--win-fs-${typeScaleName}`;
 
-    // Add entries to tailwind var preview
-    tailwindVarPreview += `  ${typeScaleName}: 'var(${cssVariable})',\n`;
+		// custom lorem ipsum
+		var p = document.createElement("p");
+		p.innerHTML = 'Lorem ipsum';
+		p.classList.add(typeScaleName);
+		p.style.fontSize = "var(--win-fs-"+typeScaleName+")";
+		fontBlock.append(p);
+		
+		cssVariables += `${cssVariable}: clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px);\n`;
 
-    // Add entries to tailwind preview
-    tailwindPreview += `  '${typeScaleName}': 'clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px)',\n`;
+		// Add entries to tailwind var preview
+		tailwindVarPreview += `  ${typeScaleName}: 'var(${cssVariable})',\n`;
+
+		// Add entries to tailwind preview
+		tailwindPreview += `  '${typeScaleName}': 'clamp(${minFontSize.toFixed(values.decimalPlaces)}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(values.decimalPlaces)}px, ${maxFontSize.toFixed(values.decimalPlaces)}px)',\n`;
+	  }
   }
 
   const wrappedCSSVariables = `:root {\n${cssVariables}}`;
@@ -110,6 +149,7 @@ document.getElementById('disableRatio').addEventListener('change', function() {
     typographyRatio.style.display = 'block';
     typographySingle.style.display = 'none';
   }
+  generate();
 });
 
 
@@ -123,9 +163,11 @@ document.querySelector('.AddFont').addEventListener('click', function() {
   let delFontButton = clonedInputGroup.querySelector('.delFont');
   delFontButton.addEventListener('click', function() {
     this.closest('.input-group').remove();
+	generate();
   });
 
   typographySingleWrap.appendChild(clonedInputGroup); // This adds the copy to the DOM
+  generate();
 });
 
 // Event listener for initial "delFont" button
