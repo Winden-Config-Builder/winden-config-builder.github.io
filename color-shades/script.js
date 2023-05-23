@@ -59,7 +59,7 @@ function handleRemoveButtonClick() {
 // Handle changes to the number of blocks
 function handleNumBlocksInputChange() {
     const newNumBlocks = Number(numBlocksInput.value);
-    if (newNumBlocks >= 1 && newNumBlocks <= 10) {
+    if (newNumBlocks >= 1 && newNumBlocks <= 20) {
         numBlocks = newNumBlocks;
         generatePalette();
     } else {
