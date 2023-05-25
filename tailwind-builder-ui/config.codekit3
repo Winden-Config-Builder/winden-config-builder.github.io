@@ -56,6 +56,14 @@
       "sC" : 3,
       "tS" : 0
     },
+    "\/source\/breakpoints.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/build\/breakpoints.html",
+      "oF" : 0
+    },
     "\/source\/css\/main.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -102,9 +110,9 @@
       "oAP" : "\/build\/favicon.ico",
       "oF" : 0
     },
-    "\/source\/index.html" : {
+    "\/source\/index.kit" : {
       "cB" : 0,
-      "ft" : 8192,
+      "ft" : 2048,
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/build\/index.html",
