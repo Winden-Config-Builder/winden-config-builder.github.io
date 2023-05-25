@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>Welcome to Tailwind!</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script> 
+  </head>
+  <body class="antialiased">
+
+    <div
+      x-data="{ tab: window.location.hash ? window.location.hash.substring(1) : 'description' }"
+      id="tab_wrapper"
+      class="flex gap-4"
+    >
+      <!-- The tabs navigation -->
+      <nav class="grid bg-slate-100 [&>a]:p-4">
+        <a
+          :class="{ 'active bg-white': tab === 'description' }"
+          @click.prevent="tab = 'description'; window.location.hash = 'description'"
+          href="#"
+          class=""
+          >Description</a
+        >
+        <a
+          :class="{ 'active bg-white': tab === 'reviews' }"
+          @click.prevent="tab = 'reviews'; window.location.hash = 'reviews'"
+          href="#"
+          >Reviews</a
+        >
+      </nav>
+
+      <!-- The tabs content -->
+      <div x-show="tab === 'description'">Lorem ipsum description.</div>
+      <div x-show="tab === 'reviews'">Lorem ipsum reviews.</div>
+    </div>
+
+
+  </body>
+</html>
