@@ -21,3 +21,9 @@
 .input-label{
     @apply absolute -top-6;
 }
+
+#editing-view-port, #editing-view-port > div{
+    display: inline-block !important;
+    border: 1px solid red;
+}
+

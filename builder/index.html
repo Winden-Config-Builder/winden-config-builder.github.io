@@ -9,50 +9,58 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>    
 </head>
 <body class="bg-slate-200">
-    <header class="bg-white p-4 text-center mb-8">
+    <header class="bg-white p-4 text-center mb-12">
         <h1 class="text-2xl font-bold">Tailwind Config Builder</h1>
     </header>
-    <div x-data="{ activeTab: 'breakpoints' }" class="flex max-w-7xl mx-auto">
-        <nav class="flex flex-col">
-          <button class="nav-btn" x-on:click="activeTab = 'breakpoints'" :class="{ 'bg-white': activeTab === 'breakpoints' }">Breakpoints</button>
-          <button class="nav-btn" x-on:click="activeTab = 'colors'" :class="{ 'bg-white': activeTab === 'colors' }">Colors</button>
-          <button class="nav-btn" x-on:click="activeTab = 'sizes'" :class="{ 'bg-white': activeTab === 'sizes' }">Sizes</button>
-          <button class="nav-btn" x-on:click="activeTab = 'typography'" :class="{ 'bg-white': activeTab === 'typography' }">Typography</button>
-          <button class="nav-btn" x-on:click="activeTab = 'fontFamily'" :class="{ 'bg-white': activeTab === 'fontFamily' }">Font Family</button>
-          <button class="nav-btn" x-on:click="activeTab = 'containers'" :class="{ 'bg-white': activeTab === 'containers' }">Containers</button>
-        </nav>
-        
-        <div class="flex px-16 py-8 bg-white grow">
-            <div class="w-full" x-show="activeTab === 'breakpoints'">
-                <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
-                <div dp-include-html="./inc/breakpoints.html"></div>             
-            </div>
+    <div x-data="{ activeTab: 'breakpoints' }" class="flex flex-col xl:flex-row  gap-12">
+        <div class="flex max-w-7xl grow w-full">
+            <nav class="flex flex-col">
+                <button class="nav-btn" x-on:click="activeTab = 'breakpoints'" :class="{ 'bg-white': activeTab === 'breakpoints' }">Breakpoints</button>
+                <button class="nav-btn" x-on:click="activeTab = 'colors'" :class="{ 'bg-white': activeTab === 'colors' }">Colors</button>
+                <button class="nav-btn" x-on:click="activeTab = 'sizes'" :class="{ 'bg-white': activeTab === 'sizes' }">Sizes</button>
+                <button class="nav-btn" x-on:click="activeTab = 'typography'" :class="{ 'bg-white': activeTab === 'typography' }">Typography</button>
+                <button class="nav-btn" x-on:click="activeTab = 'fontFamily'" :class="{ 'bg-white': activeTab === 'fontFamily' }">Font Family</button>
+                <button class="nav-btn" x-on:click="activeTab = 'containers'" :class="{ 'bg-white': activeTab === 'containers' }">Containers</button>
+              </nav>
+              
+              <div class="flex px-16 py-8 bg-white grow">
+                  <div class="w-full" x-show="activeTab === 'breakpoints'">
+                      <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
+                      <div dp-include-html="./inc/breakpoints.html"></div>             
+                  </div>
+      
+                  <div class="w-full" x-show="activeTab === 'colors'">
+                      <h2 class="text-4xl font-black mb-8">Colors</h2>
+                      <div dp-include-html="./inc/colors.html"></div>
+                  </div>
+      
+                  <div class="w-full" x-show="activeTab === 'sizes'">
+                      <h2 class="text-4xl font-black mb-8">Sizes</h2>
+                      <div dp-include-html="./inc/sizes.html"></div>
+                  </div>
+      
+                  <div class="w-full" x-show="activeTab === 'typography'">
+                      <h2 class="text-4xl font-black mb-8">Typography</h2>
+                      <div dp-include-html="./inc/typography.html"></div>
+                  </div>
+      
+                  <div class="w-full" x-show="activeTab === 'fontFamily'">
+                      <h2 class="text-4xl font-black mb-8">Font Family</h2>
+                      <div dp-include-html="./inc/fontFamily.html"></div>
+                  </div>
+      
+                  <div class="w-full" x-show="activeTab === 'containers'">
+                      <h2 class="text-4xl font-black mb-8">Containers</h2>
+                      <div dp-include-html="./inc/containers.html"></div>
+                  </div>
+                  
+              </div>
+        </div>
 
-            <div class="w-full" x-show="activeTab === 'colors'">
-                <h2 class="text-4xl font-black mb-8">Colors</h2>
-                <div dp-include-html="./inc/colors.html"></div>
-            </div>
-
-            <div class="w-full" x-show="activeTab === 'sizes'">
-                <h2 class="text-4xl font-black mb-8">Sizes</h2>
-                <div dp-include-html="./inc/sizes.html"></div>
-            </div>
-
-            <div class="w-full" x-show="activeTab === 'typography'">
-                <h2 class="text-4xl font-black mb-8">Typography</h2>
-                <div dp-include-html="./inc/typography.html"></div>
-            </div>
-
-            <div class="w-full" x-show="activeTab === 'fontFamily'">
-                <h2 class="text-4xl font-black mb-8">Font Family</h2>
-                <div dp-include-html="./inc/fontFamily.html"></div>
-            </div>
-
-            <div class="w-full" x-show="activeTab === 'containers'">
-                <h2 class="text-4xl font-black mb-8">Containers</h2>
-                <div dp-include-html="./inc/containers.html"></div>
-            </div>
-            
+        <div id="preview" class="bg-slate-900 text-blue-300 p-8 grow text-xs leading-6">
+            <pre><code>
+                <div dp-include-html="./inc/preview.html"></div>             
+            </code></pre>
         </div>
     </div>
     
