@@ -1,4 +1,4 @@
-<div class="repeateble-fields">
+<!-- <div class="repeateble-fields">
     <div class="wrap">
         <div class="repeateble-row flex gap-4 mb-4">
             <input class="input" type="text" name="" value="mob" id="">
@@ -17,4 +17,24 @@
         </div>
     </div>
     <button class="clone-row">+ Add New</button>
+</div> -->
+
+<div class="repeateble-fields" x-data="{rows: [{name: 'mob', value: 600}, {name: 'tab', value: 1200}, {name: 'desk', value: 1680}]}">
+    <div class="wrap">
+        <template x-for="(row, index) in rows" :key="index">
+            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                <label class="input-wrap">
+                    <span class="input-label">Name</span>
+                    <input class="input" type="text" x-model="row.name">
+                </label>
+                <label class="input-wrap">
+                    <span class="input-label">Value</span>
+                    <input class="input" type="number" x-model="row.value">
+                </label>
+                <button class="delete-row" @click="rows.splice(index, 1)">Del</button>
+            </div>
+        </template>
+    </div>
+    <button class="clone-row" @click="rows.push({name: '', value: ''})">+ Add New</button>
 </div>
+

@@ -9,3 +9,11 @@
 .input{
     @apply border border-slate-400 grow rounded-md p-2;
 }
+
+.input-wrap{
+    @apply grid relative grow;
+}
+
+.input-label{
+    @apply absolute -top-6;
+}
