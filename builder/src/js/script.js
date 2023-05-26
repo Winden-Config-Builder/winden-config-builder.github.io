@@ -1,1 +1,2 @@
-// console.log("Hello sadsssa!");
+import { includeHTML } from './includeHTML.js';
+includeHTML();
