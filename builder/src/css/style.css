@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.btn-primary{
+    @apply bg-blue-600 text-white px-4 py-2 rounded-md mt-4;
+}
+
 .nav-btn{
     @apply block text-left p-3 w-[200px];
 }
@@ -11,7 +15,7 @@
 }
 
 .input-wrap{
-    @apply grid relative grow;
+    @apply grid relative grow max-w-md;
 }
 
 .input-label{
