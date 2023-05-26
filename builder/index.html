@@ -17,7 +17,7 @@
             <nav class="flex flex-col">
                 <button class="nav-btn" x-on:click="activeTab = 'breakpoints'" :class="{ 'bg-white': activeTab === 'breakpoints' }">Breakpoints</button>
                 <button class="nav-btn" x-on:click="activeTab = 'colors'" :class="{ 'bg-white': activeTab === 'colors' }">Colors</button>
-                <button class="nav-btn" x-on:click="activeTab = 'sizes'" :class="{ 'bg-white': activeTab === 'sizes' }">Sizes</button>
+                <button class="nav-btn" x-on:click="activeTab = 'spacing'" :class="{ 'bg-white': activeTab === 'spacing' }">Spacing</button>
                 <button class="nav-btn" x-on:click="activeTab = 'typography'" :class="{ 'bg-white': activeTab === 'typography' }">Typography</button>
                 <button class="nav-btn" x-on:click="activeTab = 'fontFamily'" :class="{ 'bg-white': activeTab === 'fontFamily' }">Font Family</button>
                 <button class="nav-btn" x-on:click="activeTab = 'containers'" :class="{ 'bg-white': activeTab === 'containers' }">Containers</button>
@@ -34,9 +34,9 @@
                       <div dp-include-html="./inc/colors.html"></div>
                   </div>
       
-                  <div class="w-full" x-show="activeTab === 'sizes'">
-                      <h2 class="text-4xl font-black mb-8">Sizes</h2>
-                      <div dp-include-html="./inc/sizes.html"></div>
+                  <div class="w-full" x-show="activeTab === 'spacing'">
+                      <h2 class="text-4xl font-black mb-8">Spacing</h2>
+                      <div dp-include-html="./inc/spacing.html"></div>
                   </div>
       
                   <div class="w-full" x-show="activeTab === 'typography'">
@@ -64,6 +64,9 @@
         </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/color2k@2.0.2/dist/index.unpkg.umd.min.js"></script>
+    <script src="dist/colorShades.js"></script>
+    <script src="dist/calculator.js"></script>
     <script src="dist/script.js"></script>
 </body>
 </html>

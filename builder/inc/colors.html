@@ -1,1 +1,33 @@
-<h1>This is col</h1>
+<div class="flex-wrapper">
+    <div class="input-wrap">
+        <label for="">Name</label>
+        <input type="text" id="colorName" value="custom-color">
+    </div>
+
+    <div id="colorPickerContainer" class="input-wrap">
+        <div class="colorPickerWrap">
+            <label for="">Color</label>
+            <div class="flex">
+                <input type="color" class="colorPicker" value="#ff0000" onchange="generatePalette()">
+                <input type="text" class="colorPickerValue" value="#ff0000">
+            </div>
+        </div>
+    </div>
+    <button id="addColorPickerButton">+ Add Color Picker</button>
+    <div class="input-wrap">
+        <label for="">Lightness Min</label>
+        <input type="number" id="lightnessMin" min="0" max="100" value="5" />   
+    </div>
+    <div class="input-wrap">
+        <label for="">Lightness Max</label>
+        <input type="number" id="lightnessMax" min="0" max="100" value="95" />
+    </div>        
+</div>
+
+<div id="palette">
+    
+</div>
+<div id="buttons-wrap">
+    <label for="numBlocks">Number of Blocks:</label>
+    <input type="number" id="numBlocks" min="1" max="20" value="6">
+</div>
