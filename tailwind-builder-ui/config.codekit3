@@ -110,9 +110,9 @@
       "oAP" : "\/build\/favicon.ico",
       "oF" : 0
     },
-    "\/source\/index.kit" : {
+    "\/source\/index.html" : {
       "cB" : 0,
-      "ft" : 2048,
+      "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/build\/index.html",

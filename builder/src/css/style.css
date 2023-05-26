@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-btn{
+    @apply block text-left p-3 w-[200px];
+}
