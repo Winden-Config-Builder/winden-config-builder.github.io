@@ -6,10 +6,6 @@
     @apply bg-blue-600 text-white px-4 py-2 rounded-md mt-4;
 }
 
-.nav-btn{
-    @apply block text-left p-3 w-[200px];
-}
-
 .input{
     @apply border border-slate-400 grow rounded-md p-2;
 }
