@@ -1,35 +1,21 @@
 // DOM elements
-const colorPicker = document.getElementById("colorPicker");
-const colorPickerValue = document.getElementById("colorPickerValue");
+const colorPickerContainer = document.getElementById("colorPickerContainer");
 const lightnessMinInput = document.getElementById("lightnessMin");
 const lightnessMaxInput = document.getElementById("lightnessMax");
-const addButton = document.getElementById("addButton");
-const removeButton = document.getElementById("removeButton");
-const paletteDiv = document.getElementById("palette");
 const numBlocksInput = document.getElementById("numBlocks");
-
-// Add an event listener for the new button
-const addColorPickerButton = document.getElementById("addColorPickerButton");
-addColorPickerButton.addEventListener("click", handleAddColorPickerButtonClick);
+const paletteDiv = document.getElementById("palette");
 
 // Configuration
-// let numBlocks = 6;
 let numBlocks = Number(numBlocksInput.value);
 
 // Event listeners
-window.onload = generatePalette;
-document
-  .getElementById("addColorPickerButton")
-  .addEventListener("click", handleAddColorPickerButtonClick);
-document
-  .getElementById("lightnessMin")
-  .addEventListener("change", generatePalette);
-document
-  .getElementById("lightnessMax")
-  .addEventListener("change", generatePalette);
+window.addEventListener("load", generatePalette);
+document.getElementById("addColorPickerButton").addEventListener("click", addColorPicker);
+lightnessMinInput.addEventListener("change", generatePalette);
+lightnessMaxInput.addEventListener("change", generatePalette);
 numBlocksInput.addEventListener("change", handleNumBlocksInputChange);
 
-// Generate palette on color picker change
+// Handles color picker change
 function handleColorPickerChange(event) {
   const picker = event.target;
   const pickerValue = picker.nextSibling;
@@ -37,7 +23,7 @@ function handleColorPickerChange(event) {
   generatePalette();
 }
 
-// Update color picker value on input change
+// Handles color picker value change
 function handleColorPickerValueChange(event) {
   const pickerValue = event.target;
   const picker = pickerValue.previousSibling;
@@ -45,20 +31,51 @@ function handleColorPickerValueChange(event) {
   generatePalette();
 }
 
-// Add button click handler
-function handleAddButtonClick() {
-  if (numBlocks < 10) {
-    numBlocks++;
-    generatePalette();
-  }
+// Handles the creation of new color pickers
+function addColorPicker() {
+  const colorPickerWrap = document.createElement("div");
+  colorPickerWrap.className = "colorPickerWrap";
+
+  const label = document.createElement("label");
+  label.textContent = "Color";
+
+  const flex = document.createElement("div");
+  flex.className = "flex";
+
+  const colorPicker = createInputElement("color", "colorPicker", "#ff0000", handleColorPickerChange);
+  const colorPickerValue = createInputElement("text", "colorPickerValue", "#ff0000", handleColorPickerValueChange);
+  
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Remove";
+  deleteButton.addEventListener("click", handleDeleteButtonClick);
+
+  appendChildren(flex, [colorPicker, colorPickerValue, deleteButton]);
+  appendChildren(colorPickerWrap, [label, flex]);
+
+  colorPickerContainer.appendChild(colorPickerWrap);
+  generatePalette();
 }
 
-// Remove button click handler
-function handleRemoveButtonClick() {
-  if (numBlocks > 1) {
-    numBlocks--;
-    generatePalette();
-  }
+// Helper function to create an input element
+function createInputElement(type, className, value, handler) {
+  const inputElement = document.createElement("input");
+  inputElement.type = type;
+  inputElement.className = className;
+  inputElement.value = value;
+  inputElement.addEventListener("change", handler);
+  return inputElement;
+}
+
+// Helper function to append multiple children to a parent
+function appendChildren(parent, children) {
+  children.forEach(child => parent.appendChild(child));
+}
+
+// Handles the removal of color pickers
+function handleDeleteButtonClick(event) {
+  const colorPickerWrap = event.target.parentNode.parentNode;
+  colorPickerWrap.remove();
+  generatePalette();
 }
 
 // Handle changes to the number of blocks
