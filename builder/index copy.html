@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="dist/style.css" />
+    <link rel="stylesheet" href="src/css/output.css" />
   </head>
   <body class="bg-slate-200">
     <header class="bg-white p-4 text-center mb-12">
@@ -15,90 +15,83 @@
       <div class="flex max-w-7xl grow w-full">
 
         <nav class="flex flex-col overflow-hidden min-w-[200px]">
-          <button id="breakpointsTab" class="tablinks block text-left p-3 bg-white" onclick="openTab(event, 'breakpoints')">Breakpoints</button>
-          <button id="colorsTab" class="tablinks block text-left p-3" onclick="openTab(event, 'colors')">Colors</button>
-          <button id="spacingTab" class="tablinks block text-left p-3" onclick="openTab(event, 'spacing')">Spacing</button>
-          <button id="typographyTab" class="tablinks block text-left p-3" onclick="openTab(event, 'typography')">Typography</button>
-          <button id="fontFamilyTab" class="tablinks block text-left p-3" onclick="openTab(event, 'font-family')">Font Family</button>
-          <button id="containersTab" class="tablinks block text-left p-3" onclick="openTab(event, 'containers')">Containers</button>
+          <button id="colorsTab" class="tablinks block text-left p-3 bg-white" onclick="openTab(event, 'colors')">Colors</button>
         </nav>
 
         <div class="flex px-16 py-8 bg-white grow">
 
 
-          <!-- Breakpoints -->
-          <div id="breakpoints" class="tabcontent w-full">
-            <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
-            <div class="repeateble-fields">
-              <div class="wrap">                
-                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="mob" /></label>
-                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="600" /></label>
-                    <button class="delete-row">Del</button>
-                  </div>
-                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="tab" /></label>
-                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1200" /></label>
-                    <button class="delete-row">Del</button>
-                  </div>
-                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="desk" /></label>
-                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1680" /></label>
-                    <button class="delete-row">Del</button>
-                  </div>
-                </template>
+          <!-- Colors -->
+          <div id="colors" class="tabcontent w-full">
+            <h2 class="text-4xl font-black mb-8">Colors</h2>
+            <div class="flex-wrapper">
+              <div class="input-wrap">
+                <label for="">Name</label>
+                <input type="text" id="colorName" value="custom-color" />
               </div>
-              <button class="clone-row btn-primary">+ Add New</button>
-            </div>
-          </div>
-          <!-- End of Breakpoints -->
 
-          <!-- Font Family -->
-          <div id="font-family" class="tabcontent w-full hidden">
-            <h2 class="text-4xl font-black mb-8">Font Family</h2>
-            <div class="repeateble-fields">
-              <div class="wrap">                
-                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="display" /></label>
-                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="text" value="Oswald" /></label>
-                    <button class="delete-row">Del</button>
+              <div id="colorPickerContainer" class="input-wrap">
+                <div class="colorPickerWrap">
+                  <label for="">Color</label>
+                  <div class="flex">
+                    <input
+                      type="color"
+                      class="colorPicker"
+                      value="#ff0000"
+                      onchange="generatePalette()"
+                    />
+                    <input
+                      type="text"
+                      class="colorPickerValue"
+                      value="#ff0000"
+                    />
                   </div>
-                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="Body" /></label>
-                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="text" value="Open Sans, sans" /></label>
-                    <button class="delete-row">Del</button>
-                  </div>
-                </template>
+                </div>
               </div>
-              <button class="clone-row btn-primary">+ Add New</button>
+              <div class="input-wrap">
+                <label for="shadesCheckbox">Enable Shades:</label>
+                <input type="checkbox" id="shadesCheckbox">
+              </div>
+              <button id="addColorPickerButton">+ Add Color Picker</button>
+              <div class="input-wrap">
+                <label for="">Lightness Min</label>
+                <input
+                  type="number"
+                  id="lightnessMin"
+                  min="0"
+                  max="100"
+                  value="5"
+                />
+              </div>
+              <div class="input-wrap">
+                <label for="">Lightness Max</label>
+                <input
+                  type="number"
+                  id="lightnessMax"
+                  min="0"
+                  max="100"
+                  value="95"
+                />
+              </div>
+            </div>
+
+            <div id="palette"></div>
+            <div id="buttons-wrap">
+              <label for="numBlocks">Number of Blocks:</label>
+              <input type="number" id="numBlocks" min="1" max="20" value="6" />
             </div>
           </div>
-          <!-- End of Font Family -->
+          <!-- End of Colors -->
 
         </div>
       </div>
 
-      <div id="preview" class="bg-slate-900 text-blue-300 p-8 grow text-xs leading-6" >
-        <pre><code>
-                theme: {
-                    screens: {
-                        'mob': '600px',
-                        'tab': '1200px',
-                        'desk': '1680px',
-                    },
-                    fontFamily: {
-                        'display': ['"Oswald"'],
-                        'body': ['"Open Sans"', '"sans"'],
-                    },    
-                }    
-            </code></pre>
-      </div>
+
     </div>
 
     <!-- ...existing HTML code... -->
     <script src="https://cdn.jsdelivr.net/npm/color2k@2.0.2/dist/index.unpkg.umd.min.js"></script>
     <script src="src/js/colorShades.js"></script>
-    <script src="src/js/calculator.js"></script>
-    <script src="src/js/script.js"></script>
+    <script src="src/js/tabs.js"></script>
   </body>
 </html>
