@@ -1,371 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="dist/style.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>    
-</head>
-<body class="bg-slate-200" x-data="tailwindConfig">
-
-
+    <link rel="stylesheet" href="dist/style.css" />
+  </head>
+  <body class="bg-slate-200">
     <header class="bg-white p-4 text-center mb-12">
-        <h1 class="text-2xl font-bold">Tailwind Config Builder</h1>
+      <h1 class="text-2xl font-bold">Tailwind Config Builder</h1>
     </header>
+    <div class="flex flex-col xl:flex-row gap-12">
+      <div class="flex max-w-7xl grow w-full">
+
+        <nav class="flex flex-col overflow-hidden min-w-[200px]">
+          <button id="breakpointsTab" class="tablinks block text-left p-3 bg-white" onclick="openTab(event, 'breakpoints')">Breakpoints</button>
+          <button id="colorsTab" class="tablinks block text-left p-3" onclick="openTab(event, 'colors')">Colors</button>
+          <button id="spacingTab" class="tablinks block text-left p-3" onclick="openTab(event, 'spacing')">Spacing</button>
+          <button id="typographyTab" class="tablinks block text-left p-3" onclick="openTab(event, 'typography')">Typography</button>
+          <button id="fontFamilyTab" class="tablinks block text-left p-3" onclick="openTab(event, 'font-family')">Font Family</button>
+          <button id="containersTab" class="tablinks block text-left p-3" onclick="openTab(event, 'containers')">Containers</button>
+        </nav>
+
+        <div class="flex px-16 py-8 bg-white grow">
 
 
-    <div x-data="{ activeTab: 'breakpoints' }" class="flex flex-col xl:flex-row  gap-12">
-        <div class="flex max-w-7xl grow w-full">
-            <nav class="flex flex-col">
-                <button class="nav-btn" x-on:click="activeTab = 'breakpoints'" :class="{ 'bg-white': activeTab === 'breakpoints' }">Breakpoints</button>
-                <button class="nav-btn" x-on:click="activeTab = 'colors'" :class="{ 'bg-white': activeTab === 'colors' }">Colors</button>
-                <button class="nav-btn" x-on:click="activeTab = 'spacing'" :class="{ 'bg-white': activeTab === 'spacing' }">Spacing</button>
-                <button class="nav-btn" x-on:click="activeTab = 'typography'" :class="{ 'bg-white': activeTab === 'typography' }">Typography</button>
-                <button class="nav-btn" x-on:click="activeTab = 'fontFamily'" :class="{ 'bg-white': activeTab === 'fontFamily' }">Font Family</button>
-                <button class="nav-btn" x-on:click="activeTab = 'containers'" :class="{ 'bg-white': activeTab === 'containers' }">Containers</button>
-              </nav>
-              
-              <div class="flex px-16 py-8 bg-white grow">
-
-                <!-- Breakpoints -->
-                  <div class="w-full" x-show="activeTab === 'breakpoints'">
-                      <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
-                      <div class="repeateble-row flex gap-4 mb-4 mt-12" x-for="(row, index) in rows" :key="index">
-                        <label class="input-wrap">
-                            <span class="input-label">Name</span>
-                            <input class="input" type="text" x-model="row.name">
-                        </label>
-                        <label class="input-wrap">
-                            <span class="input-label">Value</span>
-                            <input class="input" type="number" x-model="row.value" x-on:input="screens[row.name] = row.value + 'px'">
-                        </label>
-                        <button class="delete-row" @click="rows.splice(index, 1); delete screens[row.name];">Del</button>
-                      </div>
-                             
+          <!-- Breakpoints -->
+          <div id="breakpoints" class="tabcontent w-full">
+            <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
+            <div class="repeateble-fields">
+              <div class="wrap">                
+                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="mob" /></label>
+                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="600" /></label>
+                    <button class="delete-row">Del</button>
                   </div>
-                <!-- End of Breakpoints -->
-
-
-                <!-- Colors -->
-                  <div class="w-full" x-show="activeTab === 'colors'">
-                      <h2 class="text-4xl font-black mb-8">Colors</h2>
-                      <div class="flex-wrapper">
-                        <div class="input-wrap">
-                            <label for="">Name</label>
-                            <input type="text" id="colorName" value="custom-color">
-                        </div>
-                    
-                        <div id="colorPickerContainer" class="input-wrap">
-                            <div class="colorPickerWrap">
-                                <label for="">Color</label>
-                                <div class="flex">
-                                    <input type="color" class="colorPicker" value="#ff0000" onchange="generatePalette()">
-                                    <input type="text" class="colorPickerValue" value="#ff0000">
-                                </div>
-                            </div>
-                        </div>
-                        <button id="addColorPickerButton">+ Add Color Picker</button>
-                        <div class="input-wrap">
-                            <label for="">Lightness Min</label>
-                            <input type="number" id="lightnessMin" min="0" max="100" value="5" />   
-                        </div>
-                        <div class="input-wrap">
-                            <label for="">Lightness Max</label>
-                            <input type="number" id="lightnessMax" min="0" max="100" value="95" />
-                        </div>        
-                    </div>
-                    
-                    <div id="palette">
-                        
-                    </div>
-                    <div id="buttons-wrap">
-                        <label for="numBlocks">Number of Blocks:</label>
-                        <input type="number" id="numBlocks" min="1" max="20" value="6">
-                    </div>
-                    
+                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="tab" /></label>
+                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1200" /></label>
+                    <button class="delete-row">Del</button>
                   </div>
-                <!-- End of Colors -->
-
-
-                <!-- Spacing -->
-                  <div class="w-full" x-show="activeTab === 'spacing'">
-                        <h2 class="text-4xl font-black mb-8">Spacing</h2>
-                        <p class="mb-12">By default the spacing scale is inherited by the padding, margin, width, height, maxHeight, gap, inset, space, and translate core plugins.</p>
-
-                        <h1 class="text-red-500 text-3xl">Reuse same as for "Typography" just different output prefix</h1>
+                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="desk" /></label>
+                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1680" /></label>
+                    <button class="delete-row">Del</button>
                   </div>
-                <!-- End of Spacing -->
-
-
-                <!-- Typography -->
-                  <div class="w-full" x-show="activeTab === 'typography'">
-                        <h2 class="text-4xl font-black mb-8">Typography</h2>
-                        <div id="wrap">
-                            <div id="app">
-                              <h1>Fluid Type Scale Calculator</h1>
-                              <h3>
-                                Generate font size variables for a fluid type scale with CSS clamp. Grab
-                                the output CSS and drop it into any design system.
-                              </h3>
-                              <div id="form">
-                                <h1>Screen width</h1>
-                                <div class="input-group">              
-                                  <div class="input-wrap">
-                                    <label for="minScreenWidth">Mobile (Min)</label>
-                                    <input type="number" id="minScreenWidth" value="300" />
-                                  </div>
-                                  <div class="input-wrap">
-                                    <label for="maxScreenWidth">Desktop (Max)</label>
-                                    <input type="number" id="maxScreenWidth" value="1600" />
-                                  </div>
-                                </div>
-                    
-                                <div style="margin-top: 10px;">
-                                    <label for="disableRatio" style="display: block; cursor: pointer;">
-                                        <input type="checkbox" id="disableRatio" name="disableRatio" style="vertical-align: middle;">
-                                        <span>Disable Ratio</span>
-                                    </label>
-                                </div>            
-                    
-                                <div id="typographyRatio">
-                                    <h1>Base Font Size</h1>
-                                    <div class="input-group">
-                                      <div class="input-wrap">
-                                        <label for="minBaseFontSize">Mobile (Min)</label>
-                                        <input type="number" id="minBaseFontSize" value="10" />
-                                      </div>
-                                      <div class="input-wrap">
-                                        <label for="maxBaseFontSize">Desktop (Max)</label>
-                                        <input type="number" id="maxBaseFontSize" value="15" />
-                                      </div>              
-                                    </div>
-                                    
-                                    <h1>Type scale ratio</h1>
-                                    <div class="input-group">
-                                      <div class="input-wrap">
-                                        <label for="minScaleRatio">Mobile (Min)</label>
-                                        <input type="number" id="minScaleRatio" value="1.2" />
-                                      </div>
-                                      <div class="input-wrap">
-                                        <label for="maxScaleRatio">Desktop (Max)</label>
-                                        <input type="number" id="maxScaleRatio" value="1.4" />
-                                      </div>
-                                    </div>
-                            
-                                    <h1>Type scale name</h1>
-                                    <p>
-                                      Prodivide a comma-separated list of names.
-                                    </p>
-                                    <div class="input-group">
-                                        <div class="input-wrap">
-                                            <label for="typeScaleNames">Names</label>
-                                            <input
-                                              type="text"
-                                              id="typeScaleNames"
-                                              value="sm, md, base, lg, xl, xxl"
-                                            />    
-                                        </div>                
-                                        <div class="input-wrap">
-                                            <label for="baseLineSelect">Baseline Step</label>
-                                            <select name="baseLineSelect" id="baseLineSelect"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div id="typographySingle" style="display: none;">
-                                    <h1>Fluid sizes</h1>
-                                    <div class="typographySingleWrap">
-                                        <div class="input-group">
-                                            <div class="input-wrap">
-                                              <label for="minScaleRatio">Mobile Size</label>
-                                              <input type="number" oninput="generate()" id="minScaleRatio" value="14" />
-                                            </div>
-                                            <div class="input-wrap">
-                                              <label for="maxScaleRatio">Desktop Size</label>
-                                              <input type="number" oninput="generate()" id="maxScaleRatio" value="16" />
-                                            </div>
-                                            <div class="input-wrap">
-                                              <label for="maxScaleRatio">Name</label>
-                                              <input type="text" oninput="generate()" id="maxScaleName" />
-                                            </div>
-                                            <button class="delFont">Del</button>
-                                        </div>                
-                                    </div>
-                                    <button class="AddFont" style="margin-top: 10px;">+ Add new</button>
-                    
-                                </div>
-                                
-                                <h1>Rounding</h1>
-                                <p>The maximum number of decimal places in the output.</p>
-                                <input type="number" id="rounding" value="4" />
-                    
-                              </div>
-                            </div>
-                            
-                            <h1 class="text-red-500 text-3xl">Remove #css-variables-preview, #tailwind-var-preview, #tailwind-preview and move those values to the right</h1>
-
-                            <div style="width: 100%;">
-                                <div id="css-variables-preview" class="code-preview">
-                    <pre><code></code></pre>
-                                </div>
-                                <div id="tailwind-var-preview" class="code-preview">
-                    <pre><code></code></pre>
-                                </div>
-                                <div id="tailwind-preview" class="code-preview">
-                    <pre><code></code></pre>
-                                </div>
-                    
-                                <div class="font-preview">
-                                  <p class="sm">Lorem ipsum</p>   
-                                  <p class="md">Lorem ipsum</p>   
-                                  <p class="base">Lorem ipsum</p>   
-                                  <p class="lg">Lorem ipsum</p>   
-                                  <p class="xl">Lorem ipsum</p>   
-                                  <p class="xxl">Lorem ipsum</p>   
-                                </div>
-                            </div>
-                    
-                        </div>
-                  </div>
-                <!-- End of Typography -->
-
-
-                <!-- Font Family -->
-                  <div class="w-full" x-show="activeTab === 'fontFamily'">
-                      <h2 class="text-4xl font-black mb-8">Font Family</h2>
-                      <div class="repeateble-fields" x-data="{rows: [{name: 'display', value: 'Oswald'}, {name: 'Body', value: 'Open Sans, sans'}]}">
-                        <div class="wrap">
-                            <template x-for="(row, index) in rows" :key="index">
-                                <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                                    <label class="input-wrap">
-                                        <span class="input-label">Name</span>
-                                        <input class="input" type="text" x-model="row.name">
-                                    </label>
-                                    <label class="input-wrap">
-                                        <span class="input-label">Value</span>
-                                        <input class="input" type="text" x-model="row.value">
-                                    </label>
-                                    <button class="delete-row" @click="rows.splice(index, 1)">Del</button>
-                                </div>
-                            </template>
-                        </div>
-                        <button class="clone-row btn-primary" @click="rows.push({name: '', value: ''})">+ Add New</button>
-                    </div>
-                    
-                    
-                  </div>
-                <!-- End of Font Family -->
-
-
-                <!-- Containers -->
-                  <div class="w-full" x-show="activeTab === 'containers'">
-                      <h2 class="text-4xl font-black mb-8">Containers</h2>
-                      <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap">
-                            <span class="input-label">Value (%)</span>
-                            <input class="input" type="number" value="90">
-                        </label>
-                    </div>
-                    
-                    <p class="mb-16">Having 90% and not 100% is best practice as your content will be proportily the same on all mobile devices</p>
-                    
-                    <div class="repeateble-fields" x-data="{rows: [{name: 'container', value: 1200}, {name: 'container-narrow', value: 14400}, {name: 'container-wide', value: 1680}, {name: 'card', value: 600}]}">
-                        <div class="wrap">
-                            <template x-for="(row, index) in rows" :key="index">
-                                <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                                    <label class="input-wrap">
-                                        <span class="input-label">Name</span>
-                                        <input class="input" type="text" x-model="row.name">
-                                    </label>
-                                    <label class="input-wrap">
-                                        <span class="input-label">Size</span>
-                                        <input class="input" type="number" x-model="row.value">
-                                    </label>
-                                    <button class="delete-row" @click="rows.splice(index, 1)">Del</button>
-                                </div>
-                            </template>
-                        </div>
-                        <button class="clone-row btn-primary" @click="rows.push({name: '', value: ''})">+ Add New</button>
-                    </div>
-                  </div>
-                <!-- End of Containers -->
-
+                </template>
               </div>
+              <button class="clone-row btn-primary">+ Add New</button>
+            </div>
+          </div>
+          <!-- End of Breakpoints -->
+
+          <!-- Font Family -->
+          <div id="font-family" class="tabcontent w-full hidden">
+            <h2 class="text-4xl font-black mb-8">Font Family</h2>
+            <div class="repeateble-fields">
+              <div class="wrap">                
+                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="display" /></label>
+                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="text" value="Oswald" /></label>
+                    <button class="delete-row">Del</button>
+                  </div>
+                  <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                    <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="Body" /></label>
+                    <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="text" value="Open Sans, sans" /></label>
+                    <button class="delete-row">Del</button>
+                  </div>
+                </template>
+              </div>
+              <button class="clone-row btn-primary">+ Add New</button>
+            </div>
+          </div>
+          <!-- End of Font Family -->
+
         </div>
+      </div>
 
-        <div id="preview" class="bg-slate-900 text-blue-300 p-8 grow text-xs leading-6">
-          <pre><code x-text="JSON.stringify(screens, null, 2)"> test</code></pre>
-
-            <pre><code>
+      <div id="preview" class="bg-slate-900 text-blue-300 p-8 grow text-xs leading-6" >
+        <pre><code>
                 theme: {
                     screens: {
                         'mob': '600px',
                         'tab': '1200px',
                         'desk': '1680px',
                     },
-                    colors: {
-                        transparent: 'transparent', // <-- Always there
-                        current: 'currentColor', // <-- Always there
-                        'white': '#ffffff',
-                        'tahiti': {
-                          1: '#cffafe',
-                          2: '#a5f3fc',
-                          3: '#67e8f9',
-                          4: '#22d3ee',
-                          5: '#06b6d4',
-                          6: '#0891b2',
-                          7: '#0e7490',
-                          8: '#155e75',
-                          9: '#164e63',
-                        },
-                    },
-                    fontSize: {
-                        xs: 'var(--win-fs-xs)',
-                        sm: 'var(--win-fs-sm)',
-                        md: 'var(--win-fs-md)',
-                        lg: 'var(--win-fs-lg)',
-                        huge: 'var(--win-fs-huge)',
-                        giga: 'var(--win-fs-giga)',
-                    },
                     fontFamily: {
                         'display': ['"Oswald"'],
                         'body': ['"Open Sans"', '"sans"'],
                     },    
-                    spacing: {
-                        xs: 'var(--win-sp-xs)',
-                        sm: 'var(--win-sp-sm)',
-                        md: 'var(--win-sp-md)',
-                        lg: 'var(--win-sp-lg)',
-                        huge: 'var(--win-sp-huge)',
-                        giga: 'var(--win-sp-giga)',
-                    }
                 }    
             </code></pre>
-        </div>
+      </div>
     </div>
-    
-    <!-- <script src="dist/script.js"></script> -->
+
+    <!-- ...existing HTML code... -->
     <script src="https://cdn.jsdelivr.net/npm/color2k@2.0.2/dist/index.unpkg.umd.min.js"></script>
     <script src="src/js/colorShades.js"></script>
     <script src="src/js/calculator.js"></script>
-
-    <script>
-      var tailwindConfig = {
-        screens: {
-          'mob': '600px',
-          'tab': '1200px',
-          'desk': '1680px',
-        },
-        activeTab: 'breakpoints',
-        rows: [
-          {name: 'mob', value: 600},
-          {name: 'tab', value: 1200},
-          {name: 'desk', value: 1680},
-        ],
-      }
-      </script>
-      
-</body>
+    <script src="src/js/script.js"></script>
+  </body>
 </html>
