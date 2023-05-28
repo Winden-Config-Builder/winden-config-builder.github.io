@@ -211,7 +211,7 @@ function createColorDiv(color, isCurrentColor = false) {
   }
 
   const colorDiv = document.createElement("div");
-  colorDiv.className = "colorDiv flex justify-center items-end p-2 h-[80px]";
+  colorDiv.className = "colorDiv flex justify-center items-end p-2 h-[80px] grow";
   if (isCurrentColor) {
     colorDiv.classList.add("current-color");
   }
@@ -219,7 +219,7 @@ function createColorDiv(color, isCurrentColor = false) {
   colorDiv.style.backgroundColor = color;
 
   const colorValue = document.createElement("div");
-  colorValue.className = "colorValue";
+  colorValue.className = "colorValue text-sm";
 
   // If the color is in RGB or RGBA format, convert it to HEX
   if (color.startsWith("rgb")) {
