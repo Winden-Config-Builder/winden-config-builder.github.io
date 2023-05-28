@@ -34,11 +34,8 @@ function handleColorPickerValueChange(event) {
 // Handles the creation of new color pickers
 function addColorPicker() {
   const colorPickerWrap = document.createElement("div");
-  colorPickerWrap.className = "colorPickerWrap";
-
-  const label = document.createElement("label");
-  label.textContent = "Color";
-
+  colorPickerWrap.className = "colorPickerWrap flex";
+  
   const flex = document.createElement("div");
   flex.className = "flex";
 
@@ -50,7 +47,7 @@ function addColorPicker() {
   deleteButton.addEventListener("click", handleDeleteButtonClick);
 
   appendChildren(flex, [colorPicker, colorPickerValue, deleteButton]);
-  appendChildren(colorPickerWrap, [label, flex]);
+  appendChildren(colorPickerWrap, [flex]);
 
   colorPickerContainer.appendChild(colorPickerWrap);
   generatePalette();
