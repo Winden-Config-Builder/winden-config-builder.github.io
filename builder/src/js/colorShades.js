@@ -14,21 +14,28 @@ document.querySelector(".addColorPickerButton").addEventListener("click", addCol
 lightnessMinInput.addEventListener("change", generatePalette);
 lightnessMaxInput.addEventListener("change", generatePalette);
 numBlocksInput.addEventListener("change", handleNumBlocksInputChange);
+const colorPickers = document.getElementsByClassName("colorPicker");
+
+for (const picker of colorPickers) {
+  picker.addEventListener("change", handleColorPickerChange);
+  const pickerValue = picker.nextElementSibling;
+  pickerValue.addEventListener("change", handleColorPickerValueChange);
+}
 
 // Handles color picker change
 function handleColorPickerChange(event) {
-    const picker = event.target;
-    const pickerValue = picker.nextElementSibling;
-    pickerValue.value = picker.value;
-    generatePalette();
+  const picker = event.target;
+  const pickerValue = picker.nextElementSibling;
+  pickerValue.value = picker.value;
+  generatePalette();
 }
 
 // Handles color picker value change
 function handleColorPickerValueChange(event) {
-    const pickerValue = event.target;
-    const picker = pickerValue.previousElementSibling;
-    picker.value = pickerValue.value;
-    generatePalette();
+  const pickerValue = event.target;
+  const picker = pickerValue.previousElementSibling;
+  picker.value = pickerValue.value;
+  generatePalette();
 }
 
 // Handles the creation of new color pickers
