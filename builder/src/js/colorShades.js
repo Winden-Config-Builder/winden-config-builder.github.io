@@ -210,16 +210,13 @@ function createColorDiv(color, isCurrentColor = false) {
     return;
   }
 
-  const colorWrap = document.createElement("div");
-  colorWrap.className = "colorWrap";
+  const colorDiv = document.createElement("div");
+  colorDiv.className = "colorDiv flex justify-center items-end p-2 h-[80px]";
   if (isCurrentColor) {
-    colorWrap.classList.add("current-color");
+    colorDiv.classList.add("current-color");
   }
 
-  const colorDiv = document.createElement("div");
-  colorDiv.className = "colorDiv";
   colorDiv.style.backgroundColor = color;
-  colorWrap.appendChild(colorDiv);
 
   const colorValue = document.createElement("div");
   colorValue.className = "colorValue";
@@ -229,9 +226,39 @@ function createColorDiv(color, isCurrentColor = false) {
     color = rgbaToHex(color);
   }
 
+  // Check contrast and change text color to white if needed
+  if (getContrast(color) < 4.5) {
+    colorValue.style.color = "rgb(255, 255, 255)";
+  }
+
   colorValue.textContent = color;
   colorDiv.appendChild(colorValue);
 
-  paletteDiv.appendChild(colorWrap);
+  paletteDiv.appendChild(colorDiv);
+}
+
+
+function getContrast(hexColor) {
+  // Convert HEX to RGB
+  const [r, g, b] = hexToRgb(hexColor);
+
+  // Calculate the relative luminance
+  const L = 0.2126 * Math.pow(r / 255, 2.2) +
+            0.7152 * Math.pow(g / 255, 2.2) +
+            0.0722 * Math.pow(b / 255, 2.2);
+
+  // Compare it with the relative luminance of black
+  const contrast = (L + 0.05) / (0.0 + 0.05);
+
+  return contrast;
+}
+
+function hexToRgb(hexColor) {
+  const bigint = parseInt(hexColor.substring(1), 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+
+  return [r, g, b];
 }
 

@@ -697,6 +697,10 @@ video {
   margin: 20px 0;
 }
 
+.relative {
+  position: relative;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -745,8 +749,24 @@ video {
   display: none;
 }
 
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
 .h-\[40px\] {
   height: 40px;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-\[100px\] {
+  height: 100px;
+}
+
+.h-\[80px\] {
+  height: 80px;
 }
 
 .w-\[80px\] {
@@ -775,6 +795,10 @@ video {
 
 .items-end {
   align-items: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
