@@ -40,14 +40,14 @@
                         <button class="delete-row">Del</button>
                     </div><!-- ENd of Name and delete -->
                                 
-                    <div class="flex mb-4" ><!-- Color shades -->
-                    <div id="colorPickerContainer" class="inline-block">
-                        <div class="colorPickerWrap input-wrap">
-                            <input type="color" class="colorPicker" value="#ff0000" onchange="generatePalette()" />
-                            <input class="input" type="text" name="colorPickerValue" value="#ff0000">
+                    <div class="flex mb-4 gap-4 items-end" ><!-- Color shades -->
+                        <div id="colorPickerContainer" class="flex gap-4">
+                            <div class="colorPickerWrap input-wrap">
+                                <input type="color" class="colorPicker w-[100px] h-[40px] mb-1" value="#ff0000" onchange="generatePalette()" />
+                                <input class="input w-[100px]" type="text" name="colorPickerValue" value="#ff0000">
+                            </div>
                         </div>
-                    </div>
-                    <button class="btn-outline" id="addColorPickerButton">+ Add Shade</button>
+                        <button class="btn-outline" id="addColorPickerButton">+ Add Shade</button>
                     </div><!-- End of Color shades -->
 
                     <!-- palete -->

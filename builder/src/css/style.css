@@ -27,6 +27,19 @@
     border: 1px solid red;
 }
 
+input[type="color" i]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border: 0;
+    @apply rounded-md overflow-hidden;
+    
+}
+
+input[type="color" i]::-webkit-color-swatch {
+    background-color: unset;
+    border-width: 0px;
+    
+}
+
 
 
 
