@@ -219,6 +219,7 @@ function createColorDiv(color, isCurrentColor = false) {
   const colorDiv = document.createElement("div");
   colorDiv.className = "colorDiv";
   colorDiv.style.backgroundColor = color;
+  colorWrap.appendChild(colorDiv);
 
   const colorValue = document.createElement("div");
   colorValue.className = "colorValue";
@@ -229,8 +230,8 @@ function createColorDiv(color, isCurrentColor = false) {
   }
 
   colorValue.textContent = color;
+  colorDiv.appendChild(colorValue);
 
-  colorWrap.appendChild(colorDiv);
-  colorWrap.appendChild(colorValue);
   paletteDiv.appendChild(colorWrap);
 }
+
