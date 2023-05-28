@@ -34,24 +34,27 @@ function handleColorPickerValueChange(event) {
 // Handles the creation of new color pickers
 function addColorPicker() {
   const colorPickerWrap = document.createElement("div");
-  colorPickerWrap.className = "colorPickerWrap flex";
-  
-  const flex = document.createElement("div");
-  flex.className = "flex";
+  colorPickerWrap.className = "colorPickerWrap flex items-end";
 
-  const colorPicker = createInputElement("color", "colorPicker", "#ff0000", handleColorPickerChange);
+  const flex = document.createElement("div");
+  flex.className = "grid";
+
+  const colorPicker = createInputElement("color", "colorPicker w-[80px] h-[40px] mb-1", "#ff0000", handleColorPickerChange);
   const colorPickerValue = createInputElement("text", "colorPickerValue", "#ff0000", handleColorPickerValueChange);
-  
+  colorPickerValue.className = "input w-[80px]";
+
   const deleteButton = document.createElement("button");
-  deleteButton.textContent = "Remove";
+  deleteButton.textContent = "X";
+  deleteButton.className = "border border-slate-200 text-blue-500 ml-2 p-2 rounded-md"
   deleteButton.addEventListener("click", handleDeleteButtonClick);
 
-  appendChildren(flex, [colorPicker, colorPickerValue, deleteButton]);
-  appendChildren(colorPickerWrap, [flex]);
+  appendChildren(flex, [colorPicker, colorPickerValue]);
+  appendChildren(colorPickerWrap, [flex, deleteButton]);
 
   colorPickerContainer.appendChild(colorPickerWrap);
   generatePalette();
 }
+
 
 // Helper function to create an input element
 function createInputElement(type, className, value, handler) {
@@ -127,10 +130,11 @@ function handleAddColorPickerButtonClick() {
 
 // Handle the removal of color pickers
 function handleDeleteButtonClick(event) {
-  const colorPickerWrap = event.target.parentNode.parentNode;
+  const colorPickerWrap = event.target.closest(".colorPickerWrap");
   colorPickerWrap.remove();
   generatePalette();
 }
+
 
 // Generate the color palette
 function generatePalette() {

@@ -64,10 +64,9 @@ input[type="color" i]::-webkit-color-swatch {
     .colorWrap{
         display: flex;
         flex-direction: column;
-        gap: 5px;
-        border: 1px solid lightgray;
-        padding: 5px;
+        gap: 2px;
         flex-grow: 1;
+        text-align: center;
     }
     
     .colorDiv {
