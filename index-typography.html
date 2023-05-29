@@ -26,12 +26,12 @@
                     <h2 class="text-4xl font-black mb-8">Fluid Typography</h2>
                     <div id="wrap">
 
-                        <div id="app">
+                        <div>
                             <p class="mb-8">
                             Generate font size variables for a fluid type scale with CSS clamp. Grab
                             the output CSS and drop it into any design system.
                             </p>
-                            <div id="form">
+                            <div>
                             <h2 class="subTitle">Screen width</h2>
                             <div class="flex gap-4 mb-4">
                                 <div class="input-wrap">
@@ -46,8 +46,8 @@
                     
                             <div style="margin-top: 10px">
                                 <label for="disableRatio" style="display: block; cursor: pointer">
-                                <input type="checkbox" id="disableRatio" name="disableRatio" style="vertical-align: middle" />
-                                <span>Disable Ratio</span>
+                                    <input type="checkbox" id="disableRatio" name="disableRatio" class="disableRatio" style="vertical-align: middle" />
+                                    <span>Disable Ratio</span>
                                 </label>
                             </div>
                     
@@ -82,11 +82,11 @@
                                 <div class="input-group flex gap-4 mb-4">
                                 <div class="input-wrap">
                                     <label for="typeScaleNames">Names</label>
-                                    <input class="input typeScaleNames" type="text" id="typeScaleNames" value="sm, md, base, lg, xl, xxl" />
+                                    <input class="input typeScaleNames" type="text" value="sm, md, base, lg, xl, xxl" />
                                 </div>
                                 <div class="input-wrap">
                                     <label for="baseLineSelect">Baseline Step</label>
-                                    <select class="input" name="baseLineSelect" id="baseLineSelect"></select>
+                                    <select class="input baseLineSelect" name="baseLineSelect" ></select>
                                 </div>
                                 </div>
                             </div>
