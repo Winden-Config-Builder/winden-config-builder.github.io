@@ -122,14 +122,15 @@ function generate() {
     head.appendChild(newStyleTag);
   }
 
-  document.querySelector("#css-variables-preview code").textContent =
-    wrappedCSSVariables;
-  document.querySelector(
-    "#tailwind-var-preview code"
-  ).textContent = `${tailwindVarPreview}}`;
-  document.querySelector(
-    "#tailwind-preview code"
-  ).textContent = `${tailwindPreview}}`;
+  document.querySelector(".css-variables-preview code").textContent =
+  wrappedCSSVariables;
+	document.querySelector(
+	".tailwind-var-preview code"
+	).textContent = `${tailwindVarPreview}}`;
+	document.querySelector(
+	".tailwind-preview code"
+	).textContent = `${tailwindPreview}}`;
+
 }
 
 function updateSelectOptions() {

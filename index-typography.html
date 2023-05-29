@@ -24,7 +24,7 @@
                 <!-- Typography -->
                 <div id="typography" class="tabcontent w-full hidden">
                     <h2 class="text-4xl font-black mb-8">Fluid Typography</h2>
-                    <div id="wrap">
+                    <div class="typographyWrapper">
 
                         <div>
                             <p class="mb-8">
@@ -51,7 +51,7 @@
                                 </label>
                             </div>
                     
-                            <div id="typographyRatio" class="bg-slate-50 p-6 my-8 rounded-md">
+                            <div class="typographyRatio bg-slate-50 p-6 my-8 rounded-md">
                                 <h2 class="subTitle">Base Font Size</h2>
                     
                                 <div class="input-group flex gap-4 mb-4">
@@ -67,45 +67,45 @@
                     
                                 <h2 class="subTitle mt-8">Type scale ratio</h2>
                                 <div class="input-group flex gap-4 mb-4">
-                                <div class="input-wrap">
-                                    <label for="minScaleRatio">Mobile (Min)</label>
-                                    <input class="input minScaleRatio" type="number"  value="1.2" />
-                                </div>
-                                <div class="input-wrap">
-                                    <label for="maxScaleRatio">Desktop (Max)</label>
-                                    <input class="input maxScaleRatio" type="number" value="1.4" />
-                                </div>
+                                    <div class="input-wrap">
+                                        <label for="minScaleRatio">Mobile (Min)</label>
+                                        <input class="input minScaleRatio" type="number"  value="1.2" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxScaleRatio">Desktop (Max)</label>
+                                        <input class="input maxScaleRatio" type="number" value="1.4" />
+                                    </div>
                                 </div>
                     
                                 <h2 class="subTitle mt-8">Type scale name</h2>
                                 <p>Prodivide a comma-separated list of names.</p>
                                 <div class="input-group flex gap-4 mb-4">
-                                <div class="input-wrap">
-                                    <label for="typeScaleNames">Names</label>
-                                    <input class="input typeScaleNames" type="text" value="sm, md, base, lg, xl, xxl" />
-                                </div>
-                                <div class="input-wrap">
-                                    <label for="baseLineSelect">Baseline Step</label>
-                                    <select class="input baseLineSelect" name="baseLineSelect" ></select>
-                                </div>
+                                    <div class="input-wrap">
+                                        <label for="typeScaleNames">Names</label>
+                                        <input class="input typeScaleNames" type="text" value="sm, md, base, lg, xl, xxl" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="baseLineSelect">Baseline Step</label>
+                                        <select class="input baseLineSelect" name="baseLineSelect" ></select>
+                                    </div>
                                 </div>
                             </div>
                     
-                            <div id="typographySingle" class="bg-slate-50 py-4 px-6 my-8 rounded-md" style="display: none">
+                            <div class="typographySingle bg-slate-50 py-4 px-6 my-8 rounded-md" style="display: none">
                                 <h2 class="subTitle">Fluid sizes</h2>
                                 <div class="typographySingleWrap">
                                 <div class="input-group flex gap-4 mb-4">
                                     <div class="input-wrap">
                                         <label for="minScaleRatio">Mobile Size</label>
-                                        <input class="input" type="number" oninput="generate()" id="minScaleRatio" value="14" />
+                                        <input class="input minScaleRatio" type="number" oninput="generate()" value="14" />
                                     </div>
                                     <div class="input-wrap">
                                         <label for="maxScaleRatio">Desktop Size</label>
-                                        <input class="input" type="number" oninput="generate()" id="maxScaleRatio" value="16" />
+                                        <input class="input maxScaleRatio" type="number" oninput="generate()"  value="16" />
                                     </div>
                                     <div class="input-wrap">
                                         <label for="maxScaleRatio">Name</label>
-                                        <input class="input" type="text" oninput="generate()" id="maxScaleName" />
+                                        <input class="input maxScaleName" type="text" oninput="generate()" />
                                     </div>
                                     <button class="delFont">Del</button>
                                 </div>
@@ -120,13 +120,13 @@
                         </div>
                     
                         <div class="w-full mt-12">
-                            <div id="css-variables-preview" class="code-preview bg-slate-100 text-slate-700 leading-8 p-4">
+                            <div class="css-variables-preview code-preview bg-slate-100 text-slate-700 leading-8 p-4">
                             <pre><code></code></pre>
                             </div>
-                            <div id="tailwind-var-preview" class="code-preview bg-slate-200 text-slate-700 leading-8 p-4">
+                            <div class="tailwind-var-preview code-preview bg-slate-200 text-slate-700 leading-8 p-4">
                             <pre><code></code></pre>
                             </div>
-                            <div id="tailwind-preview" class="code-preview bg-slate-300 text-slate-700 leading-8 p-4 mb-12">
+                            <div class="tailwind-preview code-preview bg-slate-300 text-slate-700 leading-8 p-4 mb-12">
                             <pre><code></code></pre>
                             </div>
                     
