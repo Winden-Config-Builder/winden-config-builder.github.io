@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="src/css/output.css" />
+    </head>
+    <body class="bg-slate-200">
+        <header class="bg-white p-4 text-center mb-12">
+        <h1 class="text-2xl font-bold">Tailwind Config Builder</h1>
+        </header>
+        
+        <div class="flex flex-col xl:flex-row gap-12">
+            <div class="flex max-w-7xl grow w-full">
+
+            <nav class="flex flex-col overflow-hidden min-w-[200px]">
+                <button id="colorsTab" class="tablinks block text-left p-3  bg-white" onclick="openTab(event, 'colors')">Colors</button>
+                <button id="breakpointsTab" class="tablinks block text-left p-3" onclick="openTab(event, 'breakpoints')">Breakpoints</button>
+                <button id="spacingTab" class="tablinks block text-left p-3" onclick="openTab(event, 'spacing')">Spacing</button>
+                <button id="typographyTab" class="tablinks block text-left p-3" onclick="openTab(event, 'typography')">Typography</button>
+                <button id="fontFamilyTab" class="tablinks block text-left p-3" onclick="openTab(event, 'font-family')">Font Family</button>
+                <button id="containersTab" class="tablinks block text-left p-3" onclick="openTab(event, 'containers')">Containers</button>
+            </nav>
+
+            <div class="flex px-16 py-8 bg-white grow">
+
+                <!-- Colors -->
+                <div id="colors" class="tabcontent w-full hidden">
+                    <h2 class="text-4xl font-black mb-8">Colors</h2>
+                                
+                    <div class="color-row grid gap-8"><!-- Color Row -->                    
+                        <div class="flex justify-between" ><!-- Name and delete -->
+                            <div class="input-wrap">
+                                <label class="input-label" for="">Name</label>
+                                <input class="input" type="text" value="custom-color" />
+                            </div>
+                            <button class="delete-row">Del</button>
+                        </div><!-- ENd of Name and delete -->
+                                                    
+                        <div class="flex gap-4 items-end" ><!-- Color shades -->
+                            <div class="colorPickerContainer flex gap-4">
+                                <div class="colorPickerWrap input-wrap">
+                                    <input type="color" class="colorPicker w-[80px] h-[40px] mb-1" value="#ff0000" onchange="generatePalette()" />
+                                    <input class="input w-[80px]" type="text" name="colorPickerValue" value="#ff0000">
+                                </div>
+                            </div>
+                            <button class="btn-outline addColorPickerButton">+ Add Shade</button>
+                        </div><!-- End of Color shades -->
+                    
+                        <!-- palete -->
+                        <div class="rounded-md overflow-hidden flex palette"></div>
+                        <!-- End of palete -->
+                                        
+                        <div class="flex gap-4" ><!-- Advanced settings -->
+                            <div class="input-wrap !max-w-[120px]" id="buttons-wrap">
+                                <label for="numBlocks">No. of shades</label>
+                                <input class="input numBlocks" type="number" min="1" max="20" value="6" />
+                            </div>
+                            <div class="input-wrap !max-w-[120px]">
+                                <label for="">Lightness Min</label>
+                                <input class="input lightnessMin" type="number" min="0" max="100" value="5" />
+                            </div>
+                            <div class="input-wrap !max-w-[120px]">
+                                <label for="">Lightness Max</label>
+                                <input class="input lightnessMax" type="number" min="0" max="100" value="95" />
+                            </div>
+                        </div><!-- End Advanced settings -->
+                                        
+                        <div class=""><!-- Enable shades -->
+                            <input type="checkbox" class="shadesCheckbox">
+                            <label for="shadesCheckbox">Enable Shades</label>
+                        </div><!-- End of Enable shades -->
+                                        
+                    </div><!-- End of Color Row -->
+
+                    <button class="clone-color-row btn-primary">+ Add New Color</button>
+            
+                </div>
+                <!-- End of Colors -->
+
+                <!-- Breakpoints -->
+                <div id="breakpoints" class="tabcontent w-full">
+                    <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
+                    <div class="repeateble-fields">
+                        <div class="wrap">                
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="mob" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="600" /></label>
+                            <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="tab" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1200" /></label>
+                            <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="desk" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1680" /></label>
+                            <button class="delete-row">Del</button>
+                            </div>
+                        </template>
+                        </div>
+                        <button class="clone-row btn-primary">+ Add New</button>
+                    </div>
+                </div>
+                <!-- End of Breakpoints -->
+
+                <!-- Font Family -->
+                <div id="font-family" class="tabcontent w-full hidden">
+                    <h2 class="text-4xl font-black mb-8">Font Family</h2>
+                    <div class="repeateble-fields">
+                    <div class="wrap">                
+                        <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="display" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="text" value="Oswald" /></label>
+                            <button class="delete-row">Del</button>
+                        </div>
+                        <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="Body" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="text" value="Open Sans, sans" /></label>
+                            <button class="delete-row">Del</button>
+                        </div>
+                        </template>
+                    </div>
+                    <button class="clone-row btn-primary">+ Add New</button>
+                    </div>
+                </div>
+                <!-- End of Font Family -->
+
+                <!-- Spacing -->
+                <div id="spacing" class="tabcontent w-full hidden">
+                <h2 class="text-4xl font-black mb-8">Spacing</h2>
+                <p class="mb-12">
+                    By default the spacing scale is inherited by the padding, margin,
+                    width, height, maxHeight, gap, inset, space, and translate core
+                    plugins.
+                </p>
+
+                <h1 class="text-red-500 text-3xl">
+                    Reuse same as for "Typography" just different output prefix
+                </h1>
+                </div>
+                <!-- End of Spacing -->
+
+                <!-- Typography -->
+                <div id="typography" class="tabcontent w-full hidden">
+                    <h2 class="text-4xl font-black mb-8">Fluid Typography</h2>
+                    <div id="wrap">
+                    <div id="app">
+                        <p class="mb-8">
+                        Generate font size variables for a fluid type scale with CSS clamp. Grab
+                        the output CSS and drop it into any design system.
+                        </p>
+                        <div id="form">
+                        <h2 class="subTitle">Screen width</h2>
+                        <div class="flex gap-4 mb-4">
+                            <div class="input-wrap">
+                                <label for="minScreenWidth">Mobile (Min)</label>
+                                <input class="input" type="number" id="minScreenWidth" value="300" />
+                            </div>
+                            <div class="input-wrap">
+                                <label for="maxScreenWidth">Desktop (Max)</label>
+                                <input class="input" type="number" id="maxScreenWidth" value="1600" />
+                            </div>
+                        </div>
+                
+                        <div style="margin-top: 10px">
+                            <label for="disableRatio" style="display: block; cursor: pointer">
+                            <input type="checkbox" id="disableRatio" name="disableRatio" style="vertical-align: middle" />
+                            <span>Disable Ratio</span>
+                            </label>
+                        </div>
+                
+                        <div id="typographyRatio" class="bg-slate-50 p-6 my-8 rounded-md">
+                            <h2 class="subTitle">Base Font Size</h2>
+                
+                            <div class="input-group flex gap-4 mb-4">
+                                <div class="input-wrap">
+                                    <label for="minBaseFontSize">Mobile (Min)</label>
+                                    <input class="input" type="number" id="minBaseFontSize" value="10" />
+                                </div>
+                                <div class="input-wrap">
+                                    <label for="maxBaseFontSize">Desktop (Max)</label>
+                                    <input class="input" type="number" id="maxBaseFontSize" value="15" />
+                                </div>
+                            </div>
+                
+                            <h2 class="subTitle mt-8">Type scale ratio</h2>
+                            <div class="input-group flex gap-4 mb-4">
+                            <div class="input-wrap">
+                                <label for="minScaleRatio">Mobile (Min)</label>
+                                <input class="input" type="number" id="minScaleRatio" value="1.2" />
+                            </div>
+                            <div class="input-wrap">
+                                <label for="maxScaleRatio">Desktop (Max)</label>
+                                <input class="input" type="number" id="maxScaleRatio" value="1.4" />
+                            </div>
+                            </div>
+                
+                            <h2 class="subTitle mt-8">Type scale name</h2>
+                            <p>Prodivide a comma-separated list of names.</p>
+                            <div class="input-group flex gap-4 mb-4">
+                            <div class="input-wrap">
+                                <label for="typeScaleNames">Names</label>
+                                <input class="input" type="text" id="typeScaleNames" value="sm, md, base, lg, xl, xxl" />
+                            </div>
+                            <div class="input-wrap">
+                                <label for="baseLineSelect">Baseline Step</label>
+                                <select class="input" name="baseLineSelect" id="baseLineSelect"></select>
+                            </div>
+                            </div>
+                        </div>
+                
+                        <div id="typographySingle" class="bg-slate-50 py-4 px-6 my-8 rounded-md" style="display: none">
+                            <h2 class="subTitle">Fluid sizes</h2>
+                            <div class="typographySingleWrap">
+                            <div class="input-group flex gap-4 mb-4">
+                                <div class="input-wrap">
+                                    <label for="minScaleRatio">Mobile Size</label>
+                                    <input class="input" type="number" oninput="generate()" id="minScaleRatio" value="14" />
+                                </div>
+                                <div class="input-wrap">
+                                    <label for="maxScaleRatio">Desktop Size</label>
+                                    <input class="input" type="number" oninput="generate()" id="maxScaleRatio" value="16" />
+                                </div>
+                                <div class="input-wrap">
+                                    <label for="maxScaleRatio">Name</label>
+                                    <input class="input" type="text" oninput="generate()" id="maxScaleName" />
+                                </div>
+                                <button class="delFont">Del</button>
+                            </div>
+                            </div>
+                            <button class="AddFont btn-outline mt-8 mb-4">+ Add new</button>
+                        </div>
+                        
+                        <h2 class="subTitle">Rounding</h2>
+                        <p>The maximum number of decimal places in the output.</p>
+                        <input class="input" type="number" id="rounding" value="4" />
+                        </div>
+                    </div>
+                
+                    <div class="w-full mt-12">
+                        <div id="css-variables-preview" class="code-preview bg-slate-100 text-slate-700 leading-8 p-4">
+                        <pre><code></code></pre>
+                        </div>
+                        <div id="tailwind-var-preview" class="code-preview bg-slate-200 text-slate-700 leading-8 p-4">
+                        <pre><code></code></pre>
+                        </div>
+                        <div id="tailwind-preview" class="code-preview bg-slate-300 text-slate-700 leading-8 p-4 mb-12">
+                        <pre><code></code></pre>
+                        </div>
+                
+                        <div class="font-preview">
+                        <p class="sm">Lorem ipsum</p>
+                        <p class="md">Lorem ipsum</p>
+                        <p class="base">Lorem ipsum</p>
+                        <p class="lg">Lorem ipsum</p>
+                        <p class="xl">Lorem ipsum</p>
+                        <p class="xxl">Lorem ipsum</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End of Typography -->
+  
+
+                <!-- Containers -->
+                <div id="containers" class="tabcontent w-full hidden">
+
+                    <h2 class="text-4xl font-black mb-8">Containers</h2>
+
+                    <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                        <label class="input-wrap">
+                        <span class="input-label">Value (%)</span>
+                        <input class="input" type="number" value="90" />
+                        </label>
+                    </div>
+
+                    <p class="mb-16">
+                        Having 90% and not 100% is best practice as your content will be
+                        proportily the same on all mobile devices
+                    </p>
+
+                    <div class="repeateble-fields">
+                        <div class="wrap">
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="container" /></label>
+                                <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="1200" /></label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="container-narrow" /></label>
+                                <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="14400" /></label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="container-wide" /></label>
+                                <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="1680" /></label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="card" /></label>
+                                <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="600" /></label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                        </div>
+                        
+                        <button class="clone-row btn-primary">+ Add New</button>
+
+                    </div>
+
+                </div>
+                <!-- End of Containers -->
+
+            </div>
+        </div>
+
+        <div id="preview" class="bg-slate-900 text-blue-300 p-8 grow text-xs leading-6" >
+        
+        <pre><code>
+                theme: {
+                    screens: {
+                        'mob': '600px',
+                        'tab': '1200px',
+                        'desk': '1680px',
+                    },
+                    colors: {
+                        transparent: 'transparent',
+                        current: 'currentColor',
+                        'no-shade': '#fefefe',
+                        'tahiti': {
+                          1: '#cffafe',
+                          2: '#a5f3fc',
+                          3: '#67e8f9',
+                          4: '#22d3ee',
+                          5: '#06b6d4',
+                          6: '#0891b2',
+                        },
+                    },
+                    fontSize: {
+                        xs: 'var(--win-fs-xs)',
+                        sm: 'var(--win-fs-sm)',
+                        md: 'var(--win-fs-md)',
+                        lg: 'var(--win-fs-lg)',
+                        huge: 'var(--win-fs-huge)',
+                        giga: 'var(--win-fs-giga)',
+                    },
+                    fontFamily: {
+                        'display': ['"Oswald"'],
+                        'body': ['"Open Sans"', '"sans"'],
+                    },    
+                    spacing: {
+                        xs: 'var(--win-sp-xs)',
+                        sm: 'var(--win-sp-sm)',
+                        md: 'var(--win-sp-md)',
+                        lg: 'var(--win-sp-lg)',
+                        huge: 'var(--win-sp-huge)',
+                        giga: 'var(--win-sp-giga)',
+                    }
+                }    
+            </code></pre>
+        </div>
+    </div>
+
+    <!-- ...existing HTML code... -->
+    <script src="https://cdn.jsdelivr.net/npm/color2k@2.0.2/dist/index.unpkg.umd.min.js"></script>
+    <script src="src/js/colorShades.js"></script>
+    <script src="src/js/calculator.js"></script>
+    <script src="src/js/tabs.js"></script>
+    <script src="src/js/script.js"></script>
+  </body>
+</html>
