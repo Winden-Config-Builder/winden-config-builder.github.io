@@ -1,13 +1,14 @@
 function updateValues() {
   return {
-    minBaseFontSize: parseFloat(document.getElementById('minBaseFontSize').value),
-    minScreenWidth: parseFloat(document.getElementById('minScreenWidth').value),
-    minScaleRatio: parseFloat(document.getElementById('minScaleRatio').value),
-    maxBaseFontSize: parseFloat(document.getElementById('maxBaseFontSize').value),
-    maxScreenWidth: parseFloat(document.getElementById('maxScreenWidth').value),
-    maxScaleRatio: parseFloat(document.getElementById('maxScaleRatio').value),
-    typeScaleNames: document.getElementById('typeScaleNames').value.split(','),
-    decimalPlaces: parseInt(document.getElementById('rounding').value),
+    
+    minScreenWidth: parseFloat(document.querySelector('.minScreenWidth').value),
+    maxScreenWidth: parseFloat(document.querySelector('.maxScreenWidth').value),
+    minBaseFontSize: parseFloat(document.querySelector('.minBaseFontSize').value),
+    maxBaseFontSize: parseFloat(document.querySelector('.maxBaseFontSize').value), 
+    minScaleRatio: parseFloat(document.querySelector('.minScaleRatio').value),
+    typeScaleNames: document.querySelector('.typeScaleNames').value.split(','),
+    maxScaleRatio: parseFloat(document.querySelector('.maxScaleRatio').value),
+    decimalPlaces: parseInt(document.querySelector('.rounding').value),    
   };
 }
 
@@ -121,16 +122,31 @@ function updateSelectOptions() {
 }
 
 // Event listeners for all input fields
-let inputIds = ['minBaseFontSize', 'minScreenWidth', 'minScaleRatio', 'maxBaseFontSize', 'maxScreenWidth', 'maxScaleRatio', 'typeScaleNames', 'rounding', 'baseLineSelect'];
+let inputIds = ['baseLineSelect'];
 
-inputIds.forEach(id => {
-  document.getElementById(id).addEventListener('input', () => {
-    if (id === 'typeScaleNames') {
-      updateSelectOptions();
-    }
-    generate();
-  });
+let inputClasses = ['minBaseFontSize', 'minScreenWidth', 'minScaleRatio', 'maxBaseFontSize', 'maxScreenWidth', 'maxScaleRatio', 'typeScaleNames', 'rounding', 'baseLineSelect'];
+
+inputClasses.forEach(className => {
+  let elements = document.getElementsByClassName(className);
+  
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('input', () => {
+      if (className === 'typeScaleNames') {
+        updateSelectOptions();
+      }
+      generate();
+    });
+  }
 });
+
+
+let inputs = document.querySelectorAll('.input');
+inputs.forEach(input => {
+    input.addEventListener('input', () => {
+        generate();
+    });
+});
+
 
 // Generate CSS variables and update select options on page load
 window.addEventListener('load', function() {
