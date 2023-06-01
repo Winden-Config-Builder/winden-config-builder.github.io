@@ -241,6 +241,12 @@ function DuplicateColorRow() {
     clone.querySelector(".numBlocks").addEventListener("change", handleNumBlocksInputChange);
     clone.querySelector(".delete-row-color").addEventListener("click", DeleteColorRow);
     clone.querySelector(".shadesCheckbox").addEventListener("click", ToggleColorShades);
+    const colorPickers = clone.getElementsByClassName("colorPicker");
+    for (const picker of colorPickers) {
+        picker.addEventListener("change", handleColorPickerChange);
+        const pickerValue = picker.nextElementSibling;
+        pickerValue.addEventListener("change", handleColorPickerValueChange);
+    }
     generatePalette();
 
 }
