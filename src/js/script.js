@@ -71,6 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
+    const FontSizeCode = document.querySelector("#typography .tailwind-var-preview code").textContent;
+    const SpacingCode = document.querySelector("#spacing .tailwind-var-preview code").textContent;
     const theme = {
       screens: breakpoints,
       colors: allcolors,
@@ -99,11 +101,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     themePreview += "  },\n";
+    themePreview += FontSizeCode+"\n";
     themePreview += "  fontFamily: {\n";
     for (let font in theme.fontFamily) {
       themePreview += `    '${font}': ${theme.fontFamily[font]},\n`;
     }
     themePreview += "  },\n";
+    themePreview += SpacingCode + "\n";
     themePreview += "}";
 
     document.querySelector('#preview code').textContent = themePreview;
@@ -116,22 +120,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-    document.addEventListener('change', function (event) {
-        if (event.target.matches('#colors input')) {
+  document.addEventListener('change', function (event) {
+        if (event.target.matches('#colors input, #spacing input, #typography input')) {
             // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
             setTimeout(updatePreview, 0);
         }
-    });
+  });
   // Event listener for adding and deleting rows
-  document.addEventListener('click', function(event) {
-      if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color, .addColorPickerButton, .colorPickerWrap button')) {
+    document.addEventListener('click', function (event) {
+        console.log(event.target);
+      if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color, .addColorPickerButton, .colorPickerWrap button, #spacing button, #typography button, .delFont')) {
       // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
       setTimeout(updatePreview, 0);
     }
   });
 
   // Initial preview update
-  updatePreview();
+    setTimeout(function () {
+        updatePreview();
+    }, 100)
 });
 
 

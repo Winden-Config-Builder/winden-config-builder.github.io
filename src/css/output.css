@@ -948,3 +948,6 @@ input[type="color" i]::-webkit-color-swatch {
     flex-direction: row;
   }
 }
+.tailwind-var-preview, .tailwind-preview {
+    display: none;
+}
