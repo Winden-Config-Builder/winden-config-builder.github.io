@@ -119,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('change', function (event) {
         if (event.target.matches('#colors input')) {
             // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
-            console.log("test");
             setTimeout(updatePreview, 0);
         }
     });
@@ -127,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('click', function(event) {
       if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color, .addColorPickerButton, .colorPickerWrap button')) {
       // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
-          console.log("test");
       setTimeout(updatePreview, 0);
     }
   });
