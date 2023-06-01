@@ -1,20 +1,27 @@
 // DOM elements
-const colorPickerContainer = document.querySelector(".colorPickerContainer");
 const lightnessMinInput = document.querySelector(".lightnessMin");
 const lightnessMaxInput = document.querySelector(".lightnessMax");
 const numBlocksInput = document.querySelector(".numBlocks");
-const paletteDiv = document.querySelector(".palette");
-
+const shadesCheckbox = document.querySelector(".shadesCheckbox");
 // Configuration
 let numBlocks = Number(numBlocksInput.value);
 
 // Event listeners
 window.addEventListener("load", generatePalette);
 document.querySelector(".addColorPickerButton").addEventListener("click", addColorPicker);
+document.querySelector(".clone-color-row").addEventListener("click", DuplicateColorRow);
+document.querySelector(".delete-row-color").addEventListener("click", DeleteColorRow);
+shadesCheckbox.addEventListener("click", ToggleColorShades);
 lightnessMinInput.addEventListener("change", generatePalette);
 lightnessMaxInput.addEventListener("change", generatePalette);
 numBlocksInput.addEventListener("change", handleNumBlocksInputChange);
 const colorPickers = document.getElementsByClassName("colorPicker");
+
+if (shadesCheckbox.checked == false) {
+    document.querySelector(".palette").style.display = "none";
+    document.querySelector(".addColorPickerButton").style.display = "none";
+    document.querySelector(".advanced-s").style.display = "none";
+}
 
 for (const picker of colorPickers) {
   picker.addEventListener("change", handleColorPickerChange);
@@ -39,7 +46,9 @@ function handleColorPickerValueChange(event) {
 }
 
 // Handles the creation of new color pickers
-function addColorPicker() {
+function addColorPicker(event) {
+    const ColorRow = event.currentTarget.closest(".color-row");
+    const colorPickerContainer = ColorRow.querySelector(".colorPickerContainer");
     const colorPickerWrap = document.createElement("div");
     colorPickerWrap.className = "colorPickerWrap flex items-end";
 
@@ -79,7 +88,7 @@ function appendChildren(parent, children) {
 
 // Handles the removal of color pickers
 function handleDeleteButtonClick(event) {
-    const colorPickerWrap = event.target.parentNode.parentNode;
+    const colorPickerWrap = event.target.parentNode;
     colorPickerWrap.remove();
     generatePalette();
 }
@@ -97,57 +106,58 @@ function handleNumBlocksInputChange() {
 
 // Generate the color palette
 function generatePalette() {
-    const colorPickers = Array.from(document.getElementsByClassName("colorPicker"));
-    const pickedColors = colorPickers.map((picker) => picker.value);
-    const numColors = pickedColors.length;
+    const rows = document.querySelectorAll(".color-row");
+    for (row of rows) {
+        const numBlocksInput = row.querySelector(".numBlocks");
+        let numBlocks = Number(numBlocksInput.value);
+        const colorPickers = Array.from(row.getElementsByClassName("colorPicker"));
+        const pickedColors = colorPickers.map((picker) => picker.value);
+        const numColors = pickedColors.length;
+        row.querySelector(".palette").innerHTML = "";
+        if (numColors === 1) {
+            const lightnessMin = row.querySelector(".lightnessMin").value / 100;
+            const lightnessMax = row.querySelector(".lightnessMax").value / 100;
+            for (let i = 0; i < numBlocks; i++) {
+                // Here
+                let color;
+                const ratio = i / numBlocks; // And here
 
-    // Clear existing palette
-    paletteDiv.innerHTML = "";
+                // First half of the colors (from white to the chosen color)
+                if (ratio < 0.5) {
+                    const lightness = lightnessMin + (1 - lightnessMin) * (ratio * 2);
+                    color = color2k.mix("white", pickedColors[0], lightness);
+                }
+                // At the midpoint, use the chosen color
+                else if (ratio === 0.5) {
+                    color = pickedColors[0];
+                    createColorDiv(color, row, true); // pass true to mark this as the current color
+                    continue;
+                }
+                // Second half of the colors (from the chosen color to black)
+                else {
+                    const lightness = lightnessMax * ((ratio - 0.5) * 2);
+                    color = color2k.mix(pickedColors[0], "black", lightness);
+                }
 
-    if (numColors === 1) {
-        const lightnessMin = lightnessMinInput.value / 100;
-        const lightnessMax = lightnessMaxInput.value / 100;
-
-        for (let i = 0; i < numBlocks; i++) {
-            // Here
-            let color;
-            const ratio = i / numBlocks; // And here
-
-            // First half of the colors (from white to the chosen color)
-            if (ratio < 0.5) {
-                const lightness = lightnessMin + (1 - lightnessMin) * (ratio * 2);
-                color = color2k.mix("white", pickedColors[0], lightness);
+                createColorDiv(color, row);
             }
-            // At the midpoint, use the chosen color
-            else if (ratio === 0.5) {
-                color = pickedColors[0];
-                createColorDiv(color, true); // pass true to mark this as the current color
-                continue;
-            }
-            // Second half of the colors (from the chosen color to black)
-            else {
-                const lightness = lightnessMax * ((ratio - 0.5) * 2);
-                color = color2k.mix(pickedColors[0], "black", lightness);
-            }
+        } else {
+            // If there are multiple colors, iterate one less time
+            for (let i = 0; i < numBlocks - 1; i++) {
+                const colorIndex = Math.floor(i / (numBlocks / (numColors - 1)));
+                const color1 = pickedColors[colorIndex % numColors];
+                const color2 = pickedColors[Math.min(colorIndex + 1, numColors - 1)];
 
-            createColorDiv(color);
+                const ratio =
+                    (i % (numBlocks / (numColors - 1))) / (numBlocks / (numColors - 1));
+
+                const color = color2k.mix(color1, color2, ratio);
+
+                createColorDiv(color, row);
+            }
+            // Add the last color
+            createColorDiv(pickedColors[numColors - 1], row);
         }
-    } else {
-        // If there are multiple colors, iterate one less time
-        for (let i = 0; i < numBlocks - 1; i++) {
-            const colorIndex = Math.floor(i / (numBlocks / (numColors - 1)));
-            const color1 = pickedColors[colorIndex % numColors];
-            const color2 = pickedColors[Math.min(colorIndex + 1, numColors - 1)];
-
-            const ratio =
-                (i % (numBlocks / (numColors - 1))) / (numBlocks / (numColors - 1));
-
-            const color = color2k.mix(color1, color2, ratio);
-
-            createColorDiv(color);
-        }
-        // Add the last color
-        createColorDiv(pickedColors[numColors - 1]);
     }
 }
 
@@ -161,7 +171,7 @@ function rgbaToHex(rgba) {
 }
 
 // Create a color div
-function createColorDiv(color, isCurrentColor = false) {
+function createColorDiv(color, row, isCurrentColor = false) {
     // Don't create the color div if the color is white or black
     if (color === "rgb(0, 0, 0)" || color === "rgb(255, 255, 255)") {
         return;
@@ -191,7 +201,7 @@ function createColorDiv(color, isCurrentColor = false) {
     colorValue.textContent = color;
     colorDiv.appendChild(colorValue);
 
-    paletteDiv.appendChild(colorDiv);
+    row.querySelector(".palette").appendChild(colorDiv);
 }
 
 function getContrast(hexColor) {
@@ -216,4 +226,40 @@ function hexToRgb(hexColor) {
     const b = bigint & 255;
 
     return [r, g, b];
+}
+
+function DuplicateColorRow() {
+    var rows = document.querySelectorAll('.color-row');
+    var row = rows[rows.length - 1];
+    let clone = row.cloneNode(true);
+    row.after(clone);
+    clone.querySelector(".addColorPickerButton").addEventListener("click", addColorPicker);
+    clone.querySelector(".lightnessMin").addEventListener("change", generatePalette);
+    clone.querySelector(".lightnessMax").addEventListener("change", generatePalette);
+    clone.querySelector(".numBlocks").addEventListener("change", handleNumBlocksInputChange);
+    clone.querySelector(".delete-row-color").addEventListener("click", DeleteColorRow);
+    clone.querySelector(".shadesCheckbox").addEventListener("click", ToggleColorShades);
+    generatePalette();
+
+}
+
+function DeleteColorRow(event) {
+    var rows = document.querySelectorAll('.color-row');
+    if (rows.length > 1) { 
+        const ColorRow = event.currentTarget.closest(".color-row");
+        ColorRow.remove();
+    }
+}
+
+function ToggleColorShades(event) {
+    const ColorRow = event.currentTarget.closest(".color-row");
+    if (event.currentTarget.checked == false) {
+        ColorRow.querySelector(".palette").style.display = "none";
+        ColorRow.querySelector(".addColorPickerButton").style.display = "none";
+        ColorRow.querySelector(".advanced-s").style.display = "none";
+    } else {
+        ColorRow.querySelector(".palette").style.display = "flex";
+        ColorRow.querySelector(".addColorPickerButton").style.display = "block";
+        ColorRow.querySelector(".advanced-s").style.display = "flex";
+    }
 }

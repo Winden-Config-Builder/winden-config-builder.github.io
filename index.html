@@ -34,9 +34,9 @@
                     <div class="flex justify-between" ><!-- Name and delete -->
                         <div class="input-wrap">
                             <label class="input-label" for="">Name</label>
-                            <input class="input" type="text" value="custom-color" />
+                            <input class="input color-name" type="text" value="custom-color" />
                         </div>
-                        <button class="delete-row">Del</button>
+                        <button class="delete-row-color">Del</button>
                     </div><!-- ENd of Name and delete -->
                                                 
                     <div class="flex gap-4 items-end" ><!-- Color shades -->
@@ -53,7 +53,7 @@
                     <div class="rounded-md overflow-hidden flex palette"></div>
                     <!-- End of palete -->
                                     
-                    <div class="flex gap-4" ><!-- Advanced settings -->
+                    <div class="flex gap-4 advanced-s" ><!-- Advanced settings -->
                         <div class="input-wrap !max-w-[120px]" id="buttons-wrap">
                             <label for="numBlocks">No. of shades</label>
                             <input class="input numBlocks" type="number" min="1" max="20" value="6" />
@@ -68,9 +68,12 @@
                         </div>
                     </div><!-- End Advanced settings -->
                                     
-                    <div class=""><!-- Enable shades -->
-                        <input type="checkbox" class="shadesCheckbox">
-                        <label for="shadesCheckbox">Enable Shades</label>
+                    <div class="">
+                        <!-- Enable shades -->
+                        <label>
+                            <input type="checkbox" class="shadesCheckbox">
+                            Enable Shades
+                        </label>
                     </div><!-- End of Enable shades -->
                                     
                 </div><!-- End of Color Row -->
@@ -159,11 +162,11 @@
                         <div class="input-group">
                         <div class="input-wrap">
                             <label for="minScreenWidth">Mobile (Min)</label>
-                            <input type="number" id="minScreenWidth" value="300" />
+                            <input type="number" id="minScreenWidth" class="minScreenWidth"  value="300" />
                         </div>
                         <div class="input-wrap">
                             <label for="maxScreenWidth">Desktop (Max)</label>
-                            <input type="number" id="maxScreenWidth" value="1600" />
+                            <input type="number" id="maxScreenWidth" class="maxScreenWidth" value="1600" />
                         </div>
                         </div>
 
@@ -176,6 +179,7 @@
                             type="checkbox"
                             id="disableRatio"
                             name="disableRatio"
+                            class="disableRatio"
                             style="vertical-align: middle"
                             />
                             <span>Disable Ratio</span>
@@ -187,11 +191,11 @@
                         <div class="input-group">
                             <div class="input-wrap">
                             <label for="minBaseFontSize">Mobile (Min)</label>
-                            <input type="number" id="minBaseFontSize" value="10" />
+                            <input type="number" class="minBaseFontSize" value="10" />
                             </div>
                             <div class="input-wrap">
                             <label for="maxBaseFontSize">Desktop (Max)</label>
-                            <input type="number" id="maxBaseFontSize" value="15" />
+                            <input type="number" class="maxBaseFontSize" value="15" />
                             </div>
                         </div>
 
@@ -199,11 +203,11 @@
                         <div class="input-group">
                             <div class="input-wrap">
                             <label for="minScaleRatio">Mobile (Min)</label>
-                            <input type="number" id="minScaleRatio" value="1.2" />
+                            <input type="number" class="minScaleRatio" value="1.2" />
                             </div>
                             <div class="input-wrap">
                             <label for="maxScaleRatio">Desktop (Max)</label>
-                            <input type="number" id="maxScaleRatio" value="1.4" />
+                            <input type="number" class="maxScaleRatio" value="1.4" />
                             </div>
                         </div>
 
@@ -214,7 +218,7 @@
                             <label for="typeScaleNames">Names</label>
                             <input
                                 type="text"
-                                id="typeScaleNames"
+                                id="typeScaleNames" class="typeScaleNames"
                                 value="sm, md, base, lg, xl, xxl"
                             />
                             </div>
@@ -222,6 +226,7 @@
                             <label for="baseLineSelect">Baseline Step</label>
                             <select
                                 name="baseLineSelect"
+                                class="baseLineSelect"
                                 id="baseLineSelect"
                             ></select>
                             </div>
@@ -268,7 +273,7 @@
 
                         <h1>Rounding</h1>
                         <p>The maximum number of decimal places in the output.</p>
-                        <input type="number" id="rounding" value="4" />
+                        <input type="number" class="rounding" value="4" />
                     </div>
                     </div>
 
@@ -278,13 +283,13 @@
                     </h1>
 
                     <div style="width: 100%">
-                    <div id="css-variables-preview" class="code-preview">
+                    <div id="css-variables-preview" class="code-preview css-variables-preview">
                         <pre><code></code></pre>
                     </div>
-                    <div id="tailwind-var-preview" class="code-preview">
+                    <div id="tailwind-var-preview" class="code-preview tailwind-var-preview">
                         <pre><code></code></pre>
                     </div>
-                    <div id="tailwind-preview" class="code-preview">
+                    <div id="tailwind-preview" class="code-preview tailwind-preview">
                         <pre><code></code></pre>
                     </div>
 

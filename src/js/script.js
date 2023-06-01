@@ -55,8 +55,25 @@ document.addEventListener('DOMContentLoaded', function() {
       fontFamily[name] = `[${value.join(", ")}]`;
     });
 
+    const allcolors = {};
+      document.querySelectorAll('#colors .color-row').forEach(row => {
+          const name = row.querySelector('.color-name').value;
+          if (row.querySelector('input.shadesCheckbox').checked == false) {
+              const value = row.querySelector('input.colorPicker').value;
+              allcolors[name] = value;
+          } else {
+              const shadows = {};
+              row.querySelectorAll('.colorValue').forEach(function callback(value, index) {
+                  shadows[index] = value.textContent;
+              });
+              allcolors[name] = shadows;
+          }
+
+    });
+
     const theme = {
       screens: breakpoints,
+      colors: allcolors,
       fontFamily: fontFamily,
     };
 
@@ -64,6 +81,22 @@ document.addEventListener('DOMContentLoaded', function() {
     themePreview += "  screens: {\n";
     for (let breakpoint in theme.screens) {
       themePreview += `    '${breakpoint}': '${theme.screens[breakpoint]}',\n`;
+    }
+    themePreview += "  },\n";
+    themePreview += "  colors: {\n";
+    themePreview += "     transparent: 'transparent',\n";
+    themePreview += "     current: 'currentColor',\n"; 
+    for (let color in theme.colors) {
+        if (typeof theme.colors[color] === "object") {
+                
+            themePreview += `     '${color}': {\n`;
+            for (let shades in theme.colors[color]) {
+                themePreview += `         ${shades}: '${theme.colors[color][shades]}',\n`;
+            }
+            themePreview += "     },\n";
+        } else {
+            themePreview += `    '${color}': '${theme.colors[color]}',\n`;
+        }
     }
     themePreview += "  },\n";
     themePreview += "  fontFamily: {\n";
@@ -78,14 +111,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Event listener for input changes in real-time
   document.addEventListener('input', function(event) {
-    if (event.target.matches('#breakpoints .repeateble-row .input, #font-family .repeateble-row .input')) {
+      if (event.target.matches('#breakpoints .repeateble-row .input, #font-family .repeateble-row .input, #colors input')) {
       updatePreview();
     }
   });
 
   // Event listener for adding and deleting rows
   document.addEventListener('click', function(event) {
-    if (event.target.matches('.clone-row, .delete-row')) {
+      if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color')) {
       // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
       setTimeout(updatePreview, 0);
     }

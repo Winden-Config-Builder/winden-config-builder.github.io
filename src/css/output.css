@@ -953,3 +953,10 @@ input[type="color" i]::-webkit-color-swatch {
     flex-direction: row;
   }
 }
+.color-row {
+    padding-bottom: 3rem;
+}
+button.clone-color-row.btn-primary {
+    margin-top: -2rem;
+    display: block;
+}
