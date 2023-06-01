@@ -134,175 +134,247 @@
 
                 <!-- Spacing -->
                 <div id="spacing" class="tabcontent w-full hidden">
-                <h2 class="text-4xl font-black mb-8">Spacing</h2>
-                <p class="mb-12">
-                    By default the spacing scale is inherited by the padding, margin,
-                    width, height, maxHeight, gap, inset, space, and translate core
-                    plugins.
-                </p>
+                    <h2 class="text-4xl font-black mb-8">Fluid Soacing</h2>
+                    <div class="spacingWrapper">
 
-                <h1 class="text-red-500 text-3xl">
-                    Reuse same as for "Typography" just different output prefix
-                </h1>
+                        <div>
+                            <p class="mb-8">
+                            Generate font size variables for a fluid type scale with CSS clamp. Grab
+                            the output CSS and drop it into any design system.
+                            </p>
+                            <div>
+                            <h2 class="subTitle">Screen width</h2>
+                            <div class="flex gap-4 mb-4">
+                                <div class="input-wrap">
+                                    <label for="minScreenWidth">Mobile (Min)</label>
+                                    <input class="input minScreenWidth" type="number" value="300" />
+                                </div>
+                                <div class="input-wrap">
+                                    <label for="maxScreenWidth">Desktop (Max)</label>
+                                    <input class="input maxScreenWidth" type="number" value="1600" />
+                                </div>
+                            </div>
+                    
+                            <div style="margin-top: 10px">
+                                <label for="disableRatio" style="display: block; cursor: pointer">
+                                    <input type="checkbox" id="disableRatio" name="disableRatio" class="disableRatio" style="vertical-align: middle" />
+                                    <span>Disable Ratio</span>
+                                </label>
+                            </div>
+                    
+                            <div class="typographyRatio bg-slate-50 p-6 my-8 rounded-md">
+                                <h2 class="subTitle">Base Space Size</h2>
+                    
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="minBaseFontSize">Mobile (Min)</label>
+                                        <input class="input minBaseFontSize" type="number" value="10" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxBaseFontSize">Desktop (Max)</label>
+                                        <input class="input maxBaseFontSize" type="number" value="15" />
+                                    </div>
+                                </div>
+                    
+                                <h2 class="subTitle mt-8">Space scale ratio</h2>
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="minScaleRatio">Mobile (Min)</label>
+                                        <input class="input minScaleRatio" type="number"  value="1.2" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxScaleRatio">Desktop (Max)</label>
+                                        <input class="input maxScaleRatio" type="number" value="1.4" />
+                                    </div>
+                                </div>
+                    
+                                <h2 class="subTitle mt-8">Space scale name</h2>
+                                <p>Prodivide a comma-separated list of names.</p>
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="typeScaleNames">Names</label>
+                                        <input class="input typeScaleNames" type="text" value="sm, md, base, lg, xl, xxl" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="baseLineSelect">Baseline Step</label>
+                                        <select class="input baseLineSelect" name="baseLineSelect" ></select>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="typographySingle bg-slate-50 py-4 px-6 my-8 rounded-md" style="display: none">
+                                <h2 class="subTitle">Fluid sizes</h2>
+                                <div class="typographySingleWrap">
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="minScaleRatio">Mobile Size</label>
+                                        <input class="input minScaleRatio" type="number" oninput="generate()" value="14" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxScaleRatio">Desktop Size</label>
+                                        <input class="input maxScaleRatio" type="number" oninput="generate()"  value="16" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxScaleRatio">Name</label>
+                                        <input class="input maxScaleName" type="text" oninput="generate()" />
+                                    </div>
+                                    <button class="delFont">Del</button>
+                                </div>
+                                </div>
+                                <button class="AddFont btn-outline mt-8 mb-4">+ Add new</button>
+                            </div>
+                            
+                            <h2 class="subTitle">Rounding</h2>
+                            <p>The maximum number of decimal places in the output.</p>
+                            <input class="input rounding" type="number" value="4" />
+                            </div>
+                        </div>
+                    
+                        <div class="w-full mt-12">
+                            <div class="css-variables-preview code-preview bg-slate-100 text-slate-700 leading-8 p-4">
+                            <pre><code></code></pre>
+                            </div>
+                            <div class="tailwind-var-preview code-preview bg-slate-200 text-slate-700 leading-8 p-4">
+                            <pre><code></code></pre>
+                            </div>
+                            <div class="tailwind-preview code-preview bg-slate-300 text-slate-700 leading-8 p-4 mb-12">
+                            <pre><code></code></pre>
+                            </div>
+                    
+                            <div class="font-preview">
+                            <p class="sm">Lorem ipsum</p>
+                            <p class="md">Lorem ipsum</p>
+                            <p class="base">Lorem ipsum</p>
+                            <p class="lg">Lorem ipsum</p>
+                            <p class="xl">Lorem ipsum</p>
+                            <p class="xxl">Lorem ipsum</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <!-- End of Spacing -->
 
                 <!-- Typography -->
                 <div id="typography" class="tabcontent w-full hidden">
-                <h2 class="text-4xl font-black mb-8">Typography</h2>
-                <div id="wrap">
-                    <div id="app">
-                    <h1>Fluid Type Scale Calculator</h1>
-                    <h3>
-                        Generate font size variables for a fluid type scale with CSS
-                        clamp. Grab the output CSS and drop it into any design system.
-                    </h3>
-                    <div id="form">
-                        <h1>Screen width</h1>
-                        <div class="input-group">
-                        <div class="input-wrap">
-                            <label for="minScreenWidth">Mobile (Min)</label>
-                            <input type="number" id="minScreenWidth" class="minScreenWidth"  value="300" />
+                    <h2 class="text-4xl font-black mb-8">Fluid Typography</h2>
+                    <div class="typographyWrapper">
+
+                        <div>
+                            <p class="mb-8">
+                            Generate font size variables for a fluid type scale with CSS clamp. Grab
+                            the output CSS and drop it into any design system.
+                            </p>
+                            <div>
+                            <h2 class="subTitle">Screen width</h2>
+                            <div class="flex gap-4 mb-4">
+                                <div class="input-wrap">
+                                    <label for="minScreenWidth">Mobile (Min)</label>
+                                    <input class="input minScreenWidth" type="number" value="300" />
+                                </div>
+                                <div class="input-wrap">
+                                    <label for="maxScreenWidth">Desktop (Max)</label>
+                                    <input class="input maxScreenWidth" type="number" value="1600" />
+                                </div>
+                            </div>
+                    
+                            <div style="margin-top: 10px">
+                                <label for="disableRatio" style="display: block; cursor: pointer">
+                                    <input type="checkbox" id="disableRatio" name="disableRatio" class="disableRatio" style="vertical-align: middle" />
+                                    <span>Disable Ratio</span>
+                                </label>
+                            </div>
+                    
+                            <div class="typographyRatio bg-slate-50 p-6 my-8 rounded-md">
+                                <h2 class="subTitle">Base Font Size</h2>
+                    
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="minBaseFontSize">Mobile (Min)</label>
+                                        <input class="input minBaseFontSize" type="number" value="10" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxBaseFontSize">Desktop (Max)</label>
+                                        <input class="input maxBaseFontSize" type="number" value="15" />
+                                    </div>
+                                </div>
+                    
+                                <h2 class="subTitle mt-8">Type scale ratio</h2>
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="minScaleRatio">Mobile (Min)</label>
+                                        <input class="input minScaleRatio" type="number"  value="1.2" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxScaleRatio">Desktop (Max)</label>
+                                        <input class="input maxScaleRatio" type="number" value="1.4" />
+                                    </div>
+                                </div>
+                    
+                                <h2 class="subTitle mt-8">Type scale name</h2>
+                                <p>Prodivide a comma-separated list of names.</p>
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="typeScaleNames">Names</label>
+                                        <input class="input typeScaleNames" type="text" value="sm, md, base, lg, xl, xxl" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="baseLineSelect">Baseline Step</label>
+                                        <select class="input baseLineSelect" name="baseLineSelect" ></select>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="typographySingle bg-slate-50 py-4 px-6 my-8 rounded-md" style="display: none">
+                                <h2 class="subTitle">Fluid sizes</h2>
+                                <div class="typographySingleWrap">
+                                <div class="input-group flex gap-4 mb-4">
+                                    <div class="input-wrap">
+                                        <label for="minScaleRatio">Mobile Size</label>
+                                        <input class="input minScaleRatio" type="number" oninput="generate()" value="14" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxScaleRatio">Desktop Size</label>
+                                        <input class="input maxScaleRatio" type="number" oninput="generate()"  value="16" />
+                                    </div>
+                                    <div class="input-wrap">
+                                        <label for="maxScaleRatio">Name</label>
+                                        <input class="input maxScaleName" type="text" oninput="generate()" />
+                                    </div>
+                                    <button class="delFont">Del</button>
+                                </div>
+                                </div>
+                                <button class="AddFont btn-outline mt-8 mb-4">+ Add new</button>
+                            </div>
+                            
+                            <h2 class="subTitle">Rounding</h2>
+                            <p>The maximum number of decimal places in the output.</p>
+                            <input class="input rounding" type="number" value="4" />
+                            </div>
                         </div>
-                        <div class="input-wrap">
-                            <label for="maxScreenWidth">Desktop (Max)</label>
-                            <input type="number" id="maxScreenWidth" class="maxScreenWidth" value="1600" />
-                        </div>
+                    
+                        <div class="w-full mt-12">
+                            <div class="css-variables-preview code-preview bg-slate-100 text-slate-700 leading-8 p-4">
+                            <pre><code></code></pre>
+                            </div>
+                            <div class="tailwind-var-preview code-preview bg-slate-200 text-slate-700 leading-8 p-4">
+                            <pre><code></code></pre>
+                            </div>
+                            <div class="tailwind-preview code-preview bg-slate-300 text-slate-700 leading-8 p-4 mb-12">
+                            <pre><code></code></pre>
+                            </div>
+                    
+                            <div class="font-preview">
+                            <p class="sm">Lorem ipsum</p>
+                            <p class="md">Lorem ipsum</p>
+                            <p class="base">Lorem ipsum</p>
+                            <p class="lg">Lorem ipsum</p>
+                            <p class="xl">Lorem ipsum</p>
+                            <p class="xxl">Lorem ipsum</p>
+                            </div>
                         </div>
 
-                        <div style="margin-top: 10px">
-                        <label
-                            for="disableRatio"
-                            style="display: block; cursor: pointer"
-                        >
-                            <input
-                            type="checkbox"
-                            id="disableRatio"
-                            name="disableRatio"
-                            class="disableRatio"
-                            style="vertical-align: middle"
-                            />
-                            <span>Disable Ratio</span>
-                        </label>
-                        </div>
-
-                        <div id="typographyRatio">
-                        <h1>Base Font Size</h1>
-                        <div class="input-group">
-                            <div class="input-wrap">
-                            <label for="minBaseFontSize">Mobile (Min)</label>
-                            <input type="number" class="minBaseFontSize" value="10" />
-                            </div>
-                            <div class="input-wrap">
-                            <label for="maxBaseFontSize">Desktop (Max)</label>
-                            <input type="number" class="maxBaseFontSize" value="15" />
-                            </div>
-                        </div>
-
-                        <h1>Type scale ratio</h1>
-                        <div class="input-group">
-                            <div class="input-wrap">
-                            <label for="minScaleRatio">Mobile (Min)</label>
-                            <input type="number" class="minScaleRatio" value="1.2" />
-                            </div>
-                            <div class="input-wrap">
-                            <label for="maxScaleRatio">Desktop (Max)</label>
-                            <input type="number" class="maxScaleRatio" value="1.4" />
-                            </div>
-                        </div>
-
-                        <h1>Type scale name</h1>
-                        <p>Prodivide a comma-separated list of names.</p>
-                        <div class="input-group">
-                            <div class="input-wrap">
-                            <label for="typeScaleNames">Names</label>
-                            <input
-                                type="text"
-                                id="typeScaleNames" class="typeScaleNames"
-                                value="sm, md, base, lg, xl, xxl"
-                            />
-                            </div>
-                            <div class="input-wrap">
-                            <label for="baseLineSelect">Baseline Step</label>
-                            <select
-                                name="baseLineSelect"
-                                class="baseLineSelect"
-                                id="baseLineSelect"
-                            ></select>
-                            </div>
-                        </div>
-                        </div>
-
-                        <div id="typographySingle" style="display: none">
-                        <h1>Fluid sizes</h1>
-                        <div class="typographySingleWrap">
-                            <div class="input-group">
-                            <div class="input-wrap">
-                                <label for="minScaleRatio">Mobile Size</label>
-                                <input
-                                type="number"
-                                oninput="generate()"
-                                id="minScaleRatio"
-                                value="14"
-                                />
-                            </div>
-                            <div class="input-wrap">
-                                <label for="maxScaleRatio">Desktop Size</label>
-                                <input
-                                type="number"
-                                oninput="generate()"
-                                id="maxScaleRatio"
-                                value="16"
-                                />
-                            </div>
-                            <div class="input-wrap">
-                                <label for="maxScaleRatio">Name</label>
-                                <input
-                                type="text"
-                                oninput="generate()"
-                                id="maxScaleName"
-                                />
-                            </div>
-                            <button class="delFont">Del</button>
-                            </div>
-                        </div>
-                        <button class="AddFont" style="margin-top: 10px">
-                            + Add new
-                        </button>
-                        </div>
-
-                        <h1>Rounding</h1>
-                        <p>The maximum number of decimal places in the output.</p>
-                        <input type="number" class="rounding" value="4" />
                     </div>
-                    </div>
-
-                    <h1 class="text-red-500 text-3xl">
-                    Remove #css-variables-preview, #tailwind-var-preview,
-                    #tailwind-preview and move those values to the right
-                    </h1>
-
-                    <div style="width: 100%">
-                    <div id="css-variables-preview" class="code-preview css-variables-preview">
-                        <pre><code></code></pre>
-                    </div>
-                    <div id="tailwind-var-preview" class="code-preview tailwind-var-preview">
-                        <pre><code></code></pre>
-                    </div>
-                    <div id="tailwind-preview" class="code-preview tailwind-preview">
-                        <pre><code></code></pre>
-                    </div>
-
-                    <div class="font-preview">
-                        <p class="sm">Lorem ipsum</p>
-                        <p class="md">Lorem ipsum</p>
-                        <p class="base">Lorem ipsum</p>
-                        <p class="lg">Lorem ipsum</p>
-                        <p class="xl">Lorem ipsum</p>
-                        <p class="xxl">Lorem ipsum</p>
-                    </div>
-                    </div>
-                </div>
                 </div>
                 <!-- End of Typography -->
 
