@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             themePreview += "     },\n";
         } else {
-            themePreview += `    '${color}': '${theme.colors[color]}',\n`;
+            themePreview += `     '${color}': '${theme.colors[color]}',\n`;
         }
     }
     themePreview += "  },\n";

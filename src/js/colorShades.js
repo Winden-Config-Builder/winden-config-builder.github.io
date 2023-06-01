@@ -233,6 +233,8 @@ function DuplicateColorRow() {
     var row = rows[rows.length - 1];
     let clone = row.cloneNode(true);
     row.after(clone);
+    var input = clone.querySelector('.input.color-name');
+    input.value = input.value + ' (copy)';
     clone.querySelector(".addColorPickerButton").addEventListener("click", addColorPicker);
     clone.querySelector(".lightnessMin").addEventListener("change", generatePalette);
     clone.querySelector(".lightnessMax").addEventListener("change", generatePalette);
