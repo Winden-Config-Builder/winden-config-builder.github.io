@@ -111,15 +111,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Event listener for input changes in real-time
   document.addEventListener('input', function(event) {
-      if (event.target.matches('#breakpoints .repeateble-row .input, #font-family .repeateble-row .input, #colors input')) {
+      if (event.target.matches('#breakpoints .repeateble-row .input, #font-family .repeateble-row .input')) {
       updatePreview();
     }
   });
 
+    document.addEventListener('change', function (event) {
+        if (event.target.matches('#colors input')) {
+            // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
+            console.log("test");
+            setTimeout(updatePreview, 0);
+        }
+    });
   // Event listener for adding and deleting rows
   document.addEventListener('click', function(event) {
-      if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color')) {
+      if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color, .addColorPickerButton, .colorPickerWrap button')) {
       // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
+          console.log("test");
       setTimeout(updatePreview, 0);
     }
   });
