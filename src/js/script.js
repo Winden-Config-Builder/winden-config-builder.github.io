@@ -39,7 +39,6 @@ deleteButtons.forEach(button => button.addEventListener('click', deleteRow));
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Function to update theme preview
   function updatePreview() {
     const breakpoints = {};
     document.querySelectorAll('#breakpoints .repeateble-row').forEach(row => {
@@ -56,23 +55,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const allcolors = {};
-      document.querySelectorAll('#colors .color-row').forEach(row => {
-          const name = row.querySelector('.color-name').value;
-          if (row.querySelector('input.shadesCheckbox').checked == false) {
-              const value = row.querySelector('input.colorPicker').value;
-              allcolors[name] = value;
-          } else {
-              const shadows = {};
-              row.querySelectorAll('.colorValue').forEach(function callback(value, index) {
-                  shadows[index] = value.textContent;
-              });
-              allcolors[name] = shadows;
-          }
-
+    document.querySelectorAll('#colors .color-row').forEach(row => {
+      const name = row.querySelector('.color-name').value;
+      if (row.querySelector('input.shadesCheckbox').checked == false) {
+        const value = row.querySelector('input.colorPicker').value;
+        allcolors[name] = value;
+      } else {
+        const shadows = {};
+        row.querySelectorAll('.colorValue').forEach(function callback(value, index) {
+          shadows[index] = value.textContent;
+        });
+        allcolors[name] = shadows;
+      }
     });
 
     const FontSizeCode = document.querySelector("#typography .tailwind-var-preview code").textContent;
     const SpacingCode = document.querySelector("#spacing .tailwind-var-preview code").textContent;
+
     const theme = {
       screens: breakpoints,
       colors: allcolors,
@@ -89,8 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     themePreview += "     transparent: 'transparent',\n";
     themePreview += "     current: 'currentColor',\n"; 
     for (let color in theme.colors) {
-        if (typeof theme.colors[color] === "object") {
-                
+        if (typeof theme.colors[color] === "object") {      
             themePreview += `     '${color}': {\n`;
             for (let shades in theme.colors[color]) {
                 themePreview += `         ${shades}: '${theme.colors[color][shades]}',\n`;
@@ -108,37 +106,61 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     themePreview += "  },\n";
     themePreview += SpacingCode + "\n";
-    themePreview += "}";
+    themePreview += "},\n";
+
+    // Plugins
+    const plugins = {};
+    document.querySelectorAll('#containerClasses .repeateble-row').forEach(row => {
+      const className = row.querySelector('.input-wrap:nth-child(1) .input').value;
+      const width = row.querySelector('.input-wrap:nth-child(2) .input').value + '%';
+      const maxWidth = row.querySelector('.input-wrap:nth-child(3) .input').value + 'px';
+      const center = row.querySelector('.centerContainer').checked;
+      plugins[className] = {
+        maxWidth: maxWidth,
+        width: width,
+        marginLeft: center ? 'auto' : undefined,
+        marginRight: center ? 'auto' : undefined,
+      };
+    });
+    
+    themePreview += "plugins: [\n";
+    themePreview += "  function ({ addComponents }) {\n";
+    themePreview += "    addComponents({\n";
+    for (let plugin in plugins) {
+      themePreview += `      '.${plugin}': {\n`;
+      for (let prop in plugins[plugin]) {
+        themePreview += `        ${prop}: '${plugins[plugin][prop]}',\n`;
+      }
+      themePreview += "      },\n";
+    }
+    themePreview += "    })\n";
+    themePreview += "  },\n";
+    themePreview += "],\n";
 
     document.querySelector('#preview code').textContent = themePreview;
   }
 
-  // Event listener for input changes in real-time
   document.addEventListener('input', function(event) {
-      if (event.target.matches('#breakpoints .repeateble-row .input, #font-family .repeateble-row .input')) {
+      if (event.target.matches('#breakpoints .repeateble-row .input, #font-family .repeateble-row .input, #containerClasses .repeateble-row .input')) {
       updatePreview();
     }
   });
 
   document.addEventListener('change', function (event) {
-        if (event.target.matches('#colors input, #spacing input, #typography input')) {
-            // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
+        if (event.target.matches('#colors input, #spacing input, #typography input, #containerClasses input')) {
             setTimeout(updatePreview, 0);
         }
   });
-  // Event listener for adding and deleting rows
+
     document.addEventListener('click', function (event) {
-      if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color, .addColorPickerButton, .colorPickerWrap button, #spacing button, #typography button, .delFont')) {
-      // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
+      if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color, .addColorPickerButton, .colorPickerWrap button, #spacing button, #typography button, .delFont, #containerClasses button')) {
       setTimeout(updatePreview, 0);
     }
   });
 
-  // Initial preview update
-    setTimeout(function () {
-        updatePreview();
-    }, 100)
+    setTimeout(updatePreview, 0);
 });
+
 
 
 
