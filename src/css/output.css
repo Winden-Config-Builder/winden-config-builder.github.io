@@ -727,6 +727,10 @@ video {
   gap: 2rem;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -947,7 +951,4 @@ input[type="color" i]::-webkit-color-swatch {
   .xl\:flex-row {
     flex-direction: row;
   }
-}
-.tailwind-var-preview, .tailwind-preview {
-    display: none;
 }
