@@ -10,6 +10,14 @@
     @apply border-blue-600 border text-blue-600 px-4 py-2 rounded-md mt-4;
 }
 
+.delete-row-color{
+    @apply border border-slate-300 px-4 rounded-md hover:text-red-600 hover:border-red-600; 
+}
+
+.delete-row{
+    @apply border border-slate-300 px-4 rounded-md hover:text-red-600 hover:border-red-600; 
+}
+
 .input{
     @apply border border-slate-400 grow rounded-md p-2;
 }
@@ -43,54 +51,13 @@ input[type="color" i]::-webkit-color-swatch {
 
 
 
-@layer components {    
-    /* .code-preview {
-        background-color: #d3eaff;
-        line-height: 2;
-        padding: 10px;
-        margin-bottom: 30px;
-    }
-    .code-preview pre {
-        padding: 0;
-        margin: 0;
-    } */
-    
+@layer components {        
     .sm, .md, .base, .lg, .xl, .xxl {
         line-height: 1;
         margin: 0;
         padding: 0;
     }
     
-    .sm {
-        font-size: var(--win-fs-sm);
-    }
-    
-    .md {
-        font-size: var(--win-fs-md);
-    }
-    
-    .base {
-        font-size: var(--win-fs-base);
-    }
-    
-    .lg {
-        font-size: var(--win-fs-lg);
-    }
-    
-    .xl {
-        font-size: var(--win-fs-xl);
-    }
-    
-    .xxl {
-        font-size: var(--win-fs-xxl);
-    }
-    
-    /* #typographySingle, #typographyRatio {
-        border: 4px solid lightblue;
-        padding: 20px;
-        margin: 20px 0;
-    } */
-
     .subTitle{
         @apply font-bold text-3xl mb-4;
     }

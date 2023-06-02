@@ -7,7 +7,7 @@
         <title>Document</title>
         <link rel="stylesheet" href="src/css/output.css" />
     </head>
-    <body class="bg-slate-200">
+    <body class="bg-slate-200" spellcheck="false">
         <header class="bg-white p-4 text-center mb-12">
         <h1 class="text-2xl font-bold">Tailwind Config Builder</h1>
         </header>
@@ -26,89 +26,93 @@
 
             <div class="flex px-16 py-8 bg-white grow">
 
+                <!-- Breakpoints -->
+                <div id="breakpoints" class="tabcontent w-full">
+                    <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
+                    <div class="repeateble-fields">
+                        <div class="wrap">                
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="mob" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="600" /></label>
+                            <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="tab" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1200" /></label>
+                            <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                            <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="desk" /></label>
+                            <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1680" /></label>
+                            <button class="delete-row">Del</button>
+                            </div>
+                        </template>
+                        </div>
+                        <button class="clone-row btn-primary">+ Add New</button>
+                    </div>
+                </div>
+                <!-- End of Breakpoints -->
+                
+
                 <!-- Colors -->
                 <div id="colors" class="tabcontent w-full hidden">
-                <h2 class="text-4xl font-black mb-8">Colors</h2>
-                            
-                <div class="color-row grid gap-8"><!-- Color Row -->                    
-                    <div class="flex justify-between" ><!-- Name and delete -->
-                        <div class="input-wrap">
-                            <label class="input-label" for="">Name</label>
-                            <input class="input color-name" type="text" value="custom-color" />
-                        </div>
-                        <button class="delete-row-color">Del</button>
-                    </div><!-- ENd of Name and delete -->
-                                                
-                    <div class="flex gap-4 items-end" ><!-- Color shades -->
-                        <div class="colorPickerContainer flex gap-4">
-                            <div class="colorPickerWrap input-wrap">
-                                <input type="color" class="colorPicker w-[80px] h-[40px] mb-1" value="#ff0000" onchange="generatePalette()" />
-                                <input class="input w-[80px]" type="text" name="colorPickerValue" value="#ff0000">
+                    <h2 class="text-4xl font-black mb-8">Colors</h2>
+                                
+                    <div class="color-row grid gap-8 my-16"><!-- Color Row -->                    
+                        <div class="flex justify-between" ><!-- Name and delete -->
+                            <div class="input-wrap">
+                                <label class="input-label" for="">Name</label>
+                                <input class="input color-name" type="text" value="custom-color" />
                             </div>
-                        </div>
-                        <button class="btn-outline addColorPickerButton">+ Add Shade</button>
-                    </div><!-- End of Color shades -->
-                
-                    <!-- palete -->
-                    <div class="rounded-md overflow-hidden flex palette"></div>
-                    <!-- End of palete -->
-                                    
-                    <div class="flex gap-4 advanced-s" ><!-- Advanced settings -->
-                        <div class="input-wrap !max-w-[120px]" id="buttons-wrap">
-                            <label for="numBlocks">No. of shades</label>
-                            <input class="input numBlocks" type="number" min="1" max="20" value="6" />
-                        </div>
-                        <div class="input-wrap !max-w-[120px]">
-                            <label for="">Lightness Min</label>
-                            <input class="input lightnessMin" type="number" min="0" max="100" value="5" />
-                        </div>
-                        <div class="input-wrap !max-w-[120px]">
-                            <label for="">Lightness Max</label>
-                            <input class="input lightnessMax" type="number" min="0" max="100" value="95" />
-                        </div>
-                    </div><!-- End Advanced settings -->
-                                    
-                    <div class="">
-                        <!-- Enable shades -->
-                        <label>
-                            <input type="checkbox" class="shadesCheckbox">
-                            Enable Shades
-                        </label>
-                    </div><!-- End of Enable shades -->
-                                    
-                </div><!-- End of Color Row -->
+                            <button class="delete-row-color">Del</button>
+                        </div><!-- ENd of Name and delete -->
+                                                    
+                        <div class="flex gap-4 items-end" ><!-- Color shades -->
+                            <div class="colorPickerContainer flex gap-4">
+                                <div class="colorPickerWrap input-wrap">
+                                    <input type="color" class="colorPicker w-[80px] h-[40px] mb-1" value="#ff0000" onchange="generatePalette()" />
+                                    <input class="input w-[80px]" type="text" name="colorPickerValue" value="#ff0000">
+                                </div>
+                            </div>
+                            <button class="btn-outline addColorPickerButton">+ Add Shade</button>
+                        </div><!-- End of Color shades -->
+                    
+                        <!-- palete -->
+                        <div class="rounded-md overflow-hidden flex palette border border-slate-200"></div>
+                        <!-- End of palete -->
+                                        
+                        <div class="flex gap-4 advanced-s" ><!-- Advanced settings -->
+                            <div class="input-wrap !max-w-[120px]" id="buttons-wrap">
+                                <label for="numBlocks">No. of shades</label>
+                                <input class="input numBlocks" type="number" min="1" max="20" value="6" />
+                            </div>
+                            <div class="input-wrap !max-w-[120px]">
+                                <label for="">Lightness Min</label>
+                                <input class="input lightnessMin" type="number" min="0" max="100" value="5" />
+                            </div>
+                            <div class="input-wrap !max-w-[120px]">
+                                <label for="">Lightness Max</label>
+                                <input class="input lightnessMax" type="number" min="0" max="100" value="95" />
+                            </div>
+                        </div><!-- End Advanced settings -->
+                                        
+                        <div class="">
+                            <!-- Enable shades -->
+                            <label>
+                                <input type="checkbox" class="shadesCheckbox">
+                                Enable Shades
+                            </label>
+                        </div><!-- End of Enable shades -->
 
-                <button class="clone-color-row btn-primary">+ Add New Color</button>
-        
+                        <div class="h-4 w-full bg-slate-100"></div>
+                                        
+                    </div><!-- End of Color Row -->
+
+                    <button class="clone-color-row btn-primary">+ Add New Color</button>
+            
                 </div>
                 <!-- End of Colors -->
 
-                <!-- Breakpoints -->
-                <div id="breakpoints" class="tabcontent w-full">
-                <h2 class="text-4xl font-black mb-8">Breakpoints</h2>
-                <div class="repeateble-fields">
-                    <div class="wrap">                
-                        <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="mob" /></label>
-                        <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="600" /></label>
-                        <button class="delete-row">Del</button>
-                        </div>
-                        <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="tab" /></label>
-                        <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1200" /></label>
-                        <button class="delete-row">Del</button>
-                        </div>
-                        <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="desk" /></label>
-                        <label class="input-wrap"><span class="input-label">Value</span><input class="input" type="number" value="1680" /></label>
-                        <button class="delete-row">Del</button>
-                        </div>
-                    </template>
-                    </div>
-                    <button class="clone-row btn-primary">+ Add New</button>
-                </div>
-                </div>
-                <!-- End of Breakpoints -->
 
                 <!-- Font Family -->
                 <div id="font-family" class="tabcontent w-full hidden">
@@ -372,52 +376,77 @@
                 </div>
                 <!-- End of Typography -->
 
+
                 <!-- Containers -->
                 <div id="containers" class="tabcontent w-full hidden">
-                <h2 class="text-4xl font-black mb-8">Containers</h2>
-                <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                    <label class="input-wrap">
-                    <span class="input-label">Value (%)</span>
-                    <input class="input" type="number" value="90" />
-                    </label>
-                </div>
 
-                <p class="mb-16">
-                    Having 90% and not 100% is best practice as your content will be
-                    proportily the same on all mobile devices
-                </p>
+                    <h2 class="text-4xl font-black mb-8">Containers</h2>
 
-                <div class="repeateble-fields">
-                    <div class="wrap">
                     <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="container" /></label>
-                        <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="1200" /></label>
-                        <button class="delete-row">Del</button>
+                        <label class="input-wrap">
+                        <span class="input-label">Value (%)</span>
+                        <input class="input" type="number" value="90" />
+                        </label>
                     </div>
-                    <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="container-narrow" /></label>
-                        <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="14400" /></label>
-                        <button class="delete-row">Del</button>
+
+                    <p class="mb-16">
+                        Having 90% and not 100% is best practice as your content will be
+                        proportily the same on all mobile devices
+                    </p>
+
+                    <div id="containerClasses" class="repeateble-fields">
+                        <div class="wrap">
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Class Name</span><input class="input" type="text" value="container-wide" /></label>
+                                <label class="input-wrap"><span class="input-label">Width (%)</span><input class="input" type="number" value="90" /></label>
+                                <label class="input-wrap"><span class="input-label">Max Width (px)</span><input class="input" type="number" value="1680" /></label>
+                                <label for="centerContainer" style="display: block; cursor: pointer">
+                                    <input type="checkbox" name="disableRatio" class="centerContainer" style="vertical-align: middle" checked>
+                                    <span>Center</span>
+                                </label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Class Name</span><input class="input" type="text" value="container" /></label>
+                                <label class="input-wrap"><span class="input-label">Width (%)</span><input class="input" type="number" value="90" /></label>
+                                <label class="input-wrap"><span class="input-label">Max Width (px)</span><input class="input" type="number" value="1200" /></label>
+                                <label for="centerContainer" style="display: block; cursor: pointer">
+                                    <input type="checkbox" name="disableRatio" class="centerContainer" style="vertical-align: middle" checked>
+                                    <span>Center</span>
+                                </label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Class Name</span><input class="input" type="text" value="container-narrow" /></label>
+                                <label class="input-wrap"><span class="input-label">Width (%)</span><input class="input" type="number" value="90" /></label>
+                                <label class="input-wrap"><span class="input-label">Max Width (px)</span><input class="input" type="number" value="900" /></label>
+                                <label for="centerContainer" style="display: block; cursor: pointer">
+                                    <input type="checkbox" name="disableRatio" class="centerContainer" style="vertical-align: middle" checked>
+                                    <span>Center</span>
+                                </label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                            <div class="repeateble-row flex gap-4 mb-4 mt-12">
+                                <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="card" /></label>
+                                <label class="input-wrap"><span class="input-label">Width (%)</span><input class="input" type="number" value="100" /></label>
+                                <label class="input-wrap"><span class="input-label">Max Width (px)</span><input class="input" type="number" value="600" /></label>
+                                <label for="centerContainer" style="display: block; cursor: pointer">
+                                    <input type="checkbox" name="disableRatio" class="centerContainer" style="vertical-align: middle">
+                                    <span>Center</span>
+                                </label>
+                                <button class="delete-row">Del</button>
+                            </div>
+                        </div>
+                        <button class="clone-row btn-primary">+ Add New</button>
                     </div>
-                    <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="container-wide" /></label>
-                        <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="1680" /></label>
-                        <button class="delete-row">Del</button>
-                    </div>
-                    <div class="repeateble-row flex gap-4 mb-4 mt-12">
-                        <label class="input-wrap"><span class="input-label">Name</span><input class="input" type="text" value="card" /></label>
-                        <label class="input-wrap"><span class="input-label">Size</span><input class="input" type="number" value="600" /></label>
-                        <button class="delete-row">Del</button>
-                    </div>
-                    </div>
-                    <button class="clone-row btn-primary">+ Add New</button>
-                </div>
 
                 </div>
                 <!-- End of Containers -->
 
             </div>
         </div>
+
+        <!-- preview Section -->
         <div>
             <div class="css-variables-preview code-preview bg-slate-800 text-blue-300 text-xs leading-6 p-4">
                 <pre><code class="space"></code><code class="font"></code></pre>
@@ -472,6 +501,8 @@
                 </code></pre>
             </div>
         </div>
+        <!-- End of preview Section -->
+
     </div>
 
     <!-- ...existing HTML code... -->
