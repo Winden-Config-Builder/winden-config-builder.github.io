@@ -54,7 +54,7 @@ input[type="color" i]::-webkit-color-swatch {
 
 
 .active-menu{
-    @apply bg-slate-300;
+    @apply bg-[#e7ecf3];
     border-radius: 0 100px 100px 0;
 }
 

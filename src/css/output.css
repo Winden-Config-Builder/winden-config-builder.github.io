@@ -743,6 +743,11 @@ video {
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
 }
 
+.bg-\[\#f6f8fa\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 248 250 / var(--tw-bg-opacity));
+}
+
 .bg-slate-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity));
@@ -1003,7 +1008,7 @@ input[type="color" i]::-webkit-color-swatch {
 
 .active-menu {
   --tw-bg-opacity: 1;
-  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+  background-color: rgb(231 236 243 / var(--tw-bg-opacity));
   border-radius: 0 100px 100px 0;
 }
 
