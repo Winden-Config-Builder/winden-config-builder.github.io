@@ -1,0 +1,31 @@
+theme: {
+    // current code
+}, 
+plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.container-wide': {
+          maxWidth: '1680px',
+          width: '90%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        },
+        '.container': {
+            maxWidth: '1200px',
+            width: '90%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+        '.container-narrow': {
+          maxWidth: '900px',
+          width: '90%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        },
+        '.container': {
+          maxWidth: '900px',
+          width: '100%',
+        },
+      })
+    },
+],
