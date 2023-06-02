@@ -174,21 +174,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 var $body = document.getElementsByTagName('body')[0];
 var $btnCopy = document.getElementById('copyCSSVar');
-var cssVar = document.getElementById('CSSVar').innerHTML;
+var secretInfo = document.getElementById('CSSVar').innerHTML;
 
-var copyToClipboard = function(cssVar) {
-  var $tempInput = document.createElement('INPUT');
-  $body.appendChild($tempInput);
-  $tempInput.setAttribute('value', cssVar)
-  $tempInput.select();
-  document.execCommand('copy');
-  $body.removeChild($tempInput);
+let text = document.getElementById('CSSVar').innerHTML;
+const copyContent = async () => {
+  try {
+    await navigator.clipboard.writeText(text);
+    console.log('Content copied to clipboard');
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+  }
 }
-
-$btnCopy.addEventListener('click', function(ev) {
-  copyToClipboard(cssVar);
-});
-
 // ************************************************************
 // Copy to Clipboard
 // ************************************************************
