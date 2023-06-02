@@ -48,6 +48,10 @@ input[type="color" i]::-webkit-color-swatch {
     
 }
 
+.copyToClipboard{
+    @apply bg-slate-700 rounded-full absolute right-2 top-2 px-4 hover:text-white cursor-pointer;
+}
+
 
 
 

@@ -448,16 +448,17 @@
 
         <!-- preview Section -->
         <div>
-            <div class="css-variables-preview code-preview bg-slate-800 text-blue-300 text-xs leading-6 p-4">
+            <div class="css-variables-preview code-preview bg-slate-800 text-blue-300 text-xs leading-6 p-4 relative">
+                <div class="copyToClipboard">Copy Code</div>
                 <pre><code class="space"></code><code class="font"></code></pre>
             </div>
 
             <div
                 id="preview"
-                class="bg-slate-900 text-blue-300 p-8 grow text-xs leading-6"
+                class="bg-slate-900 text-blue-300 p-4 grow text-xs leading-6 relative"
             >
-            
-            <pre><code>
+                <div class="copyToClipboard">Copy Code</div>
+                <pre><code>
                     theme: {
                         screens: {
                             'mob': '600px',
@@ -498,7 +499,7 @@
                             giga: 'var(--win-sp-giga)',
                         }
                     }    
-                </code></pre>
+                    </code></pre>
             </div>
         </div>
         <!-- End of preview Section -->
