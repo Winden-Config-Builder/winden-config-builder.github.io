@@ -172,18 +172,25 @@ document.addEventListener('DOMContentLoaded', function() {
 // Copy to Clipboard
 // ************************************************************
 
-var $body = document.getElementsByTagName('body')[0];
-var $btnCopy = document.getElementById('copyCSSVar');
-var secretInfo = document.getElementById('CSSVar').innerHTML;
+const copyButtons = document.getElementsByClassName('copyToClipboard');
 
-let text = document.getElementById('CSSVar').innerHTML;
-const copyContent = async () => {
-  try {
-    await navigator.clipboard.writeText(text);
-    console.log('Content copied to clipboard');
-  } catch (err) {
-    console.error('Failed to copy: ', err);
-  }
+Array.from(copyButtons).forEach(button => {
+    button.addEventListener('click', () => {
+        const codeElement = button.closest('div').querySelector('pre code').innerHTML;
+        copyContent(codeElement);
+        button.innerText = 'Copied';
+        setTimeout(() => {
+            button.innerText = 'Copy Code';
+        }, 3000);
+    });
+});
+const copyContent = async (text) => {
+    try {
+        await navigator.clipboard.writeText(text);
+        console.log('Content copied to clipboard');
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
 }
 // ************************************************************
 // Copy to Clipboard
