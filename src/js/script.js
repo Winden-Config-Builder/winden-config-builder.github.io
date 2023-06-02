@@ -162,10 +162,33 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
+// ************************************************************
+// End of Add to preview
+// ************************************************************
 
 
 
 // ************************************************************
-// End of Add to preview
+// Copy to Clipboard
+// ************************************************************
+
+var $body = document.getElementsByTagName('body')[0];
+var $btnCopy = document.getElementById('copyCSSVar');
+var cssVar = document.getElementById('CSSVar').innerHTML;
+
+var copyToClipboard = function(cssVar) {
+  var $tempInput = document.createElement('INPUT');
+  $body.appendChild($tempInput);
+  $tempInput.setAttribute('value', cssVar)
+  $tempInput.select();
+  document.execCommand('copy');
+  $body.removeChild($tempInput);
+}
+
+$btnCopy.addEventListener('click', function(ev) {
+  copyToClipboard(cssVar);
+});
+
+// ************************************************************
+// Copy to Clipboard
 // ************************************************************

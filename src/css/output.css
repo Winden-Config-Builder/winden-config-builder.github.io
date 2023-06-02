@@ -556,7 +556,7 @@ video {
   }
 }
 
-.sm, .md, .base, .lg, .xl, .xxl {
+.font-preview > p {
   line-height: 1;
   margin: 0;
   padding: 0;

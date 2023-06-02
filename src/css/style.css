@@ -56,7 +56,7 @@ input[type="color" i]::-webkit-color-swatch {
 
 
 @layer components {        
-    .sm, .md, .base, .lg, .xl, .xxl {
+    .font-preview > p {
         line-height: 1;
         margin: 0;
         padding: 0;
