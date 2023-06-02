@@ -9,7 +9,7 @@
 </head>
 <body class="bg-slate-200 py-8" spellcheck="false">
         
-    <div class="flex flex-col xl:flex-row gap-12">
+    <div class="flex flex-col xl:flex-row">
 
         <div class="flex max-w-7xl grow w-full">
             <header class="flex flex-col min-w-[300px]">
@@ -23,8 +23,8 @@
                     </div>
                 </div>
 
-                <nav class="flex flex-col">    
-                    <button id="breakpointsTab" class="tablinks block text-left p-3 bg-white" onclick="openTab(event, 'breakpoints')">Breakpoints</button>
+                <nav class="flex flex-col pr-8">    
+                    <button id="breakpointsTab" class="tablinks block text-left p-3 active-menu" onclick="openTab(event, 'breakpoints')">Breakpoints</button>
                     <button id="colorsTab" class="tablinks block text-left p-3  " onclick="openTab(event, 'colors')">Colors</button>
                     <button id="spacingTab" class="tablinks block text-left p-3" onclick="openTab(event, 'spacing')">Spacing</button>
                     <button id="typographyTab" class="tablinks block text-left p-3" onclick="openTab(event, 'typography')">Typography</button>
@@ -36,7 +36,7 @@
             </header>
 
 
-            <div class="flex px-16 py-8 bg-white grow rounded-md">
+            <div class="flex px-16 py-8 bg-white grow rounded-l-xl">
 
 
                 <!-- Breakpoints -->
@@ -457,7 +457,7 @@
         </div>
 
         <!-- preview Section -->
-        <div class="overflow-hidden rounded-md">
+        <div class="overflow-hidden rounded-r-xl">
             <div
                 id="previewCSS" 
                 class="css-variables-preview code-preview bg-slate-800 text-blue-300 text-xs leading-6 p-4 relative">

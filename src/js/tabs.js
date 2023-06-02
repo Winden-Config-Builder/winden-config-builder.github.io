@@ -16,10 +16,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     // Get all elements with class="tablinks" and remove the class "bg-white"
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].classList.remove("bg-white");
+      tablinks[i].classList.remove("active-menu");
     }
 
-    // Show the current tab, and add the "bg-white" class to the button that opened the tab
+    // Show the current tab, and add the "active-menu" class to the button that opened the tab
     document.getElementById(tabName).classList.remove("hidden");
-    evt.currentTarget.classList.add("bg-white");
+    evt.currentTarget.classList.add("active-menu");
   }

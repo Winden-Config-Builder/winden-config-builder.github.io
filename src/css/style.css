@@ -53,7 +53,10 @@ input[type="color" i]::-webkit-color-swatch {
 }
 
 
-
+.active-menu{
+    @apply bg-slate-300;
+    border-radius: 0 100px 100px 0;
+}
 
 @layer components {        
     .font-preview > p {
