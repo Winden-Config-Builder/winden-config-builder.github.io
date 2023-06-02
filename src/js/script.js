@@ -128,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   // Event listener for adding and deleting rows
     document.addEventListener('click', function (event) {
-        console.log(event.target);
       if (event.target.matches('.clone-row, .delete-row, .clone-color-row, .delete-row-color, .addColorPickerButton, .colorPickerWrap button, #spacing button, #typography button, .delFont')) {
       // Add some delay to make sure the new row is added/deleted from the DOM before updating preview
       setTimeout(updatePreview, 0);

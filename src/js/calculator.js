@@ -53,24 +53,28 @@ function generate() {
                     let typeScaleName = sizes[i].querySelector(".maxScaleName").value
                         ? sizes[i].querySelector(".maxScaleName").value
                         : i;
+                    
+
                     if (id === 'spacing') {
                         var cssVariable = `--win-sp-${typeScaleName}`;
+                        // custom lorem ipsum
+                        var p = document.createElement("div");
+                        p.classList.add(typeScaleName);
+                        p.classList.add("bg-slate-300");
+                        p.style.width = "var(--win-sp-" + typeScaleName + ")";
+                        p.style.height = "var(--win-sp-" + typeScaleName + ")";
+                        fontBlock.append(p);
                     } else {
                         var cssVariable = `--win-fs-${typeScaleName}`;
-                    }
-                    // custom lorem ipsum
-                    var p = document.createElement("p");
-                    p.innerHTML = "Lorem ipsum";
-                    p.classList.add(typeScaleName);
-                    if (id === 'spacing') {
-                        p.style.fontSize = "var(--win-sp-" + typeScaleName + ")";
-                    } else {
+                        // custom lorem ipsum
+                        var p = document.createElement("p");
+                        p.innerHTML = "Lorem ipsum";
+                        p.classList.add(typeScaleName);
                         p.style.fontSize = "var(--win-fs-" + typeScaleName + ")";
+                        fontBlock.append(p);
                     }
 
-                    fontBlock.append(p);
-
-                    cssVariables += `${cssVariable}: clamp(${minFontSize.toFixed(
+                    cssVariables += `   ${cssVariable}: clamp(${minFontSize.toFixed(
                         values.decimalPlaces
                     )}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(
                         values.decimalPlaces
@@ -106,22 +110,26 @@ function generate() {
                     let typeScaleName = values.typeScaleNames[i].trim();
                     if (id === 'spacing') {
                         var cssVariable = `--win-sp-${typeScaleName}`;
+                        // custom lorem ipsum
+                        var p = document.createElement("div");
+                        p.classList.add(typeScaleName);
+                        p.classList.add("bg-slate-300");
+                        p.style.width = "var(--win-sp-" + typeScaleName + ")";
+                        p.style.height = "var(--win-sp-" + typeScaleName + ")";
+                        fontBlock.append(p);
                     } else {
                         var cssVariable = `--win-fs-${typeScaleName}`;
-                    }
-
-                    // custom lorem ipsum
-                    var p = document.createElement("p");
-                    p.innerHTML = "Lorem ipsum";
-                    p.classList.add(typeScaleName);
-                    if (id === 'spacing') {
-                        p.style.fontSize = "var(--win-sp-" + typeScaleName + ")";
-                    } else {
+                        // custom lorem ipsum
+                        var p = document.createElement("p");
+                        p.innerHTML = "Lorem ipsum";
+                        p.classList.add(typeScaleName);
                         p.style.fontSize = "var(--win-fs-" + typeScaleName + ")";
+                        fontBlock.append(p);
                     }
-                    fontBlock.append(p);
 
-                    cssVariables += `${cssVariable}: clamp(${minFontSize.toFixed(
+                    
+
+                    cssVariables += `   ${cssVariable}: clamp(${minFontSize.toFixed(
                         values.decimalPlaces
                     )}px, ${vwValue.toFixed(values.decimalPlaces)}vw + ${pxValue.toFixed(
                         values.decimalPlaces
@@ -158,30 +166,42 @@ function generate() {
             tab.querySelector(
                 ".tailwind-preview code"
             ).textContent = `${tailwindPreview} }`;
-            WrappedCSSAll += wrappedCSSVariables;
+            WrappedCSSAll += cssVariables;
+            if (id === 'spacing') {
+                WrappedCSSAll += "\n";
+            }
         }
     });
-    document.querySelector(".css-variables-preview code").textContent = WrappedCSSAll;
+    document.querySelector(".css-variables-preview code").textContent = `:root {\n${WrappedCSSAll}}\n`;
 }
 
 function updateSelectOptions() {
-    let typeScaleNames = document
-        .querySelector(".typeScaleNames")
-        .value.split(/\s*,\s*/);
-    let select = document.querySelector(".baseLineSelect");
+    let tabIds = [
+        "spacing",
+        "typography",
+    ];
+    tabIds.forEach((id) => {
+        let tabs = document.querySelectorAll("#" + id);
+        for (tab of tabs) {
+            let typeScaleNames = tab
+                .querySelector(".typeScaleNames")
+                .value.split(/\s*,\s*/);
+            let select = tab.querySelector(".baseLineSelect");
 
-    // clear out old options
-    while (select.firstChild) {
-        select.firstChild.remove();
-    }
+            // clear out old options
+            while (select.firstChild) {
+                select.firstChild.remove();
+            }
 
-    // create and append new options
-    for (let i = 0; i < typeScaleNames.length; i++) {
-        let option = document.createElement("option");
-        option.value = typeScaleNames[i];
-        option.text = typeScaleNames[i];
-        select.appendChild(option);
-    }
+            // create and append new options
+            for (let i = 0; i < typeScaleNames.length; i++) {
+                let option = document.createElement("option");
+                option.value = typeScaleNames[i];
+                option.text = typeScaleNames[i];
+                select.appendChild(option);
+            }
+        }
+        });
 }
 
 
