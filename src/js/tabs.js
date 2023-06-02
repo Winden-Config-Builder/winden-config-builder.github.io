@@ -1,6 +1,6 @@
 // Get the first tab button and simulate a click on page load
 window.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('colorsTab').click();
+    document.getElementById('breakpointsTab').click();
   });
 
   function openTab(evt, tabName) {
