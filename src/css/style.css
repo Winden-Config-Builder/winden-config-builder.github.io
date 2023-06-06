@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+#app{
+    max-width: calc(100% - 48px);
+}
+
 .btn-primary{
     @apply bg-blue-600 text-white px-4 py-2 rounded-md mt-4;
 }
@@ -70,4 +74,35 @@ input[type="color" i]::-webkit-color-swatch {
     }
 
 
+}
+
+
+.github-corner svg{
+    z-index: 1;
+}
+
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+    0%,
+    100% {
+        transform: rotate(0);
+    }
+    20%,
+    60% {
+        transform: rotate(-25deg);
+    }
+    40%,
+    80% {
+        transform: rotate(10deg);
+    }
+}
+@media (max-width: 500px) {
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
 }
