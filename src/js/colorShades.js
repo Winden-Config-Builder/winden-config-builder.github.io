@@ -88,7 +88,11 @@ function appendChildren(parent, children) {
 
 // Handles the removal of color pickers
 function handleDeleteButtonClick(event) {
-    const colorPickerWrap = event.target.parentNode;
+    if (event.target) {
+        var colorPickerWrap = event.target.parentNode;
+    } else {
+        var colorPickerWrap = event.parentNode;
+    }
     colorPickerWrap.remove();
     generatePalette();
 }
@@ -246,6 +250,10 @@ function DuplicateColorRow() {
         picker.addEventListener("change", handleColorPickerChange);
         const pickerValue = picker.nextElementSibling;
         pickerValue.addEventListener("change", handleColorPickerValueChange);
+    }
+    const deleteButtons = clone.querySelectorAll(".colorPickerContainer button");
+    for (const deleteButton of deleteButtons) {
+        deleteButton.addEventListener("click", handleDeleteButtonClick);
     }
     generatePalette();
 
