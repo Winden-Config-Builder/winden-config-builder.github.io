@@ -50,3 +50,4 @@ Our app is designed for speed and efficiency. Enjoy a seamless workflow, quick t
 ![Containers](./public/containers.png)
 
 
+Builder is done by [Marko Krstić](https://markokrstic.com/) for [DPlugins](https://dplugins.com/).
