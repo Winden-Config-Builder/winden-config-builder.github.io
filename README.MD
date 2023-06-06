@@ -1,4 +1,5 @@
-# 🌈🔧 Theme Builder - Unleash Your Creativity with Custom Themes! 🔧🌈
+# Theme Builder
+## Unleash Your Creativity with Custom Themes! 
 
 Are you tired of using generic themes for your websites or applications? Introducing Theme Builder, the ultimate solution to unleash your creativity and create stunning custom themes! With our powerful app, you can now design and customize themes effortlessly, giving your projects a unique and captivating look.
 
