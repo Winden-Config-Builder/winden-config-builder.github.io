@@ -28,3 +28,17 @@ We prioritize the security and reliability of your themes. Theme Builder is buil
 Our app is designed for speed and efficiency. Enjoy a seamless workflow, quick theme generation, and instant previews, allowing you to bring your ideas to life in no time.
 
 🌟 Try Theme Builder today and elevate your design game. Visit our website now: https://theme-builder.github.io/ 🌟
+
+## App preview
+
+![Font Family](./public/font-family.png)
+
+![Fluid Spacing](./public/fluid-spacing.png)
+
+![Fluid Typography](./public/fluid-typography.png)
+
+![Containers](./public/containers.png)
+
+![Colors](./public/colors.png)
+
+![Breakpoints](./public/breakpoints.png)
