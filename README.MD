@@ -31,11 +31,22 @@ Our app is designed for speed and efficiency. Enjoy a seamless workflow, quick t
 
 ## App preview
 
-![Breakpoints](./public/breakpoints.png)
-![Colors](./public/colors.png)
+### Breakpoints
+![Breakpoints](./public/Breakpoints.png)
+
+### Colors
+![Colors](./public/Colors.png)
+
+### Fluid Spacing
 ![Fluid Spacing](./public/fluid-spacing.png)
+
+### Fluid Typography
 ![Fluid Typography](./public/fluid-typography.png)
+
+### Font Family
 ![Font Family](./public/font-family.png)
+
+### Containers
 ![Containers](./public/containers.png)
 
 
