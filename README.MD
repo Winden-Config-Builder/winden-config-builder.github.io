@@ -55,6 +55,10 @@ Builder is done by [Marko Krstić](https://markokrstic.com/) for [DPlugins](http
 
 ## Changelog 
 
+1.0.2 
+
+Updated URL to the Repo
+
 1.0.1 
 
 Fixed if you create color with shades once you add new set of colors delete color was not working
