@@ -51,3 +51,19 @@ Our app is designed for speed and efficiency. Enjoy a seamless workflow, quick t
 
 
 Builder is done by [Marko Krstić](https://markokrstic.com/) for [DPlugins](https://dplugins.com/).
+
+
+## Changelog 
+
+1.0.1 
+
+Fixed if you create color with shades once you add new set of colors delete color was not working
+
+1.0.0 Initial release
+
+1. Breakpoints
+2. Colors generator (Shades and Blending)
+3. Fluid typography (With scale ratio or 1 by 1)
+4. Fluid spacing (With scale ratio or 1 by 1)
+5. Register Font Familles (Easy integrtion with Font Hero)
+6. Register Containers
