@@ -108,26 +108,26 @@ document.addEventListener('DOMContentLoaded', function() {
     themePreview += SpacingCode + "\n";
     themePreview += "},\n";
 
-// Plugins
-const plugins = {};
-document.querySelectorAll('#containerClasses .repeateble-row').forEach(row => {
-  const className = row.querySelector('.input-wrap:nth-child(1) .input').value;
-  const width = row.querySelector('.input-wrap:nth-child(2) .input').value + '%';
-  const maxWidth = row.querySelector('.input-wrap:nth-child(3) .input').value + 'px';
-  const center = row.querySelector('.centerContainer').checked;
+  // Plugins
+  const plugins = {};
+  document.querySelectorAll('#containerClasses .repeateble-row').forEach(row => {
+    const className = row.querySelector('.input-wrap:nth-child(1) .input').value;
+    const width = row.querySelector('.input-wrap:nth-child(2) .input').value + '%';
+    const maxWidth = row.querySelector('.input-wrap:nth-child(3) .input').value + 'px';
+    const center = row.querySelector('.centerContainer').checked;
 
-  const pluginConfig = {
-    maxWidth: maxWidth,
-    width: width,
-  };
+    const pluginConfig = {
+      maxWidth: maxWidth,
+      width: width,
+    };
 
-  if (center) {
-    pluginConfig.marginLeft = 'auto';
-    pluginConfig.marginRight = 'auto';
-  }
+    if (center) {
+      pluginConfig.marginLeft = 'auto';
+      pluginConfig.marginRight = 'auto';
+    }
 
-  plugins[className] = pluginConfig;
-});
+    plugins[className] = pluginConfig;
+  });
 
     
     themePreview += "plugins: [\n";
