@@ -108,20 +108,27 @@ document.addEventListener('DOMContentLoaded', function() {
     themePreview += SpacingCode + "\n";
     themePreview += "},\n";
 
-    // Plugins
-    const plugins = {};
-    document.querySelectorAll('#containerClasses .repeateble-row').forEach(row => {
-      const className = row.querySelector('.input-wrap:nth-child(1) .input').value;
-      const width = row.querySelector('.input-wrap:nth-child(2) .input').value + '%';
-      const maxWidth = row.querySelector('.input-wrap:nth-child(3) .input').value + 'px';
-      const center = row.querySelector('.centerContainer').checked;
-      plugins[className] = {
-        maxWidth: maxWidth,
-        width: width,
-        marginLeft: center ? 'auto' : undefined,
-        marginRight: center ? 'auto' : undefined,
-      };
-    });
+// Plugins
+const plugins = {};
+document.querySelectorAll('#containerClasses .repeateble-row').forEach(row => {
+  const className = row.querySelector('.input-wrap:nth-child(1) .input').value;
+  const width = row.querySelector('.input-wrap:nth-child(2) .input').value + '%';
+  const maxWidth = row.querySelector('.input-wrap:nth-child(3) .input').value + 'px';
+  const center = row.querySelector('.centerContainer').checked;
+
+  const pluginConfig = {
+    maxWidth: maxWidth,
+    width: width,
+  };
+
+  if (center) {
+    pluginConfig.marginLeft = 'auto';
+    pluginConfig.marginRight = 'auto';
+  }
+
+  plugins[className] = pluginConfig;
+});
+
     
     themePreview += "plugins: [\n";
     themePreview += "  function ({ addComponents }) {\n";
